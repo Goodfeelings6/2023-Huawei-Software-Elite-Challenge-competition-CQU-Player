@@ -173,9 +173,10 @@ class Solution(object):
         for i in range(4):
             if self.isRobotOccupy[i] == 0:
                 # 分配buy任务
-                if self.robot[i]['type'] == 0 and len(buyTask) != 0:      
-                    self.robotTargetId[i] = buyTask[0] # 可优化
-                    buyTask.remove(buyTask[0])
+                if self.robot[i]['type'] == 0 and len(buyTask) != 0:   
+                    idx = np.random.randint(0,len(buyTask))   
+                    self.robotTargetId[i] = buyTask[idx] # 可优化
+                    buyTask.remove(buyTask[idx])
                     # 更新机器人调度状态
                     self.freeRobotNum -= 1
                     self.isRobotOccupy[i] = 1
@@ -183,8 +184,9 @@ class Solution(object):
                     self.robotTargetOrid[i] = (self.workTable[self.robotTargetId[i]]['x'],self.workTable[self.robotTargetId[i]]['y'])
                 # 分配sell任务
                 elif self.robot[i]['type'] != 0 and len(sellTask[self.robot[i]['type']]) != 0: 
-                    self.robotTargetId[i] = sellTask[self.robot[i]['type']][0] # 可优化
-                    sellTask[self.robot[i]['type']].remove(sellTask[self.robot[i]['type']][0]) 
+                    idx = np.random.randint(0,len(sellTask[self.robot[i]['type']]))
+                    self.robotTargetId[i] = sellTask[self.robot[i]['type']][idx] # 可优化
+                    sellTask[self.robot[i]['type']].remove(sellTask[self.robot[i]['type']][idx]) 
                     # 更新机器人调度状态
                     self.freeRobotNum -= 1
                     self.isRobotOccupy[i] = 1
@@ -219,7 +221,6 @@ class Solution(object):
                 
                 cos_theta = dot/(dist_a*dist_b) # 向量a转到b的转向角余弦值 
                 theta = math.acos(round(cos_theta,10)) # a -> b 转向角
-                self.info.write(str(math.degrees(theta))+"\n")
 
                 if cross < 0: # 应该顺时针转
                     theta = -theta
@@ -274,7 +275,7 @@ class Solution(object):
 
             # 日志
             # if self.frameId % 50 == 1:
-            if 1:
+            if 0:
                 robot_ordin = []
                 self.info.write("时间帧："+str(self.frameId)+"\n")
                 self.info.write("工作台："+str(self.workTable)+"\n")
