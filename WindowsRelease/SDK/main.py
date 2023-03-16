@@ -2,10 +2,13 @@
 import sys
 import numpy as np
 import math
+import functools
 
 # 测试,命令行输入：
 # 默认调试模式(使用现实时间)  ./robot -m maps/1.txt -c ./SDK "python main.py"
 # 快速模式(使用程序时间)     ./robot -m maps/1.txt -c ./SDK -f "python main.py"
+# 默认调试模式使用gui        ./robot_gui -m maps/1.txt -c ./SDK "python main.py"
+# 运行全部地图并统计结果      ./run_all
 
 class Solution(object):
     def __init__(self) -> None:       
@@ -145,8 +148,12 @@ class Solution(object):
         # 输出结束后,输出 'OK'
         self.finish()
     
+    def buyCmp(self,x,needType,robot_id):
+        need =  needType[self.workTable[x]['type']][1]/needType[self.workTable[x]['type']][0]
+        dist = np.linalg.norm([self.robot[robot_id]['x']-self.workTable[x]['x'],self.robot[robot_id]['y']-self.workTable[x]['y']])
+        return need + 0.15 * 1/dist
 
-    def getBestBuyTask(self):
+    def getBestBuyTask(self,robot_id):
         """
         # 根据场面信息,返回一个较优的买任务
         ##### buy:
@@ -167,7 +174,7 @@ class Solution(object):
                 buyTask.append(idx)
         
         # buy task 排序
-        buyTask.sort(key=lambda x : needType[self.workTable[x]['type']][1]/needType[self.workTable[x]['type']][0], reverse=True)   
+        buyTask.sort(key=lambda x : self.buyCmp(x,needType,robot_id), reverse=True)   
 
         # buy task 选择
         if len(buyTask)!=0:
@@ -175,6 +182,14 @@ class Solution(object):
         else:
             return None
 
+    def sellCmp(self,x,robot_id):
+        count = 0
+        for objType in self.demandTable[self.workTable[x]['type']]:
+            if (self.workTable[x]['rawState']>>objType)&1==1 : # 占用
+                count += 1
+        dist = np.linalg.norm([self.robot[robot_id]['x']-self.workTable[x]['x'],self.robot[robot_id]['y']-self.workTable[x]['y']])
+        
+        return count/3 + 0.1 * 1/dist
 
     def getBestSellTask(self,robot_id):
         """
@@ -223,10 +238,13 @@ class Solution(object):
             elif objType == 7:
                 if workT['type']==8 or workT['type']==9:
                     sellTask.append(idx)
+
+        # sell task 排序
+        sellTask.sort(key=lambda x : self.sellCmp(x,robot_id), reverse=True)
+
         # sell task 选择
         if len(sellTask)!=0:
-            idx = np.random.randint(0,len(sellTask))
-            return sellTask[idx]
+            return sellTask[0]
         else:
             return None
 
@@ -242,7 +260,7 @@ class Solution(object):
             if self.isRobotOccupy[i] == 0: # if 空闲
                 # 分配buy任务
                 if self.robot[i]['type'] == 0:
-                    task = self.getBestBuyTask()
+                    task = self.getBestBuyTask(i)
                     if task!=None: 
                         # 更新机器人调度状态
                         self.robotTargetId[i] = task 
@@ -281,15 +299,18 @@ class Solution(object):
             # 物品持有时间计时
             if self.robot[i]['type'] != 0:
                 self.robotObjOccupyTime[i] += 0.02
+                # 持有物品时间超时
+                if self.robotObjOccupyTime[i] >= self.destoryTime:
+                    self.instr += 'destroy %d\n' % (i)
+                    # 更新机器人占用情况
+                    self.isRobotOccupy[i] = 0
+                    self.robotObjOccupyTime[i] = 0
+                    # 更新工作台预定表
+                    self.wtReservation[self.robotTargetId[i]][self.robot[i]['type']] = 0
 
-            # 持有物品时间超时
-            if self.robotObjOccupyTime[i] >= self.destoryTime:
-                self.instr += 'destroy %d\n' % (i)
-                # 更新机器人占用情况
-                self.isRobotOccupy[i] = 0
-                self.robotObjOccupyTime[i] = 0
+        
             # 占用状态且未到达目标点
-            elif self.isRobotOccupy[i] == 1 and self.robot[i]['workTableID'] != self.robotTargetId[i]: 
+            if self.isRobotOccupy[i] == 1 and self.robot[i]['workTableID'] != self.robotTargetId[i]: 
                 a = self.robot[i]['orientation'] # 朝向角
                 vector_a = np.array([math.cos(a),math.sin(a)]) # 机器人朝向向量
 
@@ -311,8 +332,8 @@ class Solution(object):
                 else: # 逆时针转
                     theta = theta
                 
-                # 速度
-                if dist_b >= 2.5 :
+                #速度
+                if dist_b >= 4 :
                     v = 6
                 elif dist_b >= 1 :
                     v = 5
@@ -360,16 +381,16 @@ class Solution(object):
         # 初始化,并与判题器进行交互
         """
         # 初始化
-        solver.initMap()
+        self.initMap()
 
         # 交互
         while True:
             # 每一帧输入(来自判题器)
-            end = solver.inputData()
+            end = self.inputData()
             if end:
                 break
             # 每一帧输出(机器人控制指令) 
-            solver.outputData()
+            self.outputData()
 
         #     #日志
         #     if self.frameId % 50 == 1:
