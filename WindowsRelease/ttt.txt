@@ -1,0 +1,186 @@
+第1张地图
+#@@@
+        self.param_need = 0.133333
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.066667
+        self.param_haveProduct = 0.133333
+        self.param_produce = 0.666667
+        self.param_lackRate = 0.333333
+        self.param_sell_dist = 0.400000
+#@@@
+maxMoney=804304
+#@@@
+        self.param_need = 0.066667
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.200000
+        self.param_haveProduct = 0.133333
+        self.param_produce = 0.533333
+        self.param_lackRate = 0.000000
+        self.param_sell_dist = 0.066667
+#@@@
+maxMoney=830812
+#@@@
+        self.param_need = 0.000000
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.333333
+        self.param_haveProduct = 0.666667
+        self.param_produce = 0.533333
+        self.param_lackRate = 0.466667
+        self.param_sell_dist = 0.400000
+#@@@
+maxMoney=851494
+
+#@@@
+        self.param_need = 0.600000
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.066667
+        self.param_haveProduct = 0.400000
+        self.param_produce = 0.533333
+        self.param_lackRate = 0.200000
+        self.param_sell_dist = 0.666667
+#@@@
+maxMoney=762282
+fitness=[732786 721656 732786 732786 721656 728313 691263 732786 732786 650109
+ 732786 732786 721656 721656 732786 762282 725221 669488 728313 732786]
+第2张地图
+#@@@
+        self.param_need = 0.133333
+        self.param_buy_dist = 0.400000
+        self.param_need_dist = 0.866667
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.733333
+        self.param_lackRate = 0.200000
+        self.param_sell_dist = 0.000000
+#@@@
+maxMoney=697307
+#@@@
+        self.param_need = 0.200000
+        self.param_buy_dist = 0.133333
+        self.param_need_dist = 0.200000
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.866667
+        self.param_lackRate = 1.000000
+        self.param_sell_dist = 0.600000
+#@@@
+maxMoney=714419
+#@@@
+        self.param_need = 0.133333
+        self.param_buy_dist = 0.533333
+        self.param_need_dist = 0.800000
+        self.param_haveProduct = 0.466667
+        self.param_produce = 0.866667
+        self.param_lackRate = 0.866667
+        self.param_sell_dist = 0.733333
+#@@@
+maxMoney=716100
+#@@@
+        self.param_need = 0.000000
+        self.param_buy_dist = 0.533333
+        self.param_need_dist = 0.800000
+        self.param_haveProduct = 1.000000
+        self.param_produce = 0.866667
+        self.param_lackRate = 0.266667
+        self.param_sell_dist = 0.733333
+#@@@
+maxMoney=719291
+#@@@
+        self.param_need = 0.133333
+        self.param_buy_dist = 0.533333
+        self.param_need_dist = 0.933333
+        self.param_haveProduct = 0.733333
+        self.param_produce = 0.866667
+        self.param_lackRate = 0.933333
+        self.param_sell_dist = 0.733333
+#@@@
+maxMoney=722530
+
+#@@@
+        self.param_need = 0.133333
+        self.param_buy_dist = 0.533333
+        self.param_need_dist = 0.933333
+        self.param_haveProduct = 0.733333
+        self.param_produce = 0.866667
+        self.param_lackRate = 0.933333
+        self.param_sell_dist = 0.733333
+#@@@
+maxMoney=722530
+fitness=[698189 695246 698189 698189 716100 722530 698189 663838 695246 660887
+ 695246 695246 695246 673120 667867 698189 695246 695246 685559 695246]
+第3张地图
+#@@@
+        self.param_need = 0.666667
+        self.param_buy_dist = 0.600000
+        self.param_need_dist = 0.800000
+        self.param_haveProduct = 0.533333
+        self.param_produce = 0.466667
+        self.param_lackRate = 0.533333
+        self.param_sell_dist = 0.733333
+#@@@
+maxMoney=534003
+#@@@
+        self.param_need = 0.266667
+        self.param_buy_dist = 0.733333
+        self.param_need_dist = 0.800000
+        self.param_haveProduct = 0.800000
+        self.param_produce = 0.333333
+        self.param_lackRate = 0.933333
+        self.param_sell_dist = 0.200000
+#@@@
+maxMoney=568495
+
+#@@@
+        self.param_need = 0.666667
+        self.param_buy_dist = 0.866667
+        self.param_need_dist = 0.666667
+        self.param_haveProduct = 0.533333
+        self.param_produce = 0.466667
+        self.param_lackRate = 0.800000
+        self.param_sell_dist = 0.266667
+#@@@
+maxMoney=546945
+fitness=[546945 546922 546945 472800 546922 546922 546945 546922 546945 546945
+ 546945 546945 546945 546945 546945 546945 546945 546922 546945 546945]
+第4张地图
+#@@@
+        self.param_need = 0.066667
+        self.param_buy_dist = 0.800000
+        self.param_need_dist = 0.133333
+        self.param_haveProduct = 0.533333
+        self.param_produce = 0.200000
+        self.param_lackRate = 1.000000
+        self.param_sell_dist = 0.866667
+#@@@
+maxMoney=638034
+#@@@
+        self.param_need = 0.200000
+        self.param_buy_dist = 0.800000
+        self.param_need_dist = 0.133333
+        self.param_haveProduct = 0.600000
+        self.param_produce = 1.000000
+        self.param_lackRate = 0.200000
+        self.param_sell_dist = 0.533333
+#@@@
+maxMoney=646339
+#@@@
+        self.param_need = 0.200000
+        self.param_buy_dist = 0.800000
+        self.param_need_dist = 0.066667
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.666667
+        self.param_lackRate = 0.133333
+        self.param_sell_dist = 0.933333
+#@@@
+maxMoney=655332
+
+#@@@
+        self.param_need = 0.400000
+        self.param_buy_dist = 0.933333
+        self.param_need_dist = 0.066667
+        self.param_haveProduct = 0.666667
+        self.param_produce = 0.666667
+        self.param_lackRate = 0.133333
+        self.param_sell_dist = 0.866667
+#@@@
+maxMoney=611902
+fitness=[582304 598141 597588 597588 611902 608661 594008 564582 608661 597588
+ 610428 594008 597588 611902 608661 610428 597588 597588 598141 597588]
