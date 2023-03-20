@@ -364,72 +364,65 @@ class Solution(object):
                     theta = -theta
                 else: # 逆时针转
                     theta = theta
-                angle_v = min(theta / 0.02, math.pi) if theta > 0 else max(theta / 0.02, -math.pi)
                 
-                # 速度
-                if dist_b <= 0.4:
-                    v = 0
-                else:
-                    x = self.robot[i]['x']
-                    y = self.robot[i]['y']
-                # 左
-                    if x < 2 and y < 48 and y > 2 and (
-                            (a >= -math.pi and a < -math.pi / 2) or (a > math.pi / 2 and a <= math.pi)):
-                        v = 1
-                # 右
-                    elif x > 48 and y < 48 and y > 2 and a > -math.pi / 2 and a < math.pi / 2:
-                        v = 1
-                # 上
-                    elif x > 2 and x < 48 and y > 48 and a > 0 and a < math.pi:
-                        v = 1
-                # 下
-                    elif x > 2 and x < 48 and y < 2 and a > -math.pi and a < 0:
-                        v = 1
-                # 左上
-                    elif x <= 2 and y >= 48 and ((a >= -math.pi and a < -math.pi / 2) or (a > 0 and a <= math.pi)):
-                        v = 1
-                # 左下
-                    elif x <= 2 and y <= 2 and ((a >= -math.pi and a < 0) or (a > math.pi / 2 and a <= math.pi)):
-                        v = 1
-                # 右上
-                    elif x >= 48 and y >= 48 and a > -math.pi / 2 and a < math.pi:
-                        v = 1
-                # 右下
-                    elif x >= 48 and y <= 2 and a > -math.pi and a < math.pi / 2:
-                        v = 1
-                    else:
-                        v = 6 - 2 * abs(angle_v) / math.pi
-                        
-                #速度
-                # if dist_b >= 4 :
-                #     v = 6
-                # elif dist_b >= 1 :
-                #     v = 5
-                # elif dist_b >= 0.8 :
-                #     v = 4
-                # elif dist_b >= 0.5 :
-                #     v = 3
-                # elif dist_b >= 0.2 :
-                #     v = 2
-                # elif dist_b >= 0.05 :
-                #     v = 1
-                # else:
-                #     v = 0
-                self.instr = self.instr + 'forward %d %d\n' % (i,v)
-                
+                '''
+                持有物品：质量为0.88247 kg
+                最大加速度：283.295 m/s*s (5.6659 m/s*frame)
+                最大角加速度：403.4115 pi/s*s (8.06823 pi/s*frame)
+
+                不持有物品：质量为0.63617 kg
+                最大加速度：392.976 m/s*s (7.85952 m/s*frame)
+                最大角加速度：776.2503 pi/s*s (15.525 pi/s*frame)
+                '''
                 # 角速度
+                angle_v = min(theta/0.02, math.pi) if theta>0 else max(theta/0.02, -math.pi)
                 self.instr += 'rotate %d %f\n' % (i,angle_v)
+
+                #速度
+                x = self.robot[i]['x']
+                y = self.robot[i]['y']
+                # 左
+                if x<2 and y<48 and y>2 and ((a>=-math.pi and a<-math.pi/2) or (a>math.pi/2 and a<=math.pi)):
+                    v = 1
+                # 右
+                elif x>48 and y<48 and y>2 and a>-math.pi/2 and a<math.pi/2:
+                    v = 1
+                # 上
+                elif x>2 and x<48 and y>48 and a>0 and a<math.pi:
+                    v = 1
+                # 下
+                elif x>2 and x<48 and y<2 and a>-math.pi and a<0:
+                    v = 1
+                # 左上
+                elif x<=2 and y>=48 and ((a>=-math.pi and a<-math.pi/2) or (a>0 and a<=math.pi)):
+                    v = 1
+                # 左下
+                elif x<=2 and y<=2 and ((a>=-math.pi and a<0) or (a>math.pi/2 and a<=math.pi)):
+                    v = 1
+                # 右上
+                elif x>=48 and y>=48 and a>0 and a<math.pi/2:
+                    v = 1
+                # 右下
+                elif x>=48 and y<=2 and a>-math.pi/2 and a<0:
+                    v = 1
+                else:
+                    # v = 6-6*abs(theta)/math.pi
+                    v = 6/(abs(theta)+1)
+                self.instr = self.instr + 'forward %d %d\n' % (i,v)
 
             # 占用状态但到达目标点
             elif self.isRobotOccupy[i] == 1 and self.robot[i]['workTableID'] == self.robotTargetId[i]:
                 # 在工作台买入或售出
-                if self.robotTaskType[i] == 0 and self.workTable[self.robotTargetId[i]]['productState']: # 买
-                    self.instr += 'buy %d\n' % (i)
-                    # 更新机器人占用情况
-                    self.isRobotOccupy[i] = 0
-                    self.robotObjOccupyTime[i] = 0 # 物品持有时间,从买入开始计时
-                    # 更新工作台预定表
-                    self.wtReservation[self.robotTargetId[i]]['product'] = 0
+                if self.robotTaskType[i] == 0: # 买
+                    if self.workTable[self.robotTargetId[i]]['productState']==1: # 产品已经生产好
+                        self.instr += 'buy %d\n' % (i)
+                        # 更新机器人占用情况
+                        self.isRobotOccupy[i] = 0
+                        self.robotObjOccupyTime[i] = 0 # 物品持有时间,从买入开始计时
+                        # 更新工作台预定表
+                        self.wtReservation[self.robotTargetId[i]]['product'] = 0
+                    else:
+                        self.instr = self.instr + 'forward %d %d\n' % (i,0)
 
                 elif self.robotTaskType[i] == 1 : # 卖
                     self.instr += 'sell %d\n' % (i)
