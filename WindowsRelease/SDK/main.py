@@ -154,10 +154,30 @@ class Solution(object):
             return (1-math.sqrt(1-(1-x/maxX)**2))*(1-minRate)+minRate
         elif x >= maxX:
             return minRate
+    def isNearest(self,i,workT):
+        """
+        # 判断 是否有其他机器人顺路
+        :param i 机器人编号
+        :param workT 工作台
+        """
+        # i 与 workT 距离
+        i_dist = np.linalg.norm([self.robot[i]['x']-workT['x'],self.robot[i]['y']-workT['y']])
+        ans = True
+        for j in range(4):
+            j_finish_dist = 1e5
+            if i!=j and self.isRobotOccupy[j]==1 and self.robotTaskType[j]==1: # j有任务在身
+                # j 卖目标工作台与 workT 距离
+                j_finish_dist = np.linalg.norm([self.robotTargetOrid[j][1][0]-workT['x'],self.robotTargetOrid[j][1][1]-workT['y']])
+            elif i!=j and self.isRobotOccupy[j]==0: # j没任务在身
+                j_finish_dist = np.linalg.norm([self.robot[j]['x']-workT['x'],self.robot[j]['y']-workT['y']])
+            if i_dist > j_finish_dist:
+                return False
+        return True
 
     def getBestTask(self,i):
         """
         # 根据场面信息,返回一个较优的任务
+        :param i 机器人编号
         """     
         task = []
         profit = []
@@ -168,7 +188,7 @@ class Solution(object):
                 ### 统计买的距离              
                 buy_dist[idx] = np.linalg.norm([self.robot[i]['x']-workT['x'],self.robot[i]['y']-workT['y']])
                 # 可行的买任务
-                if workT['productState']==1 or (workT['remainTime']>0 and buy_dist[idx]/6 > workT['remainTime']*0.02):
+                if self.isNearest(i,workT) and (workT['productState']==1 or (workT['remainTime']>0 and buy_dist[idx]/6 > workT['remainTime']*0.02)):
                     ### 统计与需求者距离
                     objT = workT['type']
                     for idx2,workT2 in enumerate(self.workTable): 
@@ -219,8 +239,9 @@ class Solution(object):
                     else:
                         self.wtReservation[task[1]][self.workTable[task[0]]['type']] = 1
                 else: # 没任务可分配
-                    pass
-
+                    # 往地图中心走
+                    self.instr += self.control(i,(25,25))
+                    
             # 买占用状态
             elif self.isRobotOccupy[i] == 1 and self.robotTaskType[i] == 0 : 
                 # 未到达买目标点
@@ -248,8 +269,7 @@ class Solution(object):
                     self.isRobotOccupy[i] = 0
                     # 更新工作台预定表
                     self.wtReservation[self.robotTargetId[i][1]][self.robot[i]['type']] = 0
-            else: # 空闲状态
-                pass
+
 
     def control(self,i,target):
         """
