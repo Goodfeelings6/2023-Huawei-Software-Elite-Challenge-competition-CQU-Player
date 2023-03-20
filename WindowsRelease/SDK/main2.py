@@ -36,6 +36,7 @@ class Solution(object):
         self.isRobotOccupy = [0 for i in range(4)] # 标识机器人是否占用,1占用,0空闲
         self.robotTargetId = [0 for i in range(4)]   # 被占用机器人需要前往的目标工作台id(仅当 isRobotOccupy[i]==1 时i位置数据有效)
         self.robotTargetOrid = [(0,0) for i in range(4)] # 被占用机器人需要前往的目标工作台坐标
+        self.robotTargetScore = [0 for i in range(4)] # 机器人目前执行任务的打分
         self.robotTaskType = [0 for i in range(4)] # 被占用机器人目前的任务类型,只考虑buy和sell,0表示buy,1表示sell
         self.robotObjOccupyTime = [0 for i in range(4)] # 机器人的已持续持有物品时间
 
@@ -50,13 +51,14 @@ class Solution(object):
         # self.param_sell_dist = 0.5
         # 参数
         #@@@
-        self.param_need = 0.322581
-        self.param_buy_dist = 1.483871
-        self.param_need_dist = 0.258065
-        self.param_haveProduct = 0.129032
-        self.param_produce = 0.451613
-        self.param_lackRate = 1.032258
-        self.param_sell_dist = 0.580645
+        self.param_need = 0.733333
+        self.param_buy_dist = 0.666667
+        self.param_need_dist = 0.866667
+        self.param_remainTime = 0.533333
+        self.param_haveProduct = 0.333333
+        self.param_produce = 0.133333
+        self.param_lackRate = 0.533333
+        self.param_sell_dist = 0.733333
         #@@@
         # ---日志---
         # self.info = open('info.txt', 'w')
@@ -91,37 +93,41 @@ class Solution(object):
         # 识别地图,设定参数
         wtNum = sum(self.wtTypeNum)
         if wtNum == 31:
-            self.param_need = 0.01
-            self.param_buy_dist = 1
-            self.param_need_dist = 0
-            self.param_haveProduct = 0
-            self.param_produce = 0
-            self.param_lackRate = 1
-            self.param_sell_dist = 0.5
+            self.param_need = 0.000000
+            self.param_buy_dist = 1.000000
+            self.param_need_dist = 0.333333
+            self.param_remainTime = 0.5
+            self.param_haveProduct = 0.666667
+            self.param_produce = 0.533333
+            self.param_lackRate = 0.466667
+            self.param_sell_dist = 0.400000
         elif wtNum == 17:
-            self.param_need = 0.0225806
-            self.param_buy_dist = 0.451613
-            self.param_need_dist = 0.612903
-            self.param_haveProduct = 0.451613
-            self.param_produce = 0.838710
-            self.param_lackRate = 0.322581
-            self.param_sell_dist = 0.193548
+            self.param_need = 0.133333
+            self.param_buy_dist = 0.533333
+            self.param_need_dist = 0.933333
+            self.param_remainTime = 0.5
+            self.param_haveProduct = 0.733333
+            self.param_produce = 0.866667
+            self.param_lackRate = 0.933333
+            self.param_sell_dist = 0.733333
         elif wtNum == 18:
             self.param_need = 0.266667
-            self.param_buy_dist = 0.800000
-            self.param_need_dist = 0.133333
-            self.param_haveProduct = 0.333333
-            self.param_produce = 0.933333
-            self.param_lackRate = 0.400000
-            self.param_sell_dist = 0.533333
+            self.param_buy_dist = 0.733333
+            self.param_need_dist = 0.800000
+            self.param_remainTime = 0.5
+            self.param_haveProduct = 0.800000
+            self.param_produce = 0.333333
+            self.param_lackRate = 0.933333
+            self.param_sell_dist = 0.200000
         elif wtNum == 50:
-            self.param_need = 0.01
-            self.param_buy_dist = 1
-            self.param_need_dist = 0
-            self.param_haveProduct = 0
-            self.param_produce = 0
-            self.param_lackRate = 1
-            self.param_sell_dist = 0.5
+            self.param_need = 0.200000
+            self.param_buy_dist = 0.800000
+            self.param_need_dist = 0.066667
+            self.param_remainTime = 0.5
+            self.param_haveProduct = 0.000000
+            self.param_produce = 0.666667
+            self.param_lackRate = 0.133333
+            self.param_sell_dist = 0.933333
         # 读完后,输出 'OK', 告诉判题器已就绪
         self.finish()
 
@@ -201,16 +207,18 @@ class Solution(object):
         # 输出结束后,输出 'OK'
         self.finish()
     
-    def buyCmp(self,x,robot_id,needType,buy_dist,need_dist):
+    def buyCmp(self,x,robot_id,needType,buy_dist,need_dist,remainTime):
         _need =  needType[self.workTable[x]['type']][1]/needType[self.workTable[x]['type']][0]
         _buy_dist = buy_dist[x]
         _need_dist = need_dist[x]
+        # _remainTime = 1/(1+abs((_buy_dist/6)*50-remainTime[x]))
+        _remainTime = 1/(abs((_buy_dist/6)*50-remainTime[x])+1)
 
-        return self.param_need * _need + self.param_buy_dist * 1/_buy_dist + self.param_need_dist * 1/_need_dist
+        return self.param_need * _need + self.param_buy_dist * 1/_buy_dist + self.param_need_dist * 1/_need_dist + self.param_remainTime * _remainTime
 
     def getBestBuyTask(self,robot_id):
         """
-        # 根据场面信息,返回一个较优的买任务
+        # 根据场面信息,返回一个较优的买任务及其分数
         ##### buy:
         ##### 候选任务条件: 工作台类型1-7,对应买物品类型1-7 and 成品格不为空(==1) and 成品未被其他机器人预定
         """
@@ -226,37 +234,40 @@ class Solution(object):
         
         buy_dist = {} # 工作台id:与机器人距离
         need_dist = {} # 工作台id:与最近需求者距离
+        remainTime = {} # 工作台剩余生产时间帧
         for idx,workT in enumerate(self.workTable):
             # 能买的条件,进行过滤           
-            if workT['type'] >= 1 and workT['type'] <= 7 and workT['productState']==1 \
-              and self.wtReservation[idx]['product']==0 and needType[workT['type']][1]!=0:
-                ### 统计买的距离              
-                buy_dist[idx] = np.linalg.norm([self.robot[robot_id]['x']-self.workTable[idx]['x'],self.robot[robot_id]['y']-self.workTable[idx]['y']])
-                ### 统计与最近需求者距离
-                objT = workT['type']
-                for idx2,workT2 in enumerate(self.workTable): 
-                    # 如果是一个有效需求者
-                    if objT in self.demandTable[workT2['type']] and (workT2['rawState']>>objT)&1==0 and self.wtReservation[idx2][objT]==0:
-                        # 维护最小距离
-                        tmp_dist = np.linalg.norm([workT['x']-workT2['x'],workT['y']-workT2['y']])
-                        if idx not in need_dist.keys() or tmp_dist < need_dist[idx]:
-                            need_dist[idx] = tmp_dist
+            if workT['type'] >= 1 and workT['type'] <= 7 and self.wtReservation[idx]['product']==0 and needType[workT['type']][1]!=0:
+                if workT['productState']==1 or workT['remainTime']>0: # 有成品 或正在生产中
+                    ### 统计买的距离              
+                    buy_dist[idx] = np.linalg.norm([self.robot[robot_id]['x']-self.workTable[idx]['x'],self.robot[robot_id]['y']-self.workTable[idx]['y']])
+                    ### 统计与最近需求者距离
+                    objT = workT['type']
+                    for idx2,workT2 in enumerate(self.workTable): 
+                        # 如果是一个有效需求者
+                        if objT in self.demandTable[workT2['type']] and (workT2['rawState']>>objT)&1==0 and self.wtReservation[idx2][objT]==0:
+                            # 维护最小距离
+                            tmp_dist = np.linalg.norm([workT['x']-workT2['x'],workT['y']-workT2['y']])
+                            if idx not in need_dist.keys() or tmp_dist < need_dist[idx]:
+                                need_dist[idx] = tmp_dist
+                    remainTime[idx] = workT['remainTime']
         # buy task 收集
         buyTask = [] # 工作台id
         for idx,workT in enumerate(self.workTable):
             # 能买的条件,进行过滤           
-            if workT['type'] >= 1 and workT['type'] <= 7 and workT['productState']==1 \
-              and self.wtReservation[idx]['product']==0 and needType[workT['type']][1]!=0 \
-              and (buy_dist[idx]+need_dist[idx])/6+1.5 < (9000-self.frameId)*0.02:
+            if workT['type'] >= 1 and workT['type'] <= 7 and self.wtReservation[idx]['product']==0 and needType[workT['type']][1]!=0 \
+                and (workT['productState']==1 or workT['remainTime']>0 )\
+                and (buy_dist[idx]+need_dist[idx])/6+1.5 < (9000-self.frameId)*0.02:
                 buyTask.append(idx) 
         # buy task 排序
-        buyTask.sort(key=lambda x : self.buyCmp(x,robot_id,needType,buy_dist,need_dist), reverse=True)   
+        buyTask.sort(key=lambda x : self.buyCmp(x,robot_id,needType,buy_dist,need_dist,remainTime), reverse=True)   
 
         # buy task 选择
         if len(buyTask)!=0:
-            return buyTask[0]
+            score = self.buyCmp(buyTask[0],robot_id,needType,buy_dist,need_dist,remainTime)
+            return buyTask[0], score
         else:
-            return None
+            return None,None
 
     def sellCmp(self,x,robot_id):
         _haveProduct = 1 if self.workTable[x]['productState']==0 else 0
@@ -283,7 +294,7 @@ class Solution(object):
 
     def getBestSellTask(self,robot_id):
         """
-        # 根据场面信息,返回一个较优的卖任务
+        # 根据场面信息,返回一个较优的卖任务及其分数
         :param robot_id: 待分配卖任务的机器人id
         ## 固定信息
         ##### 工作台类型4 : 卖物品类型1,2       条件：对应物品格二进制位==0 and 对应物品格未被其他机器人预定
@@ -334,9 +345,10 @@ class Solution(object):
 
         # sell task 选择
         if len(sellTask)!=0:
-            return sellTask[0]
+            score = self.sellCmp(sellTask[0],robot_id)
+            return sellTask[0], score
         else:
-            return None
+            return None,None
 
     def scheduleRobot(self):
         """
@@ -350,10 +362,11 @@ class Solution(object):
             if self.isRobotOccupy[i] == 0: # if 空闲
                 # 分配buy任务
                 if self.robot[i]['type'] == 0:
-                    task = self.getBestBuyTask(i)
+                    task,score = self.getBestBuyTask(i)
                     if task!=None: 
                         # 更新机器人调度状态
                         self.robotTargetId[i] = task 
+                        self.robotTargetScore[i] = score
                         self.isRobotOccupy[i] = 1
                         self.robotTaskType[i] = 0
                         self.robotTargetOrid[i] = (self.workTable[self.robotTargetId[i]]['x'],self.workTable[self.robotTargetId[i]]['y'])
@@ -363,21 +376,42 @@ class Solution(object):
                         pass
                 # 分配sell任务
                 elif self.robot[i]['type'] != 0:
-                    task = self.getBestSellTask(i)
+                    task,score = self.getBestSellTask(i)
                     if task!=None: 
                         # 更新机器人调度状态
                         self.robotTargetId[i] = task 
+                        self.robotTargetScore[i] = score
                         self.isRobotOccupy[i] = 1
                         self.robotTaskType[i] = 1
                         self.robotTargetOrid[i] = (self.workTable[self.robotTargetId[i]]['x'],self.workTable[self.robotTargetId[i]]['y'])
                         # 更新工作台预定表
-                        self.wtReservation[task][self.robot[i]['type']] = 1
+                        if self.workTable[task]['type']==8 or self.workTable[task]['type']==9: # 不需预定，一直可卖
+                            self.wtReservation[task][self.robot[i]['type']] = 0
+                        else:
+                            self.wtReservation[task][self.robot[i]['type']] = 1
                     else: # 没sell任务可分配
                         pass
                 # 不分配
                 else:  
                     pass
-                    
+
+            # 被占用的“买任务机器人”的任务重分配（抢占）
+            # if self.robot[i]['type']==0 and self.isRobotOccupy[i] == 1: # 
+            #     task,score = self.getBestBuyTask(i)
+            #     if task!=None and score/self.robotTargetScore[i] > 20: # 重分配
+            #         # 原分配取消
+            #         self.wtReservation[self.robotTargetId[i]]['product'] = 0
+
+            #         # 更新机器人调度状态
+            #         self.robotTargetId[i] = task 
+            #         self.robotTargetScore[i] = score
+            #         self.isRobotOccupy[i] = 1
+            #         self.robotTaskType[i] = 0
+            #         self.robotTargetOrid[i] = (self.workTable[self.robotTargetId[i]]['x'],self.workTable[self.robotTargetId[i]]['y'])
+            #         # 更新工作台预定表
+            #         self.wtReservation[task]['product'] = 1
+
+
     def getInstrAndUpdate(self):
         """
         # 根据机器人本身状态和执行的任务类型
@@ -385,6 +419,52 @@ class Solution(object):
         # 2、产生控制指令并返回
         """
         self.instr = ''
+        # for i in range(4):
+        #     x_i = self.robot[i]['x']
+        #     y_i = self.robot[i]['y']
+        #     # 正常的目标工作台
+        #     if self.robotTargetOrid[i][0]==self.workTable[self.robotTargetId[i]]['x'] and self.robotTargetOrid[i][1]==self.workTable[self.robotTargetId[i]]['y']:
+        #         # 预测相撞
+        #         a = self.robot[i]['orientation'] # 朝向角
+        #         vector_a = np.array([math.cos(a),math.sin(a)]) # 机器人i朝向向量
+        #         for j in range(i+1,4):
+        #             x_j = self.robot[j]['x']
+        #             y_j = self.robot[j]['y']
+        #             x_bar = self.robot[j]['x'] - self.robot[i]['x']
+        #             y_bar = self.robot[j]['x'] - self.robot[i]['y']
+        #             vector_b = np.array([x_bar,y_bar]) # 机器人i当前位置指向机器人j的向量
+        #             dist_a = np.linalg.norm(vector_a)
+        #             dist_b = np.linalg.norm(vector_b) # 机器人i与机器人j的距离
+        #             dot = np.dot(vector_a,vector_b)     # 点积
+
+        #             cos_theta = dot/(dist_a*dist_b) # 向量a转到b的转向角余弦值 
+        #             theta = math.acos(round(cos_theta,10)) # a -> b 转向角
+        #             if dist_b < 2.6 and abs(theta) < math.pi/5 and self.robot[i]['orientation']*self.robot[j]['orientation']<=0:  # 相反方向
+        #                     # 计算虚假的目标工作台坐标
+        #                     theta1 = math.pi/6
+        #                     x_i_bar = (x_j-x_i) * math.cos(theta1) - (y_j-y_i) * math.sin(theta1) + x_i
+        #                     y_i_bar = (x_j-x_i) * math.sin(theta1) + (y_j-y_i) * math.cos(theta1) + y_i
+        #                     x_i_bar =  (x_i_bar - x_i) / (2 * math.cos(theta1)) + x_i
+        #                     y_i_bar =  (y_i_bar - y_i) / (2 * math.cos(theta1)) + y_i
+                            
+        #                     theta1 = -theta1
+        #                     x_j_bar = (x_j-x_i) * math.cos(theta1) - (y_j-y_i) * math.sin(theta1) + x_i
+        #                     y_j_bar = (x_j-x_i) * math.sin(theta1) + (y_j-y_i) * math.cos(theta1) + y_i
+        #                     x_j_bar =  (x_i_bar - x_i) / (2 * math.cos(theta1)) + x_i
+        #                     y_j_bar =  (y_i_bar - y_i) / (2 * math.cos(theta1)) + y_i
+
+        #                     self.robotTargetOrid[i] = (x_i_bar, y_i_bar)
+        #                     self.robotTargetOrid[j] = (x_j_bar, y_j_bar)
+        #     # 虚假的目标工作台
+        #     else:
+        #         # 如果到达则设回正常的目标工作台
+        #         if pow(self.robot[i]['x'] - self.robotTargetOrid[i][0], 2) + pow(self.robot[i]['y'] - self.robotTargetOrid[i][1], 2) < pow(0.4, 2):
+        #             self.robotTargetOrid[i] = (self.workTable[self.robotTargetId[i]]['x'],self.workTable[self.robotTargetId[i]]['y'])
+        #         # 未到达
+        #         else:
+        #             pass
+
+
         for i in range(4):
             # 物品持有时间计时
             if self.robot[i]['type'] != 0:
@@ -421,88 +501,65 @@ class Solution(object):
                     theta = -theta
                 else: # 逆时针转
                     theta = theta
-                angle_v = min(theta / 0.02, math.pi) if theta > 0 else max(theta / 0.02, -math.pi)
                 
-                # 速度
+                '''
+                持有物品：质量为0.88247 kg
+                最大加速度：283.295 m/s*s (5.6659 m/s*frame)
+                最大角加速度：403.4115 pi/s*s (8.06823 pi/s*frame)
+
+                不持有物品：质量为0.63617 kg
+                最大加速度：392.976 m/s*s (7.85952 m/s*frame)
+                最大角加速度：776.2503 pi/s*s (15.525 pi/s*frame)
+                '''
+                # 角速度
+                angle_v = min(theta/0.02, math.pi) if theta>0 else max(theta/0.02, -math.pi)
+                self.instr += 'rotate %d %f\n' % (i,angle_v)
+
+                #速度
                 x = self.robot[i]['x']
                 y = self.robot[i]['y']
                 # 左
                 if x<2 and y<48 and y>2 and ((a>=-math.pi and a<-math.pi/2) or (a>math.pi/2 and a<=math.pi)):
-                    v = 6/(abs(abs(a)-math.pi/2)*10/math.pi+1)
+                    v = 1
                 # 右
                 elif x>48 and y<48 and y>2 and a>-math.pi/2 and a<math.pi/2:
-                    v = 6/(abs(abs(a)-math.pi/2)*10/math.pi+1)
+                    v = 1
                 # 上
                 elif x>2 and x<48 and y>48 and a>0 and a<math.pi:
-                    if a<=math.pi/2:
-                        v = 6/(a*10/math.pi+1)
-                    else:
-                        v = 6/((math.pi-a)*10/math.pi+1)
+                    v = 1
                 # 下
                 elif x>2 and x<48 and y<2 and a>-math.pi and a<0:
-                    if a>=-math.pi/2:
-                        v = 6/(-a*10/math.pi+1)
-                    else:
-                        v = 6/((math.pi+a)*10/math.pi+1)
+                    v = 1
                 # 左上
                 elif x<=2 and y>=48 and ((a>=-math.pi and a<-math.pi/2) or (a>0 and a<=math.pi)):
-                    if a>0 and a<=math.pi/2:
-                        v = 6/(a*10/math.pi+1)
-                    elif a>=math.pi and a<-math.pi/2:
-                        v = 6/(abs(abs(a)-math.pi/2)*10/math.pi+1)
-                    elif a>math.pi/2 and a<=3*math.pi/4:
-                        v = 6/((a-math.pi/2)*24/math.pi+6)
-                    else:
-                        v = 6/((math.pi-a)*24/math.pi+6)
+                    v = 1
                 # 左下
                 elif x<=2 and y<=2 and ((a>=-math.pi and a<0) or (a>math.pi/2 and a<=math.pi)):
-                    if a>=-math.pi/2 and a<0:
-                        v = 6/(-a*10/math.pi+1)
-                    elif a>math.pi/2 and a<=math.pi:
-                        v = v = 6/(abs(abs(a)-math.pi/2)*10/math.pi+1)
-                    elif a>=-3*math.pi/4 and a<-math.pi/2:
-                        v = 6/(abs(a+math.pi/2)*24/math.pi+6)
-                    else:
-                        v = 6/(abs(a+math.pi)*24/math.pi+6)
+                    v = 1
                 # 右上
-                elif x>=48 and y>=48 and a>-math.pi/2 and a<math.pi:
-                    if a>=math.pi/2:
-                        v = 6/((math.pi-a)*10/math.pi+1)
-                    elif a<=0:
-                        v = 6/(abs(abs(a)-math.pi/2)*10/math.pi+1)
-                    elif a>0 and a<=math.pi/4:
-                        v = 6/(a*24/math.pi+6)
-                    else:
-                        v = 6/(abs(a-math.pi/2)*24/math.pi+6)
+                elif x>=48 and y>=48 and a>0 and a<math.pi/2:
+                    v = 1
                 # 右下
-                elif x>=48 and y<=2 and a>-math.pi and a<math.pi/2:
-                    if a<=-math.pi/2:
-                        v = 6/((math.pi+a)*10/math.pi+1)
-                    elif a>=0:
-                        v = 6/(abs(a-math.pi/2)*10/math.pi+1)
-                    elif a>=-math.pi/4 and a<0:
-                        v = 6/(-a*24/math.pi+6)
-                    else:
-                        v = 6/(abs(math.pi/2+a)*24/math.pi+6)
+                elif x>=48 and y<=2 and a>-math.pi/2 and a<0:
+                    v = 1
                 else:
+                    # v = 6-6*abs(theta)/math.pi
                     v = 6/(abs(theta)+1)
-                v = min(v, 6) if v>0 else max(v, -2)
-
-                self.instr = self.instr + 'forward %d %f\n' % (i,v)
-                
-                # 角速度
-                self.instr += 'rotate %d %f\n' % (i,angle_v)
+                self.instr = self.instr + 'forward %d %d\n' % (i,v)
 
             # 占用状态但到达目标点
             elif self.isRobotOccupy[i] == 1 and self.robot[i]['workTableID'] == self.robotTargetId[i]:
                 # 在工作台买入或售出
                 if self.robotTaskType[i] == 0: # 买
-                    self.instr += 'buy %d\n' % (i)
-                    # 更新机器人占用情况
-                    self.isRobotOccupy[i] = 0
-                    self.robotObjOccupyTime[i] = 0 # 物品持有时间,从买入开始计时
-                    # 更新工作台预定表
-                    self.wtReservation[self.robotTargetId[i]]['product'] = 0
+                    if self.workTable[self.robotTargetId[i]]['productState']:
+                        self.instr += 'buy %d\n' % (i)
+                        # 更新机器人占用情况
+                        self.isRobotOccupy[i] = 0
+                        self.robotObjOccupyTime[i] = 0 # 物品持有时间,从买入开始计时
+                        # 更新工作台预定表
+                        self.wtReservation[self.robotTargetId[i]]['product'] = 0
+                    else:
+                        self.instr = self.instr + 'forward %d %d\n' % (i,0)
 
                 elif self.robotTaskType[i] == 1 : # 卖
                     self.instr += 'sell %d\n' % (i)
