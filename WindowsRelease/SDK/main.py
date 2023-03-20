@@ -177,7 +177,8 @@ class Solution(object):
                             # 统计卖的距离
                             sell_dist[idx2] = np.linalg.norm([workT['x']-workT2['x'],workT['y']-workT2['y']])
                             # 可行的卖任务
-                            if (workT2['rawState']>>objT)&1==0 or 0 :
+                            if (workT2['rawState']>>objT)&1==0 and (buy_dist[idx]+sell_dist[idx2])/6+1.5 < (9000-self.frameId)*0.02 \
+                            or (0) :
                                 task.append([idx,idx2])
                                 sell_time = sell_dist[idx2]/6
                                 total_time = (buy_dist[idx]+sell_dist[idx2])/6
