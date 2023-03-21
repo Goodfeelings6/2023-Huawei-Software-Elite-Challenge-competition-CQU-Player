@@ -42,10 +42,14 @@ class Solution(object):
         self.wtReservation = []
 
         # 超参数
-        self.abandonThreshold = 0.5  # 买7号物品的机器人 i 放弃此任务的门限值, 范围0~无穷, 越大越不放弃
+        self.abandonThreshold = 1  # 买7号物品的机器人 i 放弃此任务的门限值, 范围0~无穷, 越大越不放弃，仅当sw_abandon==1有效
+        # 开关 
+        ### sw_abandon,sw_nearest 一般同时使用
+        self.sw_abandon = 1 # 买占用机器人放弃策略 是否开启 1开0关
+        self.sw_nearest = 1 # 顺路策略 是否开启 1开0关
 
         # ---日志---
-        # self.info = open('info.txt', 'w')
+        self.info = open('info.txt', 'w')
 
     def finish(self):
         """
@@ -211,7 +215,7 @@ class Solution(object):
                 ### 统计买的距离              
                 buy_dist[idx] = np.linalg.norm([self.robot[i]['x']-workT['x'],self.robot[i]['y']-workT['y']])
 #------可调节----##### 可行的买任务
-                if self.isNearest(i,workT) and (workT['productState']==1 or (workT['remainTime']>0 and buy_dist[idx]/6 > workT['remainTime']*0.02)):
+                if (self.sw_nearest and self.isNearest(i,workT)) and (workT['productState']==1 or (workT['remainTime']>0 and buy_dist[idx]/6 > workT['remainTime']*0.02)):
                     ### 统计与需求者距离
                     objT = workT['type']
                     for idx2,workT2 in enumerate(self.workTable): 
@@ -221,7 +225,8 @@ class Solution(object):
                             sell_dist[idx2] = np.linalg.norm([workT['x']-workT2['x'],workT['y']-workT2['y']])
 #-------可调节--------------##### 可行的卖任务
                             if (workT2['rawState']>>objT)&1==0 and (buy_dist[idx]+sell_dist[idx2])/6+1.5 < (9000-self.frameId)*0.02 :
-         # 适用于地图4       or (self.isMaterialComplete(workT2)  and workT2['productState']==0 and (buy_dist[idx]+sell_dist[idx2])/6 > workT2['remainTime']*0.02 ) :
+                                # or (self.isMaterialComplete(workT2)  and workT2['productState']==0 and (buy_dist[idx]+sell_dist[idx2])/6 > workT2['remainTime']*0.02 ) :
+                            # 适用于地图4 
                             # or self.isMaterialCanConsume(idx2)
                                 task.append([idx,idx2])
                                 sell_time = sell_dist[idx2]/6
@@ -303,7 +308,7 @@ class Solution(object):
                 if self.robot[i]['workTableID'] != self.robotTargetId[i][0]:
                     # 若有另外的卖任务途中的机器人 j 的目标点是机器人 i 将要前往的买工作台 ,
  #---可调节----------##### # 且  T(i)/T(j) > 阈值 则放弃 i 的任务。 T(x) 表示编号为x的机器人到达下个目标点仍需的时间
-                    if self.workTable[self.robotTargetId[i][0]]['type']==7 and self.judgeAbandon(i):
+                    if self.sw_abandon and self.workTable[self.robotTargetId[i][0]]['type']==7 and self.judgeAbandon(i):
                         # 放弃此任务
                         # 机器人转为空闲
                         self.isRobotOccupy[i] = 0
@@ -335,6 +340,30 @@ class Solution(object):
                     self.isRobotOccupy[i] = 0
                     # 更新工作台预定表
                     self.wtReservation[self.robotTargetId[i][1]][self.robot[i]['type']] = 0
+        
+        turn=[0 for i in range(4)]
+        for i in range(3):
+            for j in range(i + 1, 4):
+                if pow(self.robot[i]['x']-self.robot[j]['x'],2)+pow(self.robot[i]['y']-self.robot[j]['y'],2)<3**3 and self.robot[i]['orientation']*self.robot[j]['orientation']<0:
+                    """if turn[j]==0 and ((self.robot[j]['orientation']>-math.pi/2 and self.robot[j]['orientation']<0)or (self.robot[j]['orientation']>math.pi/2 and self.robot[j]['orientation']<math.pi))  :
+                        turn[j]=-math.pi
+                    if turn[j]==0 and ((self.robot[j]['orientation']<-math.pi/2 and self.robot[j]['orientation']>-math.pi)or (self.robot[j]['orientation']<math.pi/2 and self.robot[j]['orientation']>0))  :
+                        turn[j]=math.pi"""
+                    if(turn[j]==0):
+                        if(pow(self.robot[j]['linV_x'],2)+pow(self.robot[j]['linV_y'],2))>9:
+                            if self.robot[j]['orientation']<0 and self.robot[j]['y']>self.robot[i]['y'] and self.robot[j]['x']>self.robot[i]['x']:
+                                turn[j] = math.pi
+                            if self.robot[j]['orientation']<0 and self.robot[j]['y']>self.robot[i]['y'] and self.robot[j]['x']<=self.robot[i]['x']:
+                                turn[j] = -math.pi
+                            if self.robot[j]['orientation']>0 and self.robot[j]['y']<self.robot[i]['y'] and self.robot[j]['x']>self.robot[i]['x']:
+                                turn[j] = -math.pi
+                            if self.robot[j]['orientation']<0 and self.robot[j]['y']<self.robot[i]['y'] and self.robot[j]['x']<=self.robot[i]['x']:
+                                turn[j] = math.pi
+        # 角速度
+        for i in range(4):
+            if turn[i]!=0:
+                instr_i = 'rotate %d %f\n' % (i,turn[i])
+                self.instr += instr_i
 
 
     def control(self,i,target):
@@ -436,6 +465,8 @@ class Solution(object):
                 v = 6/(-a*24/math.pi+6)
             else:
                 v = 6/(abs(math.pi/2+a)*24/math.pi+6)
+        elif dist_b<1:
+            v = 1
         else:
             v = 6/(abs(theta)+1)
         v = min(v, 6) if v>0 else max(v, -2)
@@ -462,24 +493,23 @@ class Solution(object):
 
         #     #日志
         #     if self.frameId % 50 == 1:
-        #     # if 1:
-        #         robot_ordin = []
-        #         self.info.write("时间帧："+str(self.frameId)+"\n")
-        #         self.info.write("工作台："+str(self.workTable)+"\n")
-        #         for i in range(4):
-        #             self.info.write("机器人："+str(self.robot[i])+"\n")
-        #             robot_ordin.append((self.robot[i]['x'],self.robot[i]['y']))
-        #         self.info.write("指令：\n"+str(self.instr))
-        #         self.info.write("是否占用      :"+str(self.isRobotOccupy)+"\n")
-        #         self.info.write("目标工作台ID  :"+str(self.robotTargetId)+"\n")
-        #         self.info.write("目标工作台坐标 :"+str(self.robotTargetOrid)+"\n")
-        #         self.info.write("机器人坐标    :"+str(robot_ordin)+"\n")
-        #         self.info.write("机器人任务类型 :"+str(self.robotTaskType)+"\n")
-        #         self.info.write("机器人占用时间 :"+str(self.robotObjOccupyTime)+"\n")
-        #         self.info.write("\n")
+            # if 1:
+            #     robot_ordin = []
+            #     self.info.write("时间帧："+str(self.frameId)+"\n")
+            #     self.info.write("工作台："+str(self.workTable)+"\n")
+            #     for i in range(4):
+            #         self.info.write("机器人："+str(self.robot[i])+"\n")
+            #         robot_ordin.append((self.robot[i]['x'],self.robot[i]['y']))
+            #     self.info.write("指令：\n"+str(self.instr))
+            #     self.info.write("是否占用      :"+str(self.isRobotOccupy)+"\n")
+            #     self.info.write("目标工作台ID  :"+str(self.robotTargetId)+"\n")
+            #     self.info.write("目标工作台坐标 :"+str(self.robotTargetOrid)+"\n")
+            #     self.info.write("机器人坐标    :"+str(robot_ordin)+"\n")
+            #     self.info.write("机器人任务类型 :"+str(self.robotTaskType)+"\n")
+            #     self.info.write("\n")
                   
-        # # 关闭日志文件
-        # self.info.close()
+        # 关闭日志文件
+        self.info.close()
 
 
 if __name__ == '__main__':
