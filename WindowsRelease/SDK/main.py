@@ -175,34 +175,34 @@ class Solution(object):
             self.outputData()
 
             # 日志
-            self.log()
+            # if self.frameId % 50 == 1:
+            # if 1:
+                # self.log()
             
-    def log():
+    def log(self):
         """
         # 写日志
         """      
-        # ---日志---
-        #     self.info = open('info.txt', 'w') 
-        #     #日志
-        #     if self.frameId % 50 == 1:
-        #     # if 1:
-        #         robot_ordin = []
-        #         self.info.write("时间帧："+str(self.frameId)+"\n")
-        #         self.info.write("工作台："+str(self.workTable)+"\n")
-        #         for i in range(4):
-        #             self.info.write("机器人："+str(self.robot[i])+"\n")
-        #             robot_ordin.append((self.robot[i]['x'],self.robot[i]['y']))
-        #         self.info.write("指令：\n"+str(self.instr))
-        #         self.info.write("是否占用      :"+str(self.isRobotOccupy)+"\n")
-        #         self.info.write("目标工作台ID  :"+str(self.robotTargetId)+"\n")
-        #         self.info.write("目标工作台坐标 :"+str(self.robotTargetOrid)+"\n")
-        #         self.info.write("机器人坐标    :"+str(robot_ordin)+"\n")
-        #         self.info.write("机器人任务类型 :"+str(self.robotTaskType)+"\n")
-        #         self.info.write("机器人占用时间 :"+str(self.robotObjOccupyTime)+"\n")
-        #         self.info.write("\n")
+        #---日志---
+        self.info = open('info.txt', 'w') 
+
+        robot_ordin = []
+        self.info.write("时间帧："+str(self.frameId)+"\n")
+        self.info.write("工作台："+str(self.workTable)+"\n")
+        for i in range(4):
+            self.info.write("机器人："+str(self.robot[i])+"\n")
+            robot_ordin.append((self.robot[i]['x'],self.robot[i]['y']))
+        self.info.write("指令：\n"+str(self.instr))
+        self.info.write("是否占用      :"+str(self.isRobotOccupy)+"\n")
+        self.info.write("目标工作台ID  :"+str(self.robotTargetId)+"\n")
+        self.info.write("目标工作台坐标 :"+str(self.robotTargetOrid)+"\n")
+        self.info.write("机器人坐标    :"+str(robot_ordin)+"\n")
+        self.info.write("机器人任务类型 :"+str(self.robotTaskType)+"\n")
+        self.info.write("机器人占用时间 :"+str(self.robotObjOccupyTime)+"\n")
+        self.info.write("\n")
                 
-        # # 关闭日志文件
-        # self.info.close()
+        # 关闭日志文件
+        self.info.close()
 
 if __name__ == '__main__':
     
