@@ -223,8 +223,8 @@ class Strategy2(object):
                         pass
                 # 不分配
                 else:  
-                    pass                   
-   
+                    pass
+                    
     def getInstrAndUpdate(self):
         """
         # 根据机器人本身状态和执行的任务类型
@@ -232,27 +232,6 @@ class Strategy2(object):
         # 2、产生控制指令并返回
         """
         self.instr = ''
-        need_down_speed = [0 for i in range(4)]  # 负数表示减速，正数表示加数，第五个位置置空位
-
-        turn=[0 for i in range(4)]
-        for i in range(3):
-            for j in range(i + 1, 4):
-                if pow(self.robot[i]['x']-self.robot[j]['x'],2)+pow(self.robot[i]['y']-self.robot[j]['y'],2)<3**3and self.robot[i]['orientation']*self.robot[j]['orientation']<0:
-                    """if turn[j]==0 and ((self.robot[j]['orientation']>-math.pi/2 and self.robot[j]['orientation']<0)or (self.robot[j]['orientation']>math.pi/2 and self.robot[j]['orientation']<math.pi))  :
-                        turn[j]=-math.pi
-                    if turn[j]==0 and ((self.robot[j]['orientation']<-math.pi/2 and self.robot[j]['orientation']>-math.pi)or (self.robot[j]['orientation']<math.pi/2 and self.robot[j]['orientation']>0))  :
-                        turn[j]=math.pi"""
-                    if(turn[j]==0):
-                        if(pow(self.robot[j]['linV_x'],2)+pow(self.robot[j]['linV_y'],2))>9:
-                            if self.robot[j]['orientation']<0 and self.robot[j]['y']>self.robot[i]['y'] and self.robot[j]['x']>self.robot[i]['x']:
-                                turn[j] = math.pi
-                            if self.robot[j]['orientation']<0 and self.robot[j]['y']>self.robot[i]['y'] and self.robot[j]['x']<=self.robot[i]['x']:
-                                turn[j] = -math.pi
-                            if self.robot[j]['orientation']>0 and self.robot[j]['y']<self.robot[i]['y'] and self.robot[j]['x']>self.robot[i]['x']:
-                                turn[j] = -math.pi
-                            if self.robot[j]['orientation']<0 and self.robot[j]['y']<self.robot[i]['y'] and self.robot[j]['x']<=self.robot[i]['x']:
-                                turn[j] = math.pi
-
         for i in range(4):
             # 物品持有时间计时
             if self.robot[i]['type'] != 0:
@@ -352,16 +331,12 @@ class Strategy2(object):
                         v = 6/(-a*24/math.pi+6)
                     else:
                         v = 6/(abs(math.pi/2+a)*24/math.pi+6)
-                elif dist_b<1:
-                    v=1
                 else:
                     v = 6/(abs(theta)+1)
                 v = min(v, 6) if v>0 else max(v, -2)
-                v += need_down_speed[i]
 
                 self.instr = self.instr + 'forward %d %f\n' % (i,v)
-                if turn[i]!=0:
-                    angle_v=turn[i]
+                
                 # 角速度
                 self.instr += 'rotate %d %f\n' % (i,angle_v)
 
