@@ -42,11 +42,9 @@ class Solution(object):
         self.wtReservation = []
 
         # 超参数
-        self.abandonThreshold = 1  # 买7号物品的机器人 i 放弃此任务的门限值, 范围0~无穷, 越大越不放弃，仅当sw_abandon==1有效
+        # self.abandonThreshold = 0.4  # 买7号物品的机器人 i 放弃此任务的门限值, 范围0~无穷, 越大越不放弃
         # 开关 
-        ### sw_abandon,sw_nearest 一般同时使用
-        self.sw_abandon = 1 # 买占用机器人放弃策略 是否开启 1开0关
-        self.sw_nearest = 1 # 顺路策略 是否开启 1开0关
+        self.sw_avoidCrash = 1 # 碰撞避免 是否开启 1开0关
 
         # ---日志---
         # self.info = open('info.txt', 'w')
@@ -215,7 +213,8 @@ class Solution(object):
                 ### 统计买的距离              
                 buy_dist[idx] = np.linalg.norm([self.robot[i]['x']-workT['x'],self.robot[i]['y']-workT['y']])
 #------可调节----##### 可行的买任务
-                if (self.sw_nearest and self.isNearest(i,workT)) and (workT['productState']==1 or (workT['remainTime']>0 and buy_dist[idx]/6 > workT['remainTime']*0.02)):
+                if self.isNearest(i,workT) and (workT['productState']==1 or (workT['remainTime']>0 and buy_dist[idx]/6 > workT['remainTime']*0.02)):
+                # if (workT['productState']==1 or (workT['remainTime']>0 and buy_dist[idx]/6 > workT['remainTime']*0.02)):
                     ### 统计与需求者距离
                     objT = workT['type']
                     for idx2,workT2 in enumerate(self.workTable): 
@@ -308,13 +307,14 @@ class Solution(object):
                 if self.robot[i]['workTableID'] != self.robotTargetId[i][0]:
                     # 若有另外的卖任务途中的机器人 j 的目标点是机器人 i 将要前往的买工作台 ,
  #---可调节----------##### # 且  T(i)/T(j) > 阈值 则放弃 i 的任务。 T(x) 表示编号为x的机器人到达下个目标点仍需的时间
-                    if self.sw_abandon and self.workTable[self.robotTargetId[i][0]]['type']==7 and self.judgeAbandon(i):
+                    # if self.workTable[self.robotTargetId[i][0]]['type']==7 and self.judgeAbandon(i):
+                    if 0:
                         # 放弃此任务
                         # 机器人转为空闲
                         self.isRobotOccupy[i] = 0
                         # 更新工作台预定表
                         self.wtReservation[self.robotTargetId[i][0]]['product'] = 0 # 取消买预定
-                        objT = self.workTable[self.robotTargetId[i][1]]['type']
+                        objT = self.workTable[self.robotTargetId[i][0]]['type']
                         self.wtReservation[self.robotTargetId[i][1]][objT] = 0 # 取消卖预定
                     else:
                         self.instr += self.control(i,self.robotTargetOrid[i][0])
@@ -340,7 +340,11 @@ class Solution(object):
                     self.isRobotOccupy[i] = 0
                     # 更新工作台预定表
                     self.wtReservation[self.robotTargetId[i][1]][self.robot[i]['type']] = 0
-        
+        if self.sw_avoidCrash == 1:
+            self.avoidCrash()
+    
+    def avoidCrash(self):
+        """碰撞避免"""
         turn=[0 for i in range(4)]
         for i in range(3):
             for j in range(i + 1, 4):
@@ -465,8 +469,8 @@ class Solution(object):
                 v = 6/(-a*24/math.pi+6)
             else:
                 v = 6/(abs(math.pi/2+a)*24/math.pi+6)
-        elif dist_b<1:
-            v = 1
+        elif dist_b<0.9:
+            v = 0.8
         else:
             v = 6/(abs(theta)+1)
         v = min(v, 6) if v>0 else max(v, -2)
