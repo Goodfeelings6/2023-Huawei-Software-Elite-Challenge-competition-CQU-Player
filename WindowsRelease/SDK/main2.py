@@ -49,7 +49,7 @@ class Solution(object):
         self.sw_nearest = 1 # 顺路策略 是否开启 1开0关
 
         # ---日志---
-        self.info = open('info.txt', 'w')
+        # self.info = open('info.txt', 'w')
 
     def finish(self):
         """
@@ -509,7 +509,7 @@ class Solution(object):
             #     self.info.write("\n")
                   
         # 关闭日志文件
-        self.info.close()
+        # self.info.close()
 
 
 if __name__ == '__main__':
