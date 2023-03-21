@@ -41,6 +41,9 @@ class Solution(object):
         # 工作台预定表(读入地图时顺序初始化,可预定成品格、物品格, 0未被预定、1被预定)
         self.wtReservation = []
 
+        # 超参数
+        self.abandonThreshold = 0.5  # 买7号物品的机器人 i 放弃此任务的门限值, 范围0~无穷, 越大越不放弃
+
         # ---日志---
         # self.info = open('info.txt', 'w')
 
@@ -154,26 +157,46 @@ class Solution(object):
             return (1-math.sqrt(1-(1-x/maxX)**2))*(1-minRate)+minRate
         elif x >= maxX:
             return minRate
+
     def isNearest(self,i,workT):
         """
-        # 判断 是否有其他机器人顺路
+        # 判断i相比于其他机器人是否离workT最近。如果其他机器人对于工作台workT 顺路(或更近), 若有 return False , 否则 True
         :param i 机器人编号
         :param workT 工作台
         """
         # i 与 workT 距离
         i_dist = np.linalg.norm([self.robot[i]['x']-workT['x'],self.robot[i]['y']-workT['y']])
-        ans = True
         for j in range(4):
             j_finish_dist = 1e5
-            if i!=j and self.isRobotOccupy[j]==1 and self.robotTaskType[j]==1: # j有任务在身
+            if i!=j and self.isRobotOccupy[j]==1 and self.robotTaskType[j]==1: # j有任务在身且已经在卖的路上
                 # j 卖目标工作台与 workT 距离
                 j_finish_dist = np.linalg.norm([self.robotTargetOrid[j][1][0]-workT['x'],self.robotTargetOrid[j][1][1]-workT['y']])
             elif i!=j and self.isRobotOccupy[j]==0: # j没任务在身
+                # j 与 workT 距离
                 j_finish_dist = np.linalg.norm([self.robot[j]['x']-workT['x'],self.robot[j]['y']-workT['y']])
+            # 存在 j 更近
             if i_dist > j_finish_dist:
                 return False
         return True
 
+    def isMaterialComplete(self,workT):
+        """
+        # 判断 workT 工作台是否材料齐全了
+        """ 
+        matrial_type = self.demandTable[workT['type']]
+        for i in matrial_type:
+            if (workT['rawState']>>i)&1 == 0:
+                return False
+        return True
+
+    def isMaterialCanConsume(self, idx, workT, T):
+        """
+        # 判断 id==idx 的工作台的材料格是否能在规定时间被消耗
+        规定时间 T 即: 某一个机器人从分配任务开始、买到物品、并到达卖工作台的 这段时间
+        """
+        # 能被消耗的条件: 1,无产品 且 剩余生产时间帧小于规定时间 且 材料齐备或在小于规定时间内齐备
+        #               2,有产品 且 不阻塞 且 取产品时间<规定时间 且 材料齐备或在小于 [规定时间-取产品时间] 内齐备
+        pass
     def getBestTask(self,i):
         """
         # 根据场面信息,返回一个较优的任务
@@ -187,7 +210,7 @@ class Solution(object):
             if workT['type'] >= 1 and workT['type'] <= 7 and self.wtReservation[idx]['product']==0:
                 ### 统计买的距离              
                 buy_dist[idx] = np.linalg.norm([self.robot[i]['x']-workT['x'],self.robot[i]['y']-workT['y']])
-                # 可行的买任务
+#------可调节----##### 可行的买任务
                 if self.isNearest(i,workT) and (workT['productState']==1 or (workT['remainTime']>0 and buy_dist[idx]/6 > workT['remainTime']*0.02)):
                     ### 统计与需求者距离
                     objT = workT['type']
@@ -196,9 +219,10 @@ class Solution(object):
                         if objT in self.demandTable[workT2['type']] and self.wtReservation[idx2][objT]==0:
                             # 统计卖的距离
                             sell_dist[idx2] = np.linalg.norm([workT['x']-workT2['x'],workT['y']-workT2['y']])
-                            # 可行的卖任务
-                            if (workT2['rawState']>>objT)&1==0 and (buy_dist[idx]+sell_dist[idx2])/6+1.5 < (9000-self.frameId)*0.02 \
-                            or (0) :
+#-------可调节--------------##### 可行的卖任务
+                            if (workT2['rawState']>>objT)&1==0 and (buy_dist[idx]+sell_dist[idx2])/6+1.5 < (9000-self.frameId)*0.02 :
+         # 适用于地图4       or (self.isMaterialComplete(workT2)  and workT2['productState']==0 and (buy_dist[idx]+sell_dist[idx2])/6 > workT2['remainTime']*0.02 ) :
+                            # or self.isMaterialCanConsume(idx2)
                                 task.append([idx,idx2])
                                 sell_time = sell_dist[idx2]/6
                                 total_time = (buy_dist[idx]+sell_dist[idx2])/6
@@ -211,12 +235,43 @@ class Solution(object):
         else:
             return None
 
+    def judgeAbandon(self,i):
+        """
+        # 判断是否需要放弃 编号为 i 的机器人目前的任务, 若是,return True, 否则 False
+        :param i 机器人编号
+        :return bool
+        策略: 若有另外的卖任务途中的机器人 j 的目标点是机器人 i 将要前往的买工作台 ,
+        且  T(i)/T(j) > self.abandonThreshold 则放弃 i 的任务. 
+        T(x) 表示编号为x的机器人到达下个目标点仍需的时间.
+        self.abandonThreshold 为可调参数
+        时间之比也即距离之比.
+        """
+        # i 目标工作台坐标(买途中)
+        i_target = self.robotTargetOrid[i][0]
+        # i 与 其 target 距离
+        i_dist = np.linalg.norm([self.robot[i]['x']-i_target[0],self.robot[i]['y']-i_target[1]])
+
+        for j in range(4):
+            # j有任务在身且已经在卖的路上且 j 的卖工作台与 i 目标工作台相同
+            if i!=j and self.isRobotOccupy[j]==1 and self.robotTaskType[j]==1 \
+            and self.robotTargetId[j][1] == self.robotTargetId[i][0]: 
+                # j 目标工作台坐标
+                j_target = self.robotTargetOrid[i][1]
+                # j 与 目标工作台距离
+                j_dist = np.linalg.norm([self.robot[j]['x']-j_target[0],self.robot[j]['y']-j_target[1]])
+            else:
+                j_dist = 1e5
+
+            # 存在 j 顺路, 则 i 可以放弃
+            if i_dist / j_dist > self.abandonThreshold:
+                return True
+        return False
+
     def scheduleRobot(self):
         """
         # 给空闲机器人分配任务,调度
-        ##### 策略：未携带物品的空闲机器人 分配 buy任务, 携带物品的空闲机器人 分配 sell任务 
         """       
-        # 任务 = 一个工作台id , 表示机器人要前往此工作台 , 执行 buy 或 sell  
+        # 任务 = 两个工作台id 分别为 buy 和 sell, 表示机器人要前往对应工作台 , 执行 buy 和 sell  
         self.instr = ''
         for i in range(4):
             # if 空闲
@@ -239,14 +294,25 @@ class Solution(object):
                     else:
                         self.wtReservation[task[1]][self.workTable[task[0]]['type']] = 1
                 else: # 没任务可分配
-                    # 往地图中心走
+#----可调节---------##### # 往地图中心走 (往某个工作台走？)
                     self.instr += self.control(i,(25,25))
                     
             # 买占用状态
             elif self.isRobotOccupy[i] == 1 and self.robotTaskType[i] == 0 : 
                 # 未到达买目标点
                 if self.robot[i]['workTableID'] != self.robotTargetId[i][0]:
-                    self.instr += self.control(i,self.robotTargetOrid[i][0])
+                    # 若有另外的卖任务途中的机器人 j 的目标点是机器人 i 将要前往的买工作台 ,
+ #---可调节----------##### # 且  T(i)/T(j) > 阈值 则放弃 i 的任务。 T(x) 表示编号为x的机器人到达下个目标点仍需的时间
+                    if self.workTable[self.robotTargetId[i][0]]['type']==7 and self.judgeAbandon(i):
+                        # 放弃此任务
+                        # 机器人转为空闲
+                        self.isRobotOccupy[i] = 0
+                        # 更新工作台预定表
+                        self.wtReservation[self.robotTargetId[i][0]]['product'] = 0 # 取消买预定
+                        objT = self.workTable[self.robotTargetId[i][1]]['type']
+                        self.wtReservation[self.robotTargetId[i][1]][objT] = 0 # 取消卖预定
+                    else:
+                        self.instr += self.control(i,self.robotTargetOrid[i][0])
                 # 到达目标点
                 else:
                     # 买
@@ -411,8 +477,7 @@ class Solution(object):
         #         self.info.write("机器人任务类型 :"+str(self.robotTaskType)+"\n")
         #         self.info.write("机器人占用时间 :"+str(self.robotObjOccupyTime)+"\n")
         #         self.info.write("\n")
-                
-        
+                  
         # # 关闭日志文件
         # self.info.close()
 
