@@ -18,7 +18,8 @@ class Strategy4(object):
         self.robotTargetOrid = [(0,0) for i in range(4)] # 被占用机器人需要前往的目标工作台坐标
         self.robotTaskType = [0 for i in range(4)] # 被占用机器人目前的任务类型,只考虑buy和sell,0表示buy,1表示sell
         self.robotObjOccupyTime = [0 for i in range(4)] # 机器人的已持续持有物品时间
-       
+        self.turning=[0 for i in range(4)]
+        
         # 参数
         self.param_need = 0.01
         self.param_buy_dist = 1
@@ -61,27 +62,27 @@ class Strategy4(object):
         ##### buy:
         ##### 候选任务条件: 工作台类型1-7,对应买物品类型1-7 and 成品格不为空(==1) and 成品未被其他机器人预定
         """
-        ### 统计场上的需求 
+        ### 统计场上的需求
         epl = 1e-8
         needType = {1:[epl,0],2:[epl,0],3:[epl,0],4:[epl,0],5:[epl,0],6:[epl,0],7:[epl,0]}  # 物品类型:(格子总数,空缺格子数)
-        for idx,workT in enumerate(self.workTable):   
+        for idx,workT in enumerate(self.workTable):
             for objType in self.demandTable[workT['type']]:
                 needType[objType][0] += 1
                 if (workT['rawState']>>objType)&1==0 and self.wtReservation[idx][objType]==0: # 空缺且不被预定
-                    needType[objType][1] += 1 
+                    needType[objType][1] += 1
 
-        
+
         buy_dist = {} # 工作台id:与机器人距离
         need_dist = {} # 工作台id:与最近需求者距离
         for idx,workT in enumerate(self.workTable):
-            # 能买的条件,进行过滤           
+            # 能买的条件,进行过滤
             if workT['type'] >= 1 and workT['type'] <= 7 and workT['productState']==1 \
               and self.wtReservation[idx]['product']==0 and needType[workT['type']][1]!=0:
-                ### 统计买的距离              
+                ### 统计买的距离
                 buy_dist[idx] = np.linalg.norm([self.robot[robot_id]['x']-self.workTable[idx]['x'],self.robot[robot_id]['y']-self.workTable[idx]['y']])
                 ### 统计与最近需求者距离
                 objT = workT['type']
-                for idx2,workT2 in enumerate(self.workTable): 
+                for idx2,workT2 in enumerate(self.workTable):
                     # 如果是一个有效需求者
                     if objT in self.demandTable[workT2['type']] and (workT2['rawState']>>objT)&1==0 and self.wtReservation[idx2][objT]==0:
                         # 维护最小距离
@@ -91,13 +92,13 @@ class Strategy4(object):
         # buy task 收集
         buyTask = [] # 工作台id
         for idx,workT in enumerate(self.workTable):
-            # 能买的条件,进行过滤           
+            # 能买的条件,进行过滤
             if workT['type'] >= 1 and workT['type'] <= 7 and workT['productState']==1 \
               and self.wtReservation[idx]['product']==0 and needType[workT['type']][1]!=0 \
               and (buy_dist[idx]+need_dist[idx])/6+1.5 < (9000-self.frameId)*0.02:
-                buyTask.append(idx) 
+                buyTask.append(idx)
         # buy task 排序
-        buyTask.sort(key=lambda x : self.buyCmp(x,robot_id,needType,buy_dist,need_dist), reverse=True)   
+        buyTask.sort(key=lambda x : self.buyCmp(x,robot_id,needType,buy_dist,need_dist), reverse=True)
 
         # buy task 选择
         if len(buyTask)!=0:
@@ -123,7 +124,7 @@ class Strategy4(object):
             if (self.workTable[x]['rawState']>>objType)&1==0 : # 缺少
                 lack_count += 1
         _lackRate = (total_count-lack_count) / total_count
-        
+
         _sell_dist = np.linalg.norm([self.robot[robot_id]['x']-self.workTable[x]['x'],self.robot[robot_id]['y']-self.workTable[x]['y']])
 
         return  self.param_haveProduct * _haveProduct + self.param_produce * _produce + self.param_lackRate * _lackRate + self.param_sell_dist * 1/_sell_dist
@@ -142,7 +143,7 @@ class Strategy4(object):
         整理如下：
         ##### sell:
         ##### 卖物品类型1, 条件：((工作台类型==4 or 工作台类型==5) and 类型1物品格为空(==0) and 类型1物品格未被其他机器人预定) or 工作台类型==9
-        ##### 卖物品类型2, 条件：((工作台类型==4 or 工作台类型==6) and 类型2物品格为空(==0) and 类型2物品格未被其他机器人预定) or 工作台类型==9 
+        ##### 卖物品类型2, 条件：((工作台类型==4 or 工作台类型==6) and 类型2物品格为空(==0) and 类型2物品格未被其他机器人预定) or 工作台类型==9
         ##### 卖物品类型3, 条件：((工作台类型==5 or 工作台类型==6) and 类型3物品格为空(==0) and 类型3物品格未被其他机器人预定) or 工作台类型==9
         ##### 卖物品类型4, 条件：( 工作台类型==7 and 类型4物品格为空(==0) and 类型4物品格未被其他机器人预定) or 工作台类型==9
         ##### 卖物品类型5, 条件：( 工作台类型==7 and 类型5物品格为空(==0) and 类型5物品格未被其他机器人预定) or 工作台类型==9
@@ -150,7 +151,7 @@ class Strategy4(object):
         ##### 卖物品类型7, 条件：工作台类型==8 or 工作台类型==9
         """
         # sell task 收集
-        sellTask = [] 
+        sellTask = []
         # 物品类型
         objType = self.robot[robot_id]['type']
         for idx,workT in enumerate(self.workTable):
@@ -188,9 +189,9 @@ class Strategy4(object):
     def scheduleRobot(self):
         """
         # 给空闲机器人分配任务,调度
-        ##### 策略：未携带物品的空闲机器人 分配 buy任务, 携带物品的空闲机器人 分配 sell任务 
-        """       
-        # 任务 = 一个工作台id , 表示机器人要前往此工作台 , 执行 buy 或 sell  
+        ##### 策略：未携带物品的空闲机器人 分配 buy任务, 携带物品的空闲机器人 分配 sell任务
+        """
+        # 任务 = 一个工作台id , 表示机器人要前往此工作台 , 执行 buy 或 sell
 
         # 把任务分配给空闲机器人
         for i in range(4):
@@ -198,9 +199,9 @@ class Strategy4(object):
                 # 分配buy任务
                 if self.robot[i]['type'] == 0:
                     task = self.getBestBuyTask(i)
-                    if task!=None: 
+                    if task!=None:
                         # 更新机器人调度状态
-                        self.robotTargetId[i] = task 
+                        self.robotTargetId[i] = task
                         self.isRobotOccupy[i] = 1
                         self.robotTaskType[i] = 0
                         self.robotTargetOrid[i] = (self.workTable[self.robotTargetId[i]]['x'],self.workTable[self.robotTargetId[i]]['y'])
@@ -211,9 +212,9 @@ class Strategy4(object):
                 # 分配sell任务
                 elif self.robot[i]['type'] != 0:
                     task = self.getBestSellTask(i)
-                    if task!=None: 
+                    if task!=None:
                         # 更新机器人调度状态
-                        self.robotTargetId[i] = task 
+                        self.robotTargetId[i] = task
                         self.isRobotOccupy[i] = 1
                         self.robotTaskType[i] = 1
                         self.robotTargetOrid[i] = (self.workTable[self.robotTargetId[i]]['x'],self.workTable[self.robotTargetId[i]]['y'])
@@ -222,9 +223,9 @@ class Strategy4(object):
                     else: # 没sell任务可分配
                         pass
                 # 不分配
-                else:  
-                    pass                   
-   
+                else:
+                    pass
+
     def getInstrAndUpdate(self):
         """
         # 根据机器人本身状态和执行的任务类型
@@ -232,26 +233,51 @@ class Strategy4(object):
         # 2、产生控制指令并返回
         """
         self.instr = ''
-        need_down_speed = [0 for i in range(4)]  # 负数表示减速，正数表示加数，第五个位置置空位
-
         turn=[0 for i in range(4)]
         for i in range(3):
             for j in range(i + 1, 4):
-                if pow(self.robot[i]['x']-self.robot[j]['x'],2)+pow(self.robot[i]['y']-self.robot[j]['y'],2)<3**3and self.robot[i]['orientation']*self.robot[j]['orientation']<0:
-                    """if turn[j]==0 and ((self.robot[j]['orientation']>-math.pi/2 and self.robot[j]['orientation']<0)or (self.robot[j]['orientation']>math.pi/2 and self.robot[j]['orientation']<math.pi))  :
-                        turn[j]=-math.pi
-                    if turn[j]==0 and ((self.robot[j]['orientation']<-math.pi/2 and self.robot[j]['orientation']>-math.pi)or (self.robot[j]['orientation']<math.pi/2 and self.robot[j]['orientation']>0))  :
-                        turn[j]=math.pi"""
-                    if(turn[j]==0):
-                        if(pow(self.robot[j]['linV_x'],2)+pow(self.robot[j]['linV_y'],2))>9:
+                if pow(self.robot[i]['x']-self.robot[j]['x'],2)+pow(self.robot[i]['y']-self.robot[j]['y'],2)<2.9**2.9and\
+                        self.robot[i]['orientation']*self.robot[j]['orientation']<=0:
+                    k1=0
+                    k2=0
+                    if(self.robot[i]['orientation']!=-math.pi/2 and self.robot[i]['orientation']!=math.pi/2 ):
+                        k1 = math.tan(self.robot[i]['orientation'])
+                    if (self.robot[j]['orientation'] != -math.pi / 2 and self.robot[j]['orientation'] != math.pi / 2):
+                        k2 = math.tan(self.robot[j]['orientation'])
+
+                    b1=self.robot[i]['y']-k1*self.robot[i]['x']
+                    b2=self.robot[j]['y']-k2*self.robot[j]['x']
+                    #交点
+                    t1=0
+                    t2=0
+                    if k1!=k2 and self.robot[i]['orientation']!=-math.pi/2 and self.robot[i]['orientation']!=math.pi/2 and self.robot[j]['orientation']!=-math.pi/2and self.robot[j]['orientation']!=math.pi/2:
+                        x_0=(b2-b1)/(k1-k2)
+                        y_0=x_0*k1+b1
+                        if(x_0-self.robot[i]['x'])*math.cos(self.robot[i]['orientation'])>0 and(y_0-self.robot[i]['y'])*math.sin(self.robot[i]['orientation'])>0:
+                            t1=np.linalg.norm(np.array([self.robot[i]['x']-x_0, self.robot[i]['y']-y_0]))/0.12 #当前位置到相撞的点的距离处于每一帧最高速度运行的距离
+                        if ( x_0-self.robot[j]['x'] ) * math.cos(self.robot[j]['orientation'])>0 and ( y_0-self.robot[j]['y']) * math.sin(
+                                self.robot[j]['orientation']) > 0:
+                            t2 = np.linalg.norm(np.array([self.robot[j]['x'] - x_0, self.robot[j]['y'] - y_0]))/0.12
+                    #self.info.write("t1-t2: " + str(t1-t2)+'\n'+str(self.turning[j])+'\n')
+                    if(abs(t1-t2)>30 and self.turning[j]==0):
+                        continue
+                    if  self.turning[j]>=1 or abs(t1-t2)<=30 or self.robot[i]['orientation']==-math.pi/2 or self.robot[i]['orientation']==math.pi/2 or self.robot[j]['orientation']==-math.pi/2 or self.robot[j]['orientation']==math.pi/2:
+                        #if turn[j]==0 and  (pow(self.robot[j]['linV_x'],2)+pow(self.robot[j]['linV_y'],2)) >=16 or (pow(self.robot[i]['linV_x'],2)+pow(self.robot[i]['linV_y'],2)) >=9:
+                        if turn[j] == 0:
+                            if (self.turning[j] == 0):
+                                self.turning[j] = 30
+                            if abs(self.robot[j]['orientation']+self.robot[i]['orientation'])<math.pi/36 and  abs(self.robot[j]['x']-self.robot[i]['x'])>1.6:
+                                continue #避免两个小球运动方向相反但是绝对不可能不可能相撞导致误判为碰撞避免而耽误时间
                             if self.robot[j]['orientation']<0 and self.robot[j]['y']>self.robot[i]['y'] and self.robot[j]['x']>self.robot[i]['x']:
                                 turn[j] = math.pi
-                            if self.robot[j]['orientation']<0 and self.robot[j]['y']>self.robot[i]['y'] and self.robot[j]['x']<=self.robot[i]['x']:
+                            if self.robot[j]['orientation']<=0 and self.robot[j]['y']>self.robot[i]['y'] and self.robot[j]['x']<=self.robot[i]['x']:
                                 turn[j] = -math.pi
                             if self.robot[j]['orientation']>0 and self.robot[j]['y']<self.robot[i]['y'] and self.robot[j]['x']>self.robot[i]['x']:
                                 turn[j] = -math.pi
-                            if self.robot[j]['orientation']<0 and self.robot[j]['y']<self.robot[i]['y'] and self.robot[j]['x']<=self.robot[i]['x']:
+                            if self.robot[j]['orientation']>=0 and self.robot[j]['y']<self.robot[i]['y'] and self.robot[j]['x']<=self.robot[i]['x']:
                                 turn[j] = math.pi
+                            self.turning[j]-=1
+
 
         for i in range(4):
             # 物品持有时间计时
@@ -266,9 +292,9 @@ class Strategy4(object):
                     # 更新工作台预定表
                     self.wtReservation[self.robotTargetId[i]][self.robot[i]['type']] = 0
 
-        
+
             # 占用状态且未到达目标点
-            if self.isRobotOccupy[i] == 1 and self.robot[i]['workTableID'] != self.robotTargetId[i]: 
+            if self.isRobotOccupy[i] == 1 and self.robot[i]['workTableID'] != self.robotTargetId[i]:
                 a = self.robot[i]['orientation'] # 朝向角
                 vector_a = np.array([math.cos(a),math.sin(a)]) # 机器人朝向向量
 
@@ -278,11 +304,11 @@ class Strategy4(object):
 
                 dist_a = np.linalg.norm(vector_a)
                 dist_b = np.linalg.norm(vector_b) # 机器人与目标点的距离
-                
+
                 dot = np.dot(vector_a,vector_b)     # 点积
                 cross = np.cross(vector_a,vector_b) # 叉积
-                
-                cos_theta = dot/(dist_a*dist_b) # 向量a转到b的转向角余弦值 
+
+                cos_theta = dot/(dist_a*dist_b) # 向量a转到b的转向角余弦值
                 theta = math.acos(round(cos_theta,10)) # a -> b 转向角
 
                 if cross < 0: # 应该顺时针转
@@ -290,7 +316,7 @@ class Strategy4(object):
                 else: # 逆时针转
                     theta = theta
                 angle_v = min(theta / 0.02, math.pi) if theta > 0 else max(theta / 0.02, -math.pi)
-                
+
                 # 速度
                 x = self.robot[i]['x']
                 y = self.robot[i]['y']
@@ -357,12 +383,11 @@ class Strategy4(object):
                 else:
                     v = 6/(abs(theta)+1)
                 v = min(v, 6) if v>0 else max(v, -2)
-                v += need_down_speed[i]
 
-                self.instr = self.instr + 'forward %d %f\n' % (i,v)
                 if turn[i]!=0:
                     angle_v=turn[i]
                 # 角速度
+                self.instr = self.instr + 'forward %d %f\n' % (i, v)
                 self.instr += 'rotate %d %f\n' % (i,angle_v)
 
             # 占用状态但到达目标点

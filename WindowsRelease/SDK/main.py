@@ -193,12 +193,12 @@ class Solution(object):
             self.info.write("机器人："+str(self.robot[i])+"\n")
             robot_ordin.append((self.robot[i]['x'],self.robot[i]['y']))
         self.info.write("指令：\n"+str(self.instr))
-        self.info.write("是否占用      :"+str(self.isRobotOccupy)+"\n")
-        self.info.write("目标工作台ID  :"+str(self.robotTargetId)+"\n")
-        self.info.write("目标工作台坐标 :"+str(self.robotTargetOrid)+"\n")
+        self.info.write("是否占用      :"+str(self.strategy.isRobotOccupy)+"\n")
+        self.info.write("目标工作台ID  :"+str(self.strategy.robotTargetId)+"\n")
+        self.info.write("目标工作台坐标 :"+str(self.strategy.robotTargetOrid)+"\n")
         self.info.write("机器人坐标    :"+str(robot_ordin)+"\n")
-        self.info.write("机器人任务类型 :"+str(self.robotTaskType)+"\n")
-        self.info.write("机器人占用时间 :"+str(self.robotObjOccupyTime)+"\n")
+        self.info.write("机器人任务类型 :"+str(self.strategy.robotTaskType)+"\n")
+        self.info.write("机器人占用时间 :"+str(self.strategy.robotObjOccupyTime)+"\n")
         self.info.write("\n")
                 
         # 关闭日志文件
