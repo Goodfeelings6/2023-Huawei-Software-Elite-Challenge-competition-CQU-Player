@@ -41,9 +41,17 @@ class Solution(object):
         # 工作台预定表(读入地图时顺序初始化,可预定成品格、物品格, 0未被预定、1被预定)
         self.wtReservation = []
 
+        self.turning=[0 for i in range(4)]
+
         # 超参数
-        self.abandonThreshold = 0.8  # 买7号物品的机器人 i 放弃此任务的门限值, 范围0~无穷, 越大越不放弃
-        # 开关 
+        self.abandonThreshold = 0.2  # 机器人 i 放弃当前任务的门限值, 范围0~无穷, 越大越不放弃
+
+        # 参数 
+        self.sw_nearest = 0 # 顺路算法 是否开启 0开1关
+        self.sw_buy_pred = 1 # 买任务预测 是否开启 1开0关
+        self.sw_sell_pred = 1 # 卖任务预测 是否开启 1开0关
+        self.param_mps = 50 # 贪心系数 1~1000
+        self.sw_abandon = 1 # 放弃当前任务算法 是否开启 1开0关
         self.sw_avoidCrash = 1 # 碰撞避免 是否开启 1开0关
 
         # ---日志---
@@ -76,6 +84,14 @@ class Solution(object):
                     
             # 继续读取
             inputLine = sys.stdin.readline()
+        #@@@
+        self.sw_nearest = 0
+        self.sw_buy_pred = 1
+        self.sw_sell_pred = 1
+        self.param_mps = 50
+        self.sw_abandon = 1
+        self.sw_avoidCrash = 1
+        #@@@
         # 读完后,输出 'OK', 告诉判题器已就绪
         self.finish()
 
@@ -160,6 +176,38 @@ class Solution(object):
         elif x >= maxX:
             return minRate
 
+    def buyTaskPredict(self,workT,dist):
+        """
+        # 预测此买任务是否可行 条件: 机器人到达目标工作台前能生产产品出来
+        :param workT 目标买工作台
+        :param dist 机器人到目标买工作台的距离
+        """
+        if workT['remainTime']>0 and dist/6 > workT['remainTime']*0.02:
+            return True
+        else:
+            return False
+
+    def reservationPredict(self,idx,workT,dist):
+        """
+        # 预测已被预定产品的买工作台,是否允许重复预定（条件: 能为每个预定的机器人提供产品）
+        :param idx 目标买工作台id
+        :param workT 目标买工作台
+        :param dist 机器人到目标买工作台的距离
+        """
+        # 查找谁先预定了workT
+        for i in range(4):
+            if self.robotTargetId[i][0]==idx:
+                robot_id = i
+        pre_dist = np.linalg.norm([self.robot[robot_id]['x']-workT['x'],self.robot[robot_id]['y']-workT['y']])
+        post_dist = dist
+
+        if workT['remainTime'] == 0 :
+            return True
+        elif workT['productState']==1 and workT['remainTime'] > 0 and post_dist/6 - pre_dist/6 > workT['remainTime']*0.02:
+            return True  
+        else:
+            return False
+ 
     def isNearest(self,i,workT):
         """
         # 判断i相比于其他机器人是否离workT最近。如果其他机器人对于工作台workT 顺路(或更近), 若有 return False , 否则 True
@@ -181,6 +229,8 @@ class Solution(object):
                 return False
         return True
 
+        de
+   
     def isMaterialComplete(self,workT):
         """
         # 判断 workT 工作台是否材料齐全了
@@ -190,15 +240,35 @@ class Solution(object):
             if (workT['rawState']>>i)&1 == 0:
                 return False
         return True
+  
+    def sellTaskPredict(self,idx,workT,buy_dist,sell_dist):
+        """
+        # 预测此卖任务是否可行 条件: 机器人到达目标工作台前能腾出对应物品格出来
+        :param idx 目标卖工作台id
+        :param workT 目标卖工作台
+        :param buy_dist 机器人到目标买工作台的距离
+        :param sell_dist 机器人到目标卖工作台的距离
+        """
+        # 规定时间 T 即: 某一个机器人从分配任务开始、买到物品、并到达卖工作台的 这段时间
+        # 腾出对应物品格的条件: 1,无产品 且 剩余生产时间帧小于规定时间T 且 材料齐备或在小于规定时间内齐备
+        #                     2,有产品 且 剩余生产时间帧小于规定时间T 且 取产品时间<规定时间T 且 材料齐备或在小于 [规定时间-取产品时间] 内齐备
+        #  (材料在小于规定时间内齐备) 的预测好复杂 T_T ,先放弃 
+        
+        T = (buy_dist+sell_dist)/6
+        getProductTime = 1e5
+        for i in range(4):
+            if self.robotTaskType[i]==0 and self.robotTargetId[i][0] == idx: # 有机器人正在来买的路上
+                getProductTime = np.linalg.norm([self.robot[i]['x']-workT['x'],self.robot[i]['y']-workT['y']])
 
-    def isMaterialCanConsume(self, idx, workT, T):
-        """
-        # 判断 id==idx 的工作台的材料格是否能在规定时间被消耗
-        规定时间 T 即: 某一个机器人从分配任务开始、买到物品、并到达卖工作台的 这段时间
-        """
-        # 能被消耗的条件: 1,无产品 且 剩余生产时间帧小于规定时间 且 材料齐备或在小于规定时间内齐备
-        #               2,有产品 且 不阻塞 且 取产品时间<规定时间 且 材料齐备或在小于 [规定时间-取产品时间] 内齐备
-        pass
+        if workT['productState']==0 and workT['remainTime'] > 0 \
+        and workT['remainTime']*0.02 < T and self.isMaterialComplete(workT):
+            return True
+        elif workT['productState']==1 and workT['remainTime'] >= 0 \
+        and workT['remainTime']*0.02 < T and getProductTime  < T and self.isMaterialComplete(workT):
+            return True
+        else:
+            return False
+
     def getBestTask(self,i):
         """
         # 根据场面信息,返回一个较优的任务
@@ -230,31 +300,32 @@ class Solution(object):
                 readyRate[idx] = readyCount / len(self.demandTable[workT['type']])
 
                 
-        
+        # self.info.write(str(self.frameId)+"\n")
+
         # task 收集
         task = []
         profit = []
         buy_dist = {} # 工作台id:与机器人距离
         sell_dist = {} # 工作台id:与最近需求者距离
         for idx,workT in enumerate(self.workTable): 
-            if workT['type'] >= 1 and workT['type'] <= 7 and self.wtReservation[idx]['product']==0:
+            if workT['type'] >= 1 and workT['type'] <= 7:
                 ### 统计买的距离              
                 buy_dist[idx] = np.linalg.norm([self.robot[i]['x']-workT['x'],self.robot[i]['y']-workT['y']])
 #------可调节----##### 可行的买任务
-                if  self.isNearest(i,workT) and (workT['productState']==1 or (workT['remainTime']>0 and buy_dist[idx]/6 > workT['remainTime']*0.02)):
-                # if (workT['productState']==1 or (workT['remainTime']>0 and buy_dist[idx]/6 > workT['remainTime']*0.02)):
+                if  (self.sw_nearest or self.isNearest(i,workT)) \
+                and (workT['productState']==1 or (self.sw_buy_pred and self.buyTaskPredict(workT,buy_dist[idx]))) \
+                and (self.wtReservation[idx]['product']==0 or self.wtReservation[idx]['product']==1 and self.reservationPredict(idx,workT,buy_dist[idx])):
                     ### 统计与需求者距离
                     objT = workT['type']
                     for idx2,workT2 in enumerate(self.workTable): 
                         # 如果是一个有效需求者
-                        if objT in self.demandTable[workT2['type']] and self.wtReservation[idx2][objT]==0:
+                        if objT in self.demandTable[workT2['type']]:
                             # 统计卖的距离
                             sell_dist[idx2] = np.linalg.norm([workT['x']-workT2['x'],workT['y']-workT2['y']])
 #-------可调节--------------##### 可行的卖任务
-                            if (workT2['rawState']>>objT)&1==0 and (buy_dist[idx]+sell_dist[idx2])/6+1.5 < (9000-self.frameId)*0.02 :
-                                # or (self.isMaterialComplete(workT2)  and workT2['productState']==0 and (buy_dist[idx]+sell_dist[idx2])/6 > workT2['remainTime']*0.02 ) :
-                            # 适用于地图4 
-                            # or self.isMaterialCanConsume(idx2)
+                            if ((workT2['rawState']>>objT)&1==0 or (self.sw_sell_pred and self.sellTaskPredict(idx2,workT2,buy_dist[idx],sell_dist[idx2]))) \
+                            and (buy_dist[idx]+sell_dist[idx2])/6+1.5 < (9000-self.frameId)*0.02 \
+                            and (self.wtReservation[idx2][objT]==0):
                                 task.append([idx,idx2])
                                 sell_time = sell_dist[idx2]/6
                                 total_time = (buy_dist[idx]+sell_dist[idx2])/6
@@ -289,7 +360,9 @@ class Solution(object):
                                     rawNeed = sameWorkTableNeedType[4][workT['type']][1] / sameWorkTableNeedType[4][workT['type']][0]
                                     rawReadyRate = 0 if readyRate[idx2]==1 else readyRate[idx2]   
 
-                                score = mps + productNeed + rawNeed + rawReadyRate
+                                score = mps/self.param_mps + productNeed + rawNeed + rawReadyRate
+                                # self.info.write("id1:%d,type:%d  id2:%d,type:%d  score = %.3f,%.3f,%.3f,%.3f = %.3f \n" %(idx,workT['type'],idx2,workT2['type'],mps,productNeed,rawNeed,rawReadyRate,score))
+
                                 profit.append(score)
         # task 选择
         if len(task)!=0:
@@ -366,9 +439,7 @@ class Solution(object):
                 if self.robot[i]['workTableID'] != self.robotTargetId[i][0]:
                     # 若有另外的卖任务途中的机器人 j 的目标点是机器人 i 将要前往的买工作台 ,
  #---可调节----------##### # 且  T(i)/T(j) > 阈值 则放弃 i 的任务。 T(x) 表示编号为x的机器人到达下个目标点仍需的时间
-#  self.workTable[self.robotTargetId[i][0]]['type']==7 and 
-                    if self.judgeAbandon(i):
-                    # if 0:
+                    if self.sw_abandon and self.judgeAbandon(i):
                         # 放弃此任务
                         # 机器人转为空闲
                         self.isRobotOccupy[i] = 0
@@ -408,27 +479,52 @@ class Solution(object):
         turn=[0 for i in range(4)]
         for i in range(3):
             for j in range(i + 1, 4):
-                if pow(self.robot[i]['x']-self.robot[j]['x'],2)+pow(self.robot[i]['y']-self.robot[j]['y'],2)<3**3 and self.robot[i]['orientation']*self.robot[j]['orientation']<0:
-                    """if turn[j]==0 and ((self.robot[j]['orientation']>-math.pi/2 and self.robot[j]['orientation']<0)or (self.robot[j]['orientation']>math.pi/2 and self.robot[j]['orientation']<math.pi))  :
-                        turn[j]=-math.pi
-                    if turn[j]==0 and ((self.robot[j]['orientation']<-math.pi/2 and self.robot[j]['orientation']>-math.pi)or (self.robot[j]['orientation']<math.pi/2 and self.robot[j]['orientation']>0))  :
-                        turn[j]=math.pi"""
-                    if(turn[j]==0):
-                        if(pow(self.robot[j]['linV_x'],2)+pow(self.robot[j]['linV_y'],2))>9:
+                if pow(self.robot[i]['x']-self.robot[j]['x'],2)+pow(self.robot[i]['y']-self.robot[j]['y'],2)<2.9**2.9 and\
+                        self.robot[i]['orientation']*self.robot[j]['orientation']<=0:
+                    k1=0
+                    k2=0
+                    if(self.robot[i]['orientation']!=-math.pi/2 and self.robot[i]['orientation']!=math.pi/2 ):
+                        k1 = math.tan(self.robot[i]['orientation'])
+                    if (self.robot[j]['orientation'] != -math.pi / 2 and self.robot[j]['orientation'] != math.pi / 2):
+                        k2 = math.tan(self.robot[j]['orientation'])
+
+                    b1=self.robot[i]['y']-k1*self.robot[i]['x']
+                    b2=self.robot[j]['y']-k2*self.robot[j]['x']
+                    #交点
+                    t1=0
+                    t2=0
+                    if k1!=k2 and self.robot[i]['orientation']!=-math.pi/2 and self.robot[i]['orientation']!=math.pi/2 and self.robot[j]['orientation']!=-math.pi/2and self.robot[j]['orientation']!=math.pi/2:
+                        x_0=(b2-b1)/(k1-k2)
+                        y_0=x_0*k1+b1
+                        if(x_0-self.robot[i]['x'])*math.cos(self.robot[i]['orientation'])>0 and(y_0-self.robot[i]['y'])*math.sin(self.robot[i]['orientation'])>0:
+                            t1=np.linalg.norm(np.array([self.robot[i]['x']-x_0, self.robot[i]['y']-y_0]))/0.12 #当前位置到相撞的点的距离处于每一帧最高速度运行的距离
+                        if ( x_0-self.robot[j]['x'] ) * math.cos(self.robot[j]['orientation'])>0 and ( y_0-self.robot[j]['y']) * math.sin(
+                                self.robot[j]['orientation']) > 0:
+                            t2 = np.linalg.norm(np.array([self.robot[j]['x'] - x_0, self.robot[j]['y'] - y_0]))/0.12
+                    #self.info.write("t1-t2: " + str(t1-t2)+'\n'+str(self.turning[j])+'\n')
+                    if(abs(t1-t2)>30 and self.turning[j]==0):
+                        continue
+                    if  self.turning[j]>=1 or abs(t1-t2)<=30 or self.robot[i]['orientation']==-math.pi/2 or self.robot[i]['orientation']==math.pi/2 or self.robot[j]['orientation']==-math.pi/2 or self.robot[j]['orientation']==math.pi/2:
+                        #if turn[j]==0 and  (pow(self.robot[j]['linV_x'],2)+pow(self.robot[j]['linV_y'],2)) >=16 or (pow(self.robot[i]['linV_x'],2)+pow(self.robot[i]['linV_y'],2)) >=9:
+                        if turn[j] == 0:
+                            if (self.turning[j] == 0):
+                                self.turning[j] = 30
+                            if abs(self.robot[j]['orientation']+self.robot[i]['orientation'])<math.pi/36 and  abs(self.robot[j]['x']-self.robot[i]['x'])>1.6:
+                                continue #避免两个小球运动方向相反但是绝对不可能不可能相撞导致误判为碰撞避免而耽误时间
                             if self.robot[j]['orientation']<0 and self.robot[j]['y']>self.robot[i]['y'] and self.robot[j]['x']>self.robot[i]['x']:
                                 turn[j] = math.pi
-                            if self.robot[j]['orientation']<0 and self.robot[j]['y']>self.robot[i]['y'] and self.robot[j]['x']<=self.robot[i]['x']:
+                            if self.robot[j]['orientation']<=0 and self.robot[j]['y']>self.robot[i]['y'] and self.robot[j]['x']<=self.robot[i]['x']:
                                 turn[j] = -math.pi
                             if self.robot[j]['orientation']>0 and self.robot[j]['y']<self.robot[i]['y'] and self.robot[j]['x']>self.robot[i]['x']:
                                 turn[j] = -math.pi
-                            if self.robot[j]['orientation']<0 and self.robot[j]['y']<self.robot[i]['y'] and self.robot[j]['x']<=self.robot[i]['x']:
+                            if self.robot[j]['orientation']>=0 and self.robot[j]['y']<self.robot[i]['y'] and self.robot[j]['x']<=self.robot[i]['x']:
                                 turn[j] = math.pi
+                            self.turning[j]-=1
         # 角速度
         for i in range(4):
             if turn[i]!=0:
                 instr_i = 'rotate %d %f\n' % (i,turn[i])
                 self.instr += instr_i
-
 
     def control(self,i,target):
         """
@@ -471,6 +567,7 @@ class Solution(object):
         #速度
         x = self.robot[i]['x']
         y = self.robot[i]['y']
+        
         # 左
         if x<2 and y<48 and y>2 and ((a>=-math.pi and a<-math.pi/2) or (a>math.pi/2 and a<=math.pi)):
             v = 6/(abs(abs(a)-math.pi/2)*10/math.pi+1)
@@ -529,11 +626,10 @@ class Solution(object):
                 v = 6/(-a*24/math.pi+6)
             else:
                 v = 6/(abs(math.pi/2+a)*24/math.pi+6)
-        elif dist_b<0.9:
-            v = 0.8
+        elif self.sw_avoidCrash and dist_b<1:
+            v = 1
         else:
             v = 6/(abs(theta)+1)
-        v = min(v, 6) if v>0 else max(v, -2)
 
         instr_i += 'forward %d %f\n' % (i,v)
 
