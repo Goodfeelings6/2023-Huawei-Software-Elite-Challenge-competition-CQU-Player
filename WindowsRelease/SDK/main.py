@@ -42,7 +42,7 @@ class Solution(object):
         self.wtReservation = []
 
         # 超参数
-        # self.abandonThreshold = 0.4  # 买7号物品的机器人 i 放弃此任务的门限值, 范围0~无穷, 越大越不放弃
+        self.abandonThreshold = 0.8  # 买7号物品的机器人 i 放弃此任务的门限值, 范围0~无穷, 越大越不放弃
         # 开关 
         self.sw_avoidCrash = 1 # 碰撞避免 是否开启 1开0关
 
@@ -203,7 +203,35 @@ class Solution(object):
         """
         # 根据场面信息,返回一个较优的任务
         :param i 机器人编号
-        """     
+        """   
+        epl = 1e-8 # 很小的数，防止除数为0  
+        # 场上的所有需求  #字典项为 物品类型:(格子总数,空缺格子数)
+        needType = {1:[epl,0],2:[epl,0],3:[epl,0],4:[epl,0],5:[epl,0],6:[epl,0],7:[epl,0]}  
+        # # 同一类型工作台总体对其下原材料的需求  #字典项为 工作台类型:{物品类型:(格子总数,空缺格子数)}
+        sameWorkTableNeedType = {4:{1:[epl,0],2:[epl,0]},5:{1:[epl,0],3:[epl,0]},6:{2:[epl,0],3:[epl,0]},7:{4:[epl,0],5:[epl,0],6:[epl,0]}}
+        # 此工作台原料完备程度, 工作台id:材料齐备程度
+        readyRate = {} 
+        ## 信息统计
+        for idx,workT in enumerate(self.workTable):   
+            readyCount = 0
+            for objType in self.demandTable[workT['type']]:
+                needType[objType][0] += 1
+                if (workT['rawState']>>objType)&1==0 and self.wtReservation[idx][objType]==0: # 空缺且不被预定
+                    needType[objType][1] += 1 
+
+                if workT['type']>=4 and workT['type']<=7:
+                    sameWorkTableNeedType[workT['type']][objType][0] += 1
+                    if (workT['rawState']>>objType)&1==0 and self.wtReservation[idx][objType]==0: # 空缺且不被预定
+                        sameWorkTableNeedType[workT['type']][objType][1] += 1 
+                    else: # 齐备或被预定
+                        readyCount += 1
+
+            if workT['type']>=4 and workT['type']<=7:
+                readyRate[idx] = readyCount / len(self.demandTable[workT['type']])
+
+                
+        
+        # task 收集
         task = []
         profit = []
         buy_dist = {} # 工作台id:与机器人距离
@@ -230,8 +258,39 @@ class Solution(object):
                                 task.append([idx,idx2])
                                 sell_time = sell_dist[idx2]/6
                                 total_time = (buy_dist[idx]+sell_dist[idx2])/6
+                                # 单位时间收益
                                 mps = self.income[objT] * self.f(sell_time*50,9000,0.8) / total_time
-                                profit.append(mps)
+                                
+                                if workT2['type'] == 9: # 卖给9
+                                    productNeed = 1
+                                    rawNeed = 1
+                                    rawReadyRate = 1
+                                elif workT2['type'] == 8: # 卖给8
+                                    productNeed = 1
+                                    rawNeed = 1
+                                    rawReadyRate = 1
+                                elif workT2['type'] == 7: # 卖给7
+                                    # 其他工作台对此工作台产品的需求度
+                                    productNeed = 1         
+                                    # 此类型工作台总体对该种原材料的需求度
+                                    rawNeed =  sameWorkTableNeedType[7][workT['type']][1] / sameWorkTableNeedType[7][workT['type']][0]
+                                    # 此工作台原料完备程度    
+                                    rawReadyRate = 0 if readyRate[idx2]==1 else readyRate[idx2]
+                                elif workT2['type'] == 6: # 卖给6
+                                    productNeed = needType[6][1] / needType[6][0]
+                                    rawNeed = sameWorkTableNeedType[6][workT['type']][1] / sameWorkTableNeedType[6][workT['type']][0]
+                                    rawReadyRate = 0 if readyRate[idx2]==1 else readyRate[idx2]
+                                elif workT2['type'] == 5: # 卖给5
+                                    productNeed = needType[5][1] / needType[5][0]
+                                    rawNeed = sameWorkTableNeedType[5][workT['type']][1] / sameWorkTableNeedType[5][workT['type']][0]
+                                    rawReadyRate = 0 if readyRate[idx2]==1 else readyRate[idx2]
+                                elif workT2['type'] == 4: # 卖给4
+                                    productNeed = needType[4][1] / needType[4][0]
+                                    rawNeed = sameWorkTableNeedType[4][workT['type']][1] / sameWorkTableNeedType[4][workT['type']][0]
+                                    rawReadyRate = 0 if readyRate[idx2]==1 else readyRate[idx2]   
+
+                                score = mps + productNeed + rawNeed + rawReadyRate
+                                profit.append(score)
         # task 选择
         if len(task)!=0:
             max_i = np.argmax(np.array(profit))
@@ -307,8 +366,9 @@ class Solution(object):
                 if self.robot[i]['workTableID'] != self.robotTargetId[i][0]:
                     # 若有另外的卖任务途中的机器人 j 的目标点是机器人 i 将要前往的买工作台 ,
  #---可调节----------##### # 且  T(i)/T(j) > 阈值 则放弃 i 的任务。 T(x) 表示编号为x的机器人到达下个目标点仍需的时间
-                    # if self.workTable[self.robotTargetId[i][0]]['type']==7 and self.judgeAbandon(i):
-                    if 0:
+#  self.workTable[self.robotTargetId[i][0]]['type']==7 and 
+                    if self.judgeAbandon(i):
+                    # if 0:
                         # 放弃此任务
                         # 机器人转为空闲
                         self.isRobotOccupy[i] = 0
