@@ -3537,6 +3537,7 @@ self.sw_avoidCrash = 1
 #@@@
 money = 965263
 #@@@
+test
 self.sw_nearest = 0
 self.sw_buy_pred = 1
 self.sw_sell_pred = 0
@@ -23402,6 +23403,7 @@ self.sw_avoidCrash = 1
 #@@@
 money = 616526
 #@@@
+test
 self.sw_nearest = 1
 self.sw_buy_pred = 1
 self.sw_sell_pred = 1
@@ -23844,6 +23846,7 @@ self.sw_avoidCrash = 0
 #@@@
 money = 652581
 #@@@
+test
 self.sw_nearest = 0
 self.sw_buy_pred = 0
 self.sw_sell_pred = 0

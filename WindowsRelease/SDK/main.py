@@ -84,13 +84,43 @@ class Solution(object):
                     
             # 继续读取
             inputLine = sys.stdin.readline()
+         # 识别地图,设定参数
+        wtNum = sum(self.wtTypeNum)
+        if wtNum == 31:
+            self.sw_nearest = 0
+            self.sw_buy_pred = 1
+            self.sw_sell_pred = 0
+            self.param_mps = 61
+            self.sw_abandon = 1
+            self.sw_avoidCrash = 1
+        elif wtNum == 17:
+            self.sw_nearest = 1
+            self.sw_buy_pred = 1
+            self.sw_sell_pred = 1
+            self.param_mps = 261
+            self.sw_abandon = 1
+            self.sw_avoidCrash = 1
+        elif wtNum == 18:
+            self.sw_nearest = 1
+            self.sw_buy_pred = 1
+            self.sw_sell_pred = 1
+            self.param_mps = 381
+            self.sw_abandon = 1
+            self.sw_avoidCrash = 1
+        elif wtNum == 50:
+            self.sw_nearest = 0
+            self.sw_buy_pred = 0
+            self.sw_sell_pred = 0
+            self.param_mps = 1
+            self.sw_abandon = 1
+            self.sw_avoidCrash = 1
         #@@@
-        self.sw_nearest = 1
-        self.sw_buy_pred = 1
-        self.sw_sell_pred = 1
-        self.param_mps = 981
-        self.sw_abandon = 1
-        self.sw_avoidCrash = 1
+        # self.sw_nearest = 1
+        # self.sw_buy_pred = 1
+        # self.sw_sell_pred = 1
+        # self.param_mps = 981
+        # self.sw_abandon = 1
+        # self.sw_avoidCrash = 1
         #@@@
         # 读完后,输出 'OK', 告诉判题器已就绪
         self.finish()
