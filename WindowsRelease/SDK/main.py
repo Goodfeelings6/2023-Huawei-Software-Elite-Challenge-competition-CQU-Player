@@ -85,10 +85,10 @@ class Solution(object):
             # ¼ÌÐø¶ÁÈ¡
             inputLine = sys.stdin.readline()
         #@@@
-        self.sw_nearest = 0
+        self.sw_nearest = 1
         self.sw_buy_pred = 1
         self.sw_sell_pred = 1
-        self.param_mps = 50
+        self.param_mps = 981
         self.sw_abandon = 1
         self.sw_avoidCrash = 1
         #@@@
