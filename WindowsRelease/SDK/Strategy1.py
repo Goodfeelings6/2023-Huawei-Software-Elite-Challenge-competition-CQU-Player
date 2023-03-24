@@ -20,19 +20,20 @@ class Strategy1(object):
         self.robotTargetId = [[0,0] for i in range(4)]   # 被占用机器人需要前往的目标工作台id(仅当 isRobotOccupy[i]==1 时i位置数据有效)
         self.robotTargetOrid = [[(0,0),(0,0)] for i in range(4)] # 被占用机器人需要前往的目标工作台坐标
         self.robotTaskType = [0 for i in range(4)] # 被占用机器人目前的任务类型,只考虑buy和sell,0表示buy,1表示sell
+        self.robotTemp = [0 for i in range(4)] # 机器人是否到达临时点，1是0否
 
         self.turning=[0 for i in range(4)]
         self.accessList = [[] for i in range(4)]
 
         self.abandonThreshold = 0.2
         # 参数
-        self.sw_nearest = 1
-        self.sw_buy_pred = 0
-        self.sw_sell_pred = 0
-        self.param_mps = 1001
-        self.sw_abandon = 1
+        self.sw_nearest = 0
+        self.sw_buy_pred = 1
+        self.sw_sell_pred = 1
+        self.param_mps = 5000
+        self.sw_abandon = 0
         self.sw_avoidCrash = 0
-        self.sw_avoidCrowd = 1
+        self.sw_avoidCrowd = 0
     
     def getMessage(self,_workTable,_robot,_frameId):
         """
@@ -212,7 +213,8 @@ class Strategy1(object):
 #-------可调节--------------##### 可行的卖任务
                             if ((workT2['rawState']>>objT)&1==0 or (self.sw_sell_pred and self.sellTaskPredict(idx2,workT2,buy_dist[idx],sell_dist[idx2]))) \
                             and (buy_dist[idx]+sell_dist[idx2])/6+1.5 < (9000-self.frameId)*0.02 \
-                            and (self.wtReservation[idx2][objT]==0) :
+                            and (self.wtReservation[idx2][objT]==0) \
+                            and workT2['type'] != 9: # 不卖给9
                                 task.append([idx,idx2])
                                 sell_time = sell_dist[idx2]/6
                                 total_time = (buy_dist[idx]+sell_dist[idx2])/6
@@ -306,6 +308,7 @@ class Strategy1(object):
                     self.robotTargetId[i] = task  # [buy sell]
                     self.isRobotOccupy[i] = 1
                     self.robotTaskType[i] = 0
+                    self.robotTemp[i] = 0
                     # 买任务坐标
                     self.robotTargetOrid[i][0] = (self.workTable[task[0]]['x'],self.workTable[task[0]]['y'])
                     # 卖任务坐标
@@ -461,6 +464,12 @@ class Strategy1(object):
         :param i 机器人编号
         :param target 目标点坐标
         """
+        # 角落控制
+        if self.robotTargetId[i][0] == 41 and self.robotTemp[i]==0: # 左下角工作台
+            target = (2,4)
+        if self.robotTargetId[i][0] == 42 and self.robotTemp[i]==0: # 右下角工作台
+            target = (46,2)
+
         instr_i = ''
 
         a = self.robot[i]['orientation'] # 朝向角
@@ -481,6 +490,14 @@ class Strategy1(object):
         else: # 逆时针转
             theta = theta
 
+
+        # 角落控制
+        if self.robotTargetId[i][0] == 41 and self.robotTemp[i]==0 and dist_b<0.4: # 左下角工作台
+            self.robotTemp[i] = 1
+        if self.robotTargetId[i][0] == 42 and self.robotTemp[i]==0 and dist_b<0.4: # 右下角工作台
+            self.robotTemp[i] = 1
+
+
         '''
         持有物品：质量为0.88247 kg
         最大加速度：283.295 m/s*s (5.6659 m/s*frame)
@@ -497,26 +514,27 @@ class Strategy1(object):
         x = self.robot[i]['x']
         y = self.robot[i]['y']
         
+        edge = 1.5
         # 左
-        if x<2 and y<48 and y>2 and ((a>=-math.pi and a<-math.pi/2) or (a>math.pi/2 and a<=math.pi)):
+        if x<edge and y<50-edge and y>edge and ((a>=-math.pi and a<-math.pi/2) or (a>math.pi/2 and a<=math.pi)):
             v = 6/(abs(abs(a)-math.pi/2)*10/math.pi+1)
         # 右
-        elif x>48 and y<48 and y>2 and a>-math.pi/2 and a<math.pi/2:
+        elif x>50-edge and y<50-edge and y>edge and a>-math.pi/2 and a<math.pi/2:
             v = 6/(abs(abs(a)-math.pi/2)*10/math.pi+1)
         # 上
-        elif x>2 and x<48 and y>48 and a>0 and a<math.pi:
+        elif x>edge and x<50-edge and y>50-edge and a>0 and a<math.pi:
             if a<=math.pi/2:
                 v = 6/(a*10/math.pi+1)
             else:
                 v = 6/((math.pi-a)*10/math.pi+1)
         # 下
-        elif x>2 and x<48 and y<2 and a>-math.pi and a<0:
+        elif x>edge and x<50-edge and y<edge and a>-math.pi and a<0:
             if a>=-math.pi/2:
                 v = 6/(-a*10/math.pi+1)
             else:
                 v = 6/((math.pi+a)*10/math.pi+1)
         # 左上
-        elif x<=2 and y>=48 and ((a>=-math.pi and a<-math.pi/2) or (a>0 and a<=math.pi)):
+        elif x<=edge and y>=50-edge and ((a>=-math.pi and a<-math.pi/2) or (a>0 and a<=math.pi)):
             if a>0 and a<=math.pi/2:
                 v = 6/(a*10/math.pi+1)
             elif a>=math.pi and a<-math.pi/2:
@@ -526,7 +544,7 @@ class Strategy1(object):
             else:
                 v = 6/((math.pi-a)*24/math.pi+6)
         # 左下
-        elif x<=2 and y<=2 and ((a>=-math.pi and a<0) or (a>math.pi/2 and a<=math.pi)):
+        elif x<=edge and y<=edge and ((a>=-math.pi and a<0) or (a>math.pi/2 and a<=math.pi)):
             if a>=-math.pi/2 and a<0:
                 v = 6/(-a*10/math.pi+1)
             elif a>math.pi/2 and a<=math.pi:
@@ -536,7 +554,7 @@ class Strategy1(object):
             else:
                 v = 6/(abs(a+math.pi)*24/math.pi+6)
         # 右上
-        elif x>=48 and y>=48 and a>-math.pi/2 and a<math.pi:
+        elif x>=50-edge and y>=50-edge and a>-math.pi/2 and a<math.pi:
             if a>=math.pi/2:
                 v = 6/((math.pi-a)*10/math.pi+1)
             elif a<=0:
@@ -546,7 +564,7 @@ class Strategy1(object):
             else:
                 v = 6/(abs(a-math.pi/2)*24/math.pi+6)
         # 右下
-        elif x>=48 and y<=2 and a>-math.pi and a<math.pi/2:
+        elif x>=50-edge and y<=edge and a>-math.pi and a<math.pi/2:
             if a<=-math.pi/2:
                 v = 6/((math.pi+a)*10/math.pi+1)
             elif a>=0:
@@ -559,6 +577,11 @@ class Strategy1(object):
             v = 1
         else:
             v = 6/(abs(theta)+1)
+
+        if self.robot['x']-: # 左下角工作台
+            v=0
+        if self.robotTargetId[i][0] == 42 and self.robotTemp[i]==1 and dist_b<0.4: # 右下角工作台
+            v=0
 
         instr_i += 'forward %d %f\n' % (i,v)
 
