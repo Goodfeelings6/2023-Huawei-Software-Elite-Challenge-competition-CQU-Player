@@ -22,7 +22,8 @@ class Strategy4(object):
 
         self.turning=[0 for i in range(4)]
         self.accessList = [[] for i in range(4)]
-       
+
+        self.abandonThreshold = 0.2
         # 参数
         self.sw_nearest = 0
         self.sw_buy_pred = 0

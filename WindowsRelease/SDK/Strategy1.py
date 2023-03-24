@@ -24,13 +24,14 @@ class Strategy1(object):
         self.turning=[0 for i in range(4)]
         self.accessList = [[] for i in range(4)]
 
+        self.abandonThreshold = 0.2
         # 参数
-        self.sw_nearest = 0
+        self.sw_nearest = 1
         self.sw_buy_pred = 0
         self.sw_sell_pred = 0
-        self.param_mps = 1000
-        self.sw_abandon = 0
-        self.sw_avoidCrash = 1
+        self.param_mps = 1001
+        self.sw_abandon = 1
+        self.sw_avoidCrash = 0
         self.sw_avoidCrowd = 1
     
     def getMessage(self,_workTable,_robot,_frameId):
