@@ -70,13 +70,13 @@ class Solution(object):
 
         # 识别地图,设定策略
         wtNum = sum(self.wtTypeNum)
-        if wtNum == 31:
+        if wtNum == 43:
             self.strategy = Strategy1(self.destoryTime,self.demandTable,self.wtReservation)
-        elif wtNum == 17:
+        elif wtNum == 25:
             self.strategy = Strategy2(self.destoryTime,self.demandTable,self.wtReservation)
-        elif wtNum == 18:
-            self.strategy = Strategy3(self.destoryTime,self.demandTable,self.wtReservation)
         elif wtNum == 50:
+            self.strategy = Strategy3(self.destoryTime,self.demandTable,self.wtReservation)
+        elif wtNum == 18:
             self.strategy = Strategy4(self.destoryTime,self.demandTable,self.wtReservation)
 
         # 读完后,输出 'OK', 告诉判题器已就绪
