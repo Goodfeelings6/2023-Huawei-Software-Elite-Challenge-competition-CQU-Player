@@ -216,6 +216,8 @@ class Strategy3(object):
                                 mps = self.income[objT] * self.f(sell_time*50,9000,0.8) / total_time
                                 
                                 if workT2['type'] == 9: # 卖给9
+                                    if workT['type'] in [1,2,3]:
+                                        mps = 0
                                     productNeed = 1
                                     rawNeed = 1
                                     rawReadyRate = 1
@@ -233,15 +235,16 @@ class Strategy3(object):
                                 elif workT2['type'] == 6: # 卖给6
                                     productNeed = needType[6][1] / needType[6][0]
                                     rawNeed = sameWorkTableNeedType[6][workT['type']][1] / sameWorkTableNeedType[6][workT['type']][0]
-                                    rawReadyRate = 0 if readyRate[idx2]==1 else readyRate[idx2]
+                                    rawReadyRate = 0 if readyRate[idx2]==1 else mps*2 * readyRate[idx2]
                                 elif workT2['type'] == 5: # 卖给5
                                     productNeed = needType[5][1] / needType[5][0]
                                     rawNeed = sameWorkTableNeedType[5][workT['type']][1] / sameWorkTableNeedType[5][workT['type']][0]
-                                    rawReadyRate = 0 if readyRate[idx2]==1 else readyRate[idx2]
+                                    rawReadyRate = 0 if readyRate[idx2]==1 else mps*2 *  readyRate[idx2]
                                 elif workT2['type'] == 4: # 卖给4
+                                    mps = 0
                                     productNeed = needType[4][1] / needType[4][0]
                                     rawNeed = sameWorkTableNeedType[4][workT['type']][1] / sameWorkTableNeedType[4][workT['type']][0]
-                                    rawReadyRate = 0 if readyRate[idx2]==1 else readyRate[idx2]   
+                                    rawReadyRate = 0 if readyRate[idx2]==1 else mps*2 * readyRate[idx2]   
 
                                 score = mps/self.param_mps + productNeed + rawNeed + rawReadyRate
                                 # self.info.write("id1:%d,type:%d  id2:%d,type:%d  score = %.3f,%.3f,%.3f,%.3f = %.3f \n" %(idx,workT['type'],idx2,workT2['type'],mps,productNeed,rawNeed,rawReadyRate,score))
@@ -290,6 +293,10 @@ class Strategy3(object):
         """
         # 给空闲机器人分配任务,调度
         """       
+        if self.frameId <20:
+            self.buyTaskPredict  = 1
+        else:
+            self.buyTaskPredict  = 0
         # 任务 = 两个工作台id 分别为 buy 和 sell, 表示机器人要前往对应工作台 , 执行 buy 和 sell  
         self.instr = ''
         for i in range(4):

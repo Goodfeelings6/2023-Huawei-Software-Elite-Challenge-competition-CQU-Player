@@ -28,7 +28,7 @@ class Strategy4(object):
         self.sw_nearest = 0
         self.sw_buy_pred = 0
         self.sw_sell_pred = 1
-        self.param_mps = 801
+        self.param_mps = 790
         self.sw_abandon = 1
         self.sw_avoidCrash = 1
         
@@ -143,7 +143,7 @@ class Strategy4(object):
         getProductTime = 1e5
         for i in range(4):
             if self.robotTaskType[i]==0 and self.robotTargetId[i][0] == idx: # 有机器人正在来买的路上
-                getProductTime = np.linalg.norm([self.robot[i]['x']-workT['x'],self.robot[i]['y']-workT['y']])
+                getProductTime = np.linalg.norm([self.robot[i]['x']-workT['x'],self.robot[i]['y']-workT['y']]) /6
 
         if workT['productState']==0 and workT['remainTime'] > 0 \
         and workT['remainTime']*0.02 < T and self.isMaterialComplete(workT):
@@ -199,7 +199,7 @@ class Strategy4(object):
 #------可调节----##### 可行的买任务
                 if  (self.sw_nearest or self.isNearest(i,workT)) \
                 and (workT['productState']==1 or (self.sw_buy_pred and self.buyTaskPredict(workT,buy_dist[idx]))) \
-                and (self.wtReservation[idx]['product']==0 or self.wtReservation[idx]['product']==1 and self.reservationPredict(idx,workT,buy_dist[idx])):
+                and (self.wtReservation[idx]['product']==0 ):
                     ### 统计与需求者距离
                     objT = workT['type']
                     for idx2,workT2 in enumerate(self.workTable): 
@@ -222,6 +222,8 @@ class Strategy4(object):
                                     rawNeed = 1
                                     rawReadyRate = 1
                                 elif workT2['type'] == 8: # 卖给8
+                                    if (9000-self.frameId<500):
+                                        mps *=2
                                     productNeed = 1
                                     rawNeed = 1
                                     rawReadyRate = 1
@@ -241,6 +243,8 @@ class Strategy4(object):
                                     rawNeed = sameWorkTableNeedType[5][workT['type']][1] / sameWorkTableNeedType[5][workT['type']][0]
                                     rawReadyRate = 0 if readyRate[idx2]==1 else readyRate[idx2]
                                 elif workT2['type'] == 4: # 卖给4
+                                    if workT2['remainTime'] == -1 and self.frameId<8300:
+                                        mps *=5
                                     productNeed = needType[4][1] / needType[4][0]
                                     rawNeed = sameWorkTableNeedType[4][workT['type']][1] / sameWorkTableNeedType[4][workT['type']][0]
                                     rawReadyRate = 0 if readyRate[idx2]==1 else readyRate[idx2]   
@@ -358,7 +362,7 @@ class Strategy4(object):
                     self.wtReservation[self.robotTargetId[i][1]][self.robot[i]['type']] = 0
         if self.sw_avoidCrash == 1:
             self.avoidCrash()
-        # self.avoidCrowd()
+        self.avoidCrowd()
     
     def avoidCrowd(self):
         for i in range(4):

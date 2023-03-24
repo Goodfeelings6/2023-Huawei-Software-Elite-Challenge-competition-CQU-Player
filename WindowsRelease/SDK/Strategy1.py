@@ -33,7 +33,7 @@ class Strategy1(object):
         self.param_mps = 5000
         self.sw_abandon = 0
         self.sw_avoidCrash = 0
-        self.sw_avoidCrowd = 0
+        # self.sw_avoidCrowd = 0
     
     def getMessage(self,_workTable,_robot,_frameId):
         """
@@ -364,8 +364,8 @@ class Strategy1(object):
                     self.wtReservation[self.robotTargetId[i][1]][self.robot[i]['type']] = 0
         if self.sw_avoidCrash == 1:
             self.avoidCrash()
-        if self.sw_avoidCrowd == 1:    
-            self.avoidCrowd()
+        # if self.sw_avoidCrowd == 1:    
+            # self.avoidCrowd()
     
     def avoidCrowd(self):
         for i in range(4):

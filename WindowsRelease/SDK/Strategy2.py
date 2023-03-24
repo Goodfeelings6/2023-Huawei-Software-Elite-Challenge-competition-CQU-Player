@@ -493,26 +493,28 @@ class Strategy2(object):
         x = self.robot[i]['x']
         y = self.robot[i]['y']
         
+        edge = 1.88
+
         # 左
-        if x<2 and y<48 and y>2 and ((a>=-math.pi and a<-math.pi/2) or (a>math.pi/2 and a<=math.pi)):
+        if x<edge and y<50-edge and y>edge and ((a>=-math.pi and a<-math.pi/2) or (a>math.pi/2 and a<=math.pi)):
             v = 6/(abs(abs(a)-math.pi/2)*10/math.pi+1)
         # 右
-        elif x>48 and y<48 and y>2 and a>-math.pi/2 and a<math.pi/2:
-            v = 6/(abs(abs(a)-math.pi/2)*10/math.pi+1)
+        elif x>50-edge and y<50-edge and y>edge and a>-math.pi/2 and a<math.pi/2:
+            v = 6/(abs(abs(a)-math.pi/2)*10/math.pi+2)
         # 上
-        elif x>2 and x<48 and y>48 and a>0 and a<math.pi:
+        elif x>edge and x<50-edge and y>50-edge and a>0 and a<math.pi:
             if a<=math.pi/2:
                 v = 6/(a*10/math.pi+1)
             else:
                 v = 6/((math.pi-a)*10/math.pi+1)
         # 下
-        elif x>2 and x<48 and y<2 and a>-math.pi and a<0:
+        elif x>edge and x<50-edge and y<edge and a>-math.pi and a<0:
             if a>=-math.pi/2:
                 v = 6/(-a*10/math.pi+1)
             else:
-                v = 6/((math.pi+a)*10/math.pi+1)
+                v = 6/((math.pi+a)*10/math.pi+2)
         # 左上
-        elif x<=2 and y>=48 and ((a>=-math.pi and a<-math.pi/2) or (a>0 and a<=math.pi)):
+        elif x<=edge and y>=50-edge and ((a>=-math.pi and a<-math.pi/2) or (a>0 and a<=math.pi)):
             if a>0 and a<=math.pi/2:
                 v = 6/(a*10/math.pi+1)
             elif a>=math.pi and a<-math.pi/2:
@@ -522,7 +524,7 @@ class Strategy2(object):
             else:
                 v = 6/((math.pi-a)*24/math.pi+6)
         # 左下
-        elif x<=2 and y<=2 and ((a>=-math.pi and a<0) or (a>math.pi/2 and a<=math.pi)):
+        elif x<=edge and y<=edge and ((a>=-math.pi and a<0) or (a>math.pi/2 and a<=math.pi)):
             if a>=-math.pi/2 and a<0:
                 v = 6/(-a*10/math.pi+1)
             elif a>math.pi/2 and a<=math.pi:
@@ -532,7 +534,7 @@ class Strategy2(object):
             else:
                 v = 6/(abs(a+math.pi)*24/math.pi+6)
         # 右上
-        elif x>=48 and y>=48 and a>-math.pi/2 and a<math.pi:
+        elif x>=50-edge and y>=50-edge and a>-math.pi/2 and a<math.pi:
             if a>=math.pi/2:
                 v = 6/((math.pi-a)*10/math.pi+1)
             elif a<=0:
@@ -542,7 +544,7 @@ class Strategy2(object):
             else:
                 v = 6/(abs(a-math.pi/2)*24/math.pi+6)
         # 右下
-        elif x>=48 and y<=2 and a>-math.pi and a<math.pi/2:
+        elif x>=50-edge and y<=edge and a>-math.pi and a<math.pi/2:
             if a<=-math.pi/2:
                 v = 6/((math.pi+a)*10/math.pi+1)
             elif a>=0:
@@ -551,14 +553,31 @@ class Strategy2(object):
                 v = 6/(-a*24/math.pi+6)
             else:
                 v = 6/(abs(math.pi/2+a)*24/math.pi+6)
-        elif self.sw_avoidCrash and dist_b<1:
+        elif dist_b<1:
             v = 1
         else:
             v = 6/(abs(theta)+1)
 
+        if self.robotTargetId[i][0] == 0 and self.robotTaskType[i]==1 and a>math.pi/2 and a<math.pi: 
+            v = 0
+        if self.robotTargetId[i][0] == 1 and self.robotTaskType[i]==1 and a>math.pi/4 and a<3*math.pi/4: 
+            v = 0
+        if self.robotTargetId[i][0] == 2 and self.robotTaskType[i]==1 and a>0 and a<math.pi/2: 
+            v = 0
+        if self.robotTargetId[i][0] == 9 and self.robotTaskType[i]==1 and (a>3*math.pi/4 or a<-3*math.pi/4): 
+            v = 0
+        if self.robotTargetId[i][0] == 15 and self.robotTaskType[i]==1 and a>-math.pi/4 and a<math.pi/4: 
+            v = 0
+        if self.robotTargetId[i][0] == 22 and self.robotTaskType[i]==1 and a>-math.pi/2 and a<-math.pi: 
+            v = 0
+        if self.robotTargetId[i][0] == 23 and self.robotTaskType[i]==1 and a>-3*math.pi/4 and a<-math.pi/4: 
+            v = 0
+        if self.robotTargetId[i][0] == 24 and self.robotTaskType[i]==1 and a>-math.pi/2 and a<0: 
+            v = 0
         instr_i += 'forward %d %f\n' % (i,v)
 
         return instr_i
+
 
 
     def run(self):
