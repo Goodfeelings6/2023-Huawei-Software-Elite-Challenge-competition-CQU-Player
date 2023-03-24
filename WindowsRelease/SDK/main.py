@@ -50,13 +50,13 @@ class Solution(object):
         # self.param_sell_dist = 0.5
         # 参数
         #@@@
-        self.param_need = 0.322581
-        self.param_buy_dist = 1.483871
-        self.param_need_dist = 0.258065
-        self.param_haveProduct = 0.129032
-        self.param_produce = 0.451613
-        self.param_lackRate = 1.032258
-        self.param_sell_dist = 0.580645
+        self.param_need = 0.933333
+        self.param_buy_dist = 0.800000
+        self.param_need_dist = 0.333333
+        self.param_haveProduct = 0.866667
+        self.param_produce = 0.133333
+        self.param_lackRate = 0.066667
+        self.param_sell_dist = 0.666667
         #@@@
         # ---日志---
         # self.info = open('info.txt', 'w')
@@ -90,38 +90,38 @@ class Solution(object):
             inputLine = sys.stdin.readline()
         # 识别地图,设定参数
         wtNum = sum(self.wtTypeNum)
-        if wtNum == 31:
-            self.param_need = 0.01
-            self.param_buy_dist = 1
-            self.param_need_dist = 0
-            self.param_haveProduct = 0
-            self.param_produce = 0
-            self.param_lackRate = 1
-            self.param_sell_dist = 0.5
-        elif wtNum == 17:
-            self.param_need = 0.0225806
-            self.param_buy_dist = 0.451613
-            self.param_need_dist = 0.612903
-            self.param_haveProduct = 0.451613
-            self.param_produce = 0.838710
-            self.param_lackRate = 0.322581
-            self.param_sell_dist = 0.193548
-        elif wtNum == 18:
-            self.param_need = 0.266667
-            self.param_buy_dist = 0.800000
-            self.param_need_dist = 0.133333
-            self.param_haveProduct = 0.333333
-            self.param_produce = 0.933333
-            self.param_lackRate = 0.400000
-            self.param_sell_dist = 0.533333
-        elif wtNum == 50:
-            self.param_need = 0.01
-            self.param_buy_dist = 1
-            self.param_need_dist = 0
-            self.param_haveProduct = 0
-            self.param_produce = 0
-            self.param_lackRate = 1
-            self.param_sell_dist = 0.5
+        # if wtNum == 31:
+        #     self.param_need = 0.01
+        #     self.param_buy_dist = 1
+        #     self.param_need_dist = 0
+        #     self.param_haveProduct = 0
+        #     self.param_produce = 0
+        #     self.param_lackRate = 1
+        #     self.param_sell_dist = 0.5
+        # elif wtNum == 17:
+        #     self.param_need = 0.0225806
+        #     self.param_buy_dist = 0.451613
+        #     self.param_need_dist = 0.612903
+        #     self.param_haveProduct = 0.451613
+        #     self.param_produce = 0.838710
+        #     self.param_lackRate = 0.322581
+        #     self.param_sell_dist = 0.193548
+        # elif wtNum == 18:
+        #     self.param_need = 0.266667
+        #     self.param_buy_dist = 0.800000
+        #     self.param_need_dist = 0.133333
+        #     self.param_haveProduct = 0.333333
+        #     self.param_produce = 0.933333
+        #     self.param_lackRate = 0.400000
+        #     self.param_sell_dist = 0.533333
+        # elif wtNum == 50:
+        #     self.param_need = 0.01
+        #     self.param_buy_dist = 1
+        #     self.param_need_dist = 0
+        #     self.param_haveProduct = 0
+        #     self.param_produce = 0
+        #     self.param_lackRate = 1
+        #     self.param_sell_dist = 0.5
         # 读完后,输出 'OK', 告诉判题器已就绪
         self.finish()
 
