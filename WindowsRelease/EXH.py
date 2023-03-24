@@ -41,7 +41,7 @@ if __name__ == '__main__':
     # 穷举
     # moneys = [880000,650000,550000,650000]
     moneys = [0,0,0,0]
-    for i in range(1,4):
+    for i in range(0,1):
         maxMoney = 0
         maxStr = ''
         cmd = 'robot -m maps/%d.txt -c ./SDK -f "python main.py"'%(i+1)

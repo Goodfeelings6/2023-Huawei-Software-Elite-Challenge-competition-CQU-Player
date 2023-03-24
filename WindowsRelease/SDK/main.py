@@ -116,12 +116,12 @@ class Solution(object):
             self.sw_abandon = 1
             self.sw_avoidCrash = 1
         #@@@
-        # self.sw_nearest = 1
-        # self.sw_buy_pred = 1
-        # self.sw_sell_pred = 1
-        # self.param_mps = 1001
-        # self.sw_abandon = 1
-        # self.sw_avoidCrash = 1
+        self.sw_nearest = 1
+        self.sw_buy_pred = 0
+        self.sw_sell_pred = 1
+        self.param_mps = 1
+        self.sw_abandon = 1
+        self.sw_avoidCrash = 0
         #@@@
         # 读完后,输出 'OK', 告诉判题器已就绪
         self.finish()
@@ -364,9 +364,9 @@ class Solution(object):
                                 mps = self.income[objT] * self.f(sell_time*50,9000,0.8) / total_time
                                 
                                 if workT2['type'] == 9: # 卖给9
-                                    productNeed = 1
-                                    rawNeed = 1
-                                    rawReadyRate = 1
+                                    productNeed = 0
+                                    rawNeed = 0
+                                    rawReadyRate = 0
                                 elif workT2['type'] == 8: # 卖给8
                                     productNeed = 1
                                     rawNeed = 1
