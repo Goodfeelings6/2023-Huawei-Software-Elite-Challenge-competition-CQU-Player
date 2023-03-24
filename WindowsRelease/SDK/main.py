@@ -42,15 +42,16 @@ class Solution(object):
         self.wtReservation = []
 
         self.turning=[0 for i in range(4)]
+        self.accessList = [[] for i in range(4)]
 
         # 超参数
         self.abandonThreshold = 0.2  # 机器人 i 放弃当前任务的门限值, 范围0~无穷, 越大越不放弃
 
         # 参数 
-        self.sw_nearest = 0 # 顺路算法 是否开启 0开1关
+        self.sw_nearest = 1 # 顺路算法 是否开启 0开1关
         self.sw_buy_pred = 1 # 买任务预测 是否开启 1开0关
         self.sw_sell_pred = 1 # 卖任务预测 是否开启 1开0关
-        self.param_mps = 50 # 贪心系数 1~1000
+        self.param_mps = 500 # 贪心系数 1~1000
         self.sw_abandon = 1 # 放弃当前任务算法 是否开启 1开0关
         self.sw_avoidCrash = 1 # 碰撞避免 是否开启 1开0关
 
@@ -86,39 +87,39 @@ class Solution(object):
             inputLine = sys.stdin.readline()
          # 识别地图,设定参数
         wtNum = sum(self.wtTypeNum)
-        if wtNum == 31:
+        if wtNum == 43:
             self.sw_nearest = 0
-            self.sw_buy_pred = 1
+            self.sw_buy_pred = 0
             self.sw_sell_pred = 0
-            self.param_mps = 61
-            self.sw_abandon = 1
+            self.param_mps = 1000
+            self.sw_abandon = 0
             self.sw_avoidCrash = 1
-        elif wtNum == 17:
-            self.sw_nearest = 1
-            self.sw_buy_pred = 1
-            self.sw_sell_pred = 1
-            self.param_mps = 261
-            self.sw_abandon = 1
-            self.sw_avoidCrash = 1
-        elif wtNum == 18:
-            self.sw_nearest = 1
-            self.sw_buy_pred = 1
-            self.sw_sell_pred = 1
-            self.param_mps = 381
-            self.sw_abandon = 1
-            self.sw_avoidCrash = 1
+        elif wtNum == 25:
+            self.sw_nearest = 0
+            self.sw_buy_pred = 0
+            self.sw_sell_pred = 0
+            self.param_mps = 801
+            self.sw_abandon = 0
+            self.sw_avoidCrash = 0
         elif wtNum == 50:
             self.sw_nearest = 0
             self.sw_buy_pred = 0
             self.sw_sell_pred = 0
             self.param_mps = 1
+            self.sw_abandon = 0
+            self.sw_avoidCrash = 1
+        elif wtNum == 18:
+            self.sw_nearest = 0
+            self.sw_buy_pred = 0
+            self.sw_sell_pred = 1
+            self.param_mps = 801
             self.sw_abandon = 1
             self.sw_avoidCrash = 1
         #@@@
         # self.sw_nearest = 1
         # self.sw_buy_pred = 1
         # self.sw_sell_pred = 1
-        # self.param_mps = 981
+        # self.param_mps = 1001
         # self.sw_abandon = 1
         # self.sw_avoidCrash = 1
         #@@@
@@ -259,7 +260,7 @@ class Solution(object):
                 return False
         return True
 
-        de
+        
    
     def isMaterialComplete(self,workT):
         """
@@ -355,7 +356,7 @@ class Solution(object):
 #-------可调节--------------##### 可行的卖任务
                             if ((workT2['rawState']>>objT)&1==0 or (self.sw_sell_pred and self.sellTaskPredict(idx2,workT2,buy_dist[idx],sell_dist[idx2]))) \
                             and (buy_dist[idx]+sell_dist[idx2])/6+1.5 < (9000-self.frameId)*0.02 \
-                            and (self.wtReservation[idx2][objT]==0):
+                            and (self.wtReservation[idx2][objT]==0) :
                                 task.append([idx,idx2])
                                 sell_time = sell_dist[idx2]/6
                                 total_time = (buy_dist[idx]+sell_dist[idx2])/6
@@ -503,7 +504,48 @@ class Solution(object):
                     self.wtReservation[self.robotTargetId[i][1]][self.robot[i]['type']] = 0
         if self.sw_avoidCrash == 1:
             self.avoidCrash()
+        # self.avoidCrowd()
     
+    def avoidCrowd(self):
+        for i in range(4):
+            robot = self.robot[i]
+            dist1 = np.linalg.norm([robot['x'],robot['y']-50])  # 左上
+            dist2 = np.linalg.norm([robot['x']-50,robot['y']-50]) # 右上
+            dist3 = np.linalg.norm([robot['x']-50,robot['y']]) # 右下
+            dist4 = np.linalg.norm([robot['x'],robot['y']]) # 左下
+
+            # 出队
+            if len(self.accessList[0])!=0 and self.accessList[0][0] == i and dist1 >8:
+                self.accessList[0] = self.accessList[0][1:]
+            elif len(self.accessList[1])!=0 and self.accessList[1][0] == i and dist2 > 8:
+                self.accessList[1] = self.accessList[1][1:]
+            elif len(self.accessList[2])!=0 and self.accessList[2][0] == i and dist3 > 8:
+                self.accessList[2] = self.accessList[2][1:]
+            elif len(self.accessList[3])!=0 and self.accessList[3][0] == i and dist4 > 8:
+                self.accessList[3] = self.accessList[3][1:]    
+
+            # 入队
+            if dist1 <= 8:
+                if i not in self.accessList[0]:
+                    self.accessList[0].append(i)
+                if len(self.accessList[0])!=0 and self.accessList[0][0]!=i:
+                    self.instr += 'forward %d %f\n' % (i,0)
+            elif dist2 <= 8:
+                if i not in self.accessList[1]:
+                    self.accessList[1].append(i)
+                if(len(self.accessList[1])!=0 and self.accessList[1][0]!=i):
+                    self.instr += 'forward %d %f\n' % (i,0)
+            elif dist3 <= 8:
+                if i not in self.accessList[2]:
+                    self.accessList[2].append(i)
+                if len(self.accessList[2])!=0 and self.accessList[2][0]!=i:
+                    self.instr += 'forward %d %f\n' % (i,0)
+            elif dist4 <= 8:
+                if i not in self.accessList[3]:
+                    self.accessList[3].append(i)
+                if(len(self.accessList[3])!=0) and self.accessList[3][0]!=i:
+                    self.instr += 'forward %d %f\n' % (i,0)
+
     def avoidCrash(self):
         """碰撞避免"""
         turn=[0 for i in range(4)]

@@ -39,8 +39,9 @@ def getSw(n):
 
 if __name__ == '__main__':
     # 穷举
-    moneys = [880000,650000,550000,650000]
-    for i in range(4):
+    # moneys = [880000,650000,550000,650000]
+    moneys = [0,0,0,0]
+    for i in range(1,4):
         maxMoney = 0
         maxStr = ''
         cmd = 'robot -m maps/%d.txt -c ./SDK -f "python main.py"'%(i+1)
@@ -48,7 +49,7 @@ if __name__ == '__main__':
         sw = getSw(32)
         print(sw)
         for j in range(32):
-            for k in range(1,1001,20):
+            for k in range(1,1002,200):
                 # 读取
                 filePath = "SDK\main.py"
                 readData = readFile(filePath)
