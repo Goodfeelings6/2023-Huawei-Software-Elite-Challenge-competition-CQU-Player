@@ -358,7 +358,7 @@ class Strategy4(object):
                     self.wtReservation[self.robotTargetId[i][1]][self.robot[i]['type']] = 0
         if self.sw_avoidCrash == 1:
             self.avoidCrash()
-        self.avoidCrowd()
+        # self.avoidCrowd()
     
     def avoidCrowd(self):
         for i in range(4):

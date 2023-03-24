@@ -29,8 +29,7 @@ class Strategy3(object):
         self.sw_sell_pred = 0
         self.param_mps = 1
         self.sw_abandon = 0
-        self.sw_avoidCrash = 1
-
+        self.sw_avoidCrash = 0
     def getMessage(self,_workTable,_robot,_frameId):
         """
         获取数据

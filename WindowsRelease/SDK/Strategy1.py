@@ -233,7 +233,8 @@ class Strategy1(object):
                                     # 其他工作台对此工作台产品的需求度
                                     productNeed = 1         
                                     # 此类型工作台总体对该种原材料的需求度
-                                    rawNeed =  sameWorkTableNeedType[7][workT['type']][1] / sameWorkTableNeedType[7][workT['type']][0]
+                                    # rawNeed =  sameWorkTableNeedType[7][workT['type']][1] / sameWorkTableNeedType[7][workT['type']][0]
+                                    rawNeed = 0
                                     # 此工作台原料完备程度    
                                     rawReadyRate = 0 if readyRate[idx2]==1 else readyRate[idx2]
                                 elif workT2['type'] == 6: # 卖给6
@@ -496,6 +497,8 @@ class Strategy1(object):
             self.robotTemp[i] = 1
         if self.robotTargetId[i][0] == 42 and self.robotTemp[i]==0 and dist_b<0.4: # 右下角工作台
             self.robotTemp[i] = 1
+        
+
 
 
         '''
@@ -515,12 +518,13 @@ class Strategy1(object):
         y = self.robot[i]['y']
         
         edge = 1.5
+
         # 左
         if x<edge and y<50-edge and y>edge and ((a>=-math.pi and a<-math.pi/2) or (a>math.pi/2 and a<=math.pi)):
             v = 6/(abs(abs(a)-math.pi/2)*10/math.pi+1)
         # 右
         elif x>50-edge and y<50-edge and y>edge and a>-math.pi/2 and a<math.pi/2:
-            v = 6/(abs(abs(a)-math.pi/2)*10/math.pi+1)
+            v = 6/(abs(abs(a)-math.pi/2)*10/math.pi+2)
         # 上
         elif x>edge and x<50-edge and y>50-edge and a>0 and a<math.pi:
             if a<=math.pi/2:
@@ -532,7 +536,7 @@ class Strategy1(object):
             if a>=-math.pi/2:
                 v = 6/(-a*10/math.pi+1)
             else:
-                v = 6/((math.pi+a)*10/math.pi+1)
+                v = 6/((math.pi+a)*10/math.pi+2)
         # 左上
         elif x<=edge and y>=50-edge and ((a>=-math.pi and a<-math.pi/2) or (a>0 and a<=math.pi)):
             if a>0 and a<=math.pi/2:
@@ -573,16 +577,17 @@ class Strategy1(object):
                 v = 6/(-a*24/math.pi+6)
             else:
                 v = 6/(abs(math.pi/2+a)*24/math.pi+6)
-        elif self.sw_avoidCrash and dist_b<1:
+        elif dist_b<1:
             v = 1
         else:
             v = 6/(abs(theta)+1)
 
-        if self.robot['x']-: # 左下角工作台
-            v=0
-        if self.robotTargetId[i][0] == 42 and self.robotTemp[i]==1 and dist_b<0.4: # 右下角工作台
-            v=0
-
+        if self.robotTargetId[i][0] == 41 and self.robotTemp[i]==1 and self.robotTaskType[i]==1 and a>-math.pi and a<-math.pi/4: # 左下角工作台
+            v = 0
+        if self.robotTargetId[i][0] == 42 and self.robotTemp[i]==1 and self.robotTaskType[i]==1 and a>-math.pi/2 and a<math.pi/4: # 右下角工作台
+            v = 0
+        if self.robotTargetId[i][0] == 0 and self.robotTaskType[i]==1 and a>math.pi/4 and a<3*math.pi/4: # 上
+            v = 0
         instr_i += 'forward %d %f\n' % (i,v)
 
         return instr_i
