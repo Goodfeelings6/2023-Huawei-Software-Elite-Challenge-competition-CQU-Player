@@ -44,7 +44,7 @@ class Solution(object):
         # 超参数
         # self.abandonThreshold = 0.4  # 买7号物品的机器人 i 放弃此任务的门限值, 范围0~无穷, 越大越不放弃
         # 开关 
-        self.sw_avoidCrash = 1 # 碰撞避免 是否开启 1开0关
+        self.sw_avoidCrash = 0 # 碰撞避免 是否开启 1开0关
 
         # ---日志---
         # self.info = open('info.txt', 'w')
@@ -213,7 +213,7 @@ class Solution(object):
                 ### 统计买的距离              
                 buy_dist[idx] = np.linalg.norm([self.robot[i]['x']-workT['x'],self.robot[i]['y']-workT['y']])
 #------可调节----##### 可行的买任务
-                if  self.isNearest(i,workT) and (workT['productState']==1 or (workT['remainTime']>0 and buy_dist[idx]/6 > workT['remainTime']*0.02)):
+                if (workT['productState']==1 or (workT['remainTime']>0 and buy_dist[idx]/6 > workT['remainTime']*0.02)):
                 # if (workT['productState']==1 or (workT['remainTime']>0 and buy_dist[idx]/6 > workT['remainTime']*0.02)):
                     ### 统计与需求者距离
                     objT = workT['type']
