@@ -1,30 +1,32 @@
+#coding=gb2312
 import numpy as np
 import math
+import time
 
-# ç­–ç•¥ç±» åœ°å›¾4
+# ²ßÂÔÀà µØÍ¼4
 class Strategy4(object):
     def __init__(self,_destoryTime,_demandTable,_wtReservation) -> None:  
        
-        # é”€æ¯æ—¶é—´ s (æŒç»­å ç”¨æ—¶é—´è¾¾åˆ°é”€æ¯æ—¶é—´æ—¶å°±é”€æ¯)
+        # Ïú»ÙÊ±¼ä s (³ÖĞøÕ¼ÓÃÊ±¼ä´ïµ½Ïú»ÙÊ±¼äÊ±¾ÍÏú»Ù)
         self.destoryTime = _destoryTime
-        # å›ºå®šä¿¡æ¯ ï¼šéœ€æ±‚è¡¨,å³æ¯ç§å·¥ä½œå°éœ€è¦çš„ç‰©å“(åŸææ–™æˆ–æˆå“)ç±»å‹
+        # ¹Ì¶¨ĞÅÏ¢ £ºĞèÇó±í,¼´Ã¿ÖÖ¹¤×÷Ì¨ĞèÒªµÄÎïÆ·(Ô­²ÄÁÏ»ò³ÉÆ·)ÀàĞÍ
         self.demandTable = _demandTable
-        # å›ºå®šä¿¡æ¯ ï¼šç‰©å“å‡€åˆ©æ¶¦
+        # ¹Ì¶¨ĞÅÏ¢ £ºÎïÆ·¾»ÀûÈó
         self.income = {1:3000,2:3200,3:3400,4:7100,5:7800,6:8300,7:29000}
-        # å·¥ä½œå°é¢„å®šè¡¨(è¯»å…¥åœ°å›¾æ—¶é¡ºåºåˆå§‹åŒ–,å¯é¢„å®šæˆå“æ ¼ã€ç‰©å“æ ¼, 0æœªè¢«é¢„å®šã€1è¢«é¢„å®š)
+        # ¹¤×÷Ì¨Ô¤¶¨±í(¶ÁÈëµØÍ¼Ê±Ë³Ğò³õÊ¼»¯,¿ÉÔ¤¶¨³ÉÆ·¸ñ¡¢ÎïÆ·¸ñ, 0Î´±»Ô¤¶¨¡¢1±»Ô¤¶¨)
         self.wtReservation = _wtReservation
         
-        # æœºå™¨äººè°ƒåº¦æ§åˆ¶
-        self.isRobotOccupy = [0 for i in range(4)] # æ ‡è¯†æœºå™¨äººæ˜¯å¦å ç”¨,1å ç”¨,0ç©ºé—²
-        self.robotTargetId = [[0,0] for i in range(4)]   # è¢«å ç”¨æœºå™¨äººéœ€è¦å‰å¾€çš„ç›®æ ‡å·¥ä½œå°id(ä»…å½“ isRobotOccupy[i]==1 æ—¶iä½ç½®æ•°æ®æœ‰æ•ˆ)
-        self.robotTargetOrid = [[(0,0),(0,0)] for i in range(4)] # è¢«å ç”¨æœºå™¨äººéœ€è¦å‰å¾€çš„ç›®æ ‡å·¥ä½œå°åæ ‡
-        self.robotTaskType = [0 for i in range(4)] # è¢«å ç”¨æœºå™¨äººç›®å‰çš„ä»»åŠ¡ç±»å‹,åªè€ƒè™‘buyå’Œsell,0è¡¨ç¤ºbuy,1è¡¨ç¤ºsell
+        # »úÆ÷ÈËµ÷¶È¿ØÖÆ
+        self.isRobotOccupy = [0 for i in range(4)] # ±êÊ¶»úÆ÷ÈËÊÇ·ñÕ¼ÓÃ,1Õ¼ÓÃ,0¿ÕÏĞ
+        self.robotTargetId = [[0,0] for i in range(4)]   # ±»Õ¼ÓÃ»úÆ÷ÈËĞèÒªÇ°ÍùµÄÄ¿±ê¹¤×÷Ì¨id(½öµ± isRobotOccupy[i]==1 Ê±iÎ»ÖÃÊı¾İÓĞĞ§)
+        self.robotTargetOrid = [[(0,0),(0,0)] for i in range(4)] # ±»Õ¼ÓÃ»úÆ÷ÈËĞèÒªÇ°ÍùµÄÄ¿±ê¹¤×÷Ì¨×ø±ê
+        self.robotTaskType = [0 for i in range(4)] # ±»Õ¼ÓÃ»úÆ÷ÈËÄ¿Ç°µÄÈÎÎñÀàĞÍ,Ö»¿¼ÂÇbuyºÍsell,0±íÊ¾buy,1±íÊ¾sell
 
         self.turning=[0 for i in range(4)]
         self.accessList = [[] for i in range(4)]
 
         self.abandonThreshold = 0.2
-        # å‚æ•°
+        # ²ÎÊı
         self.sw_nearest = 0
         self.sw_buy_pred = 0
         self.sw_sell_pred = 1
@@ -34,27 +36,27 @@ class Strategy4(object):
         
     def getMessage(self,_workTable,_robot,_frameId):
         """
-        è·å–æ•°æ®
-        :param _workTable å·¥ä½œå°æ•°æ®
-        :param _robot æœºå™¨äººæ•°æ®
-        :param _frameId å½“å‰æ—¶é—´å¸§
+        »ñÈ¡Êı¾İ
+        :param _workTable ¹¤×÷Ì¨Êı¾İ
+        :param _robot »úÆ÷ÈËÊı¾İ
+        :param _frameId µ±Ç°Ê±¼äÖ¡
         """
-        # å·¥ä½œå°æ•°æ®
+        # ¹¤×÷Ì¨Êı¾İ
         self.workTable = _workTable
-        # æœºå™¨äººæ•°æ®
+        # »úÆ÷ÈËÊı¾İ
         self.robot = _robot
-        # å½“å‰æ—¶é—´å¸§
+        # µ±Ç°Ê±¼äÖ¡
         self.frameId = _frameId
     
     def sentMessage(self):
         """
-        # å‘é€æ•°æ®(æŒ‡ä»¤)ç»™ Solution ç±»
+        # ·¢ËÍÊı¾İ(Ö¸Áî)¸ø Solution Àà
         """
         return self.instr
 
     def f(self,x,maxX,minRate):
         """
-        # è´¬å€¼ç‡è®¡ç®—å…¬å¼
+        # ±áÖµÂÊ¼ÆËã¹«Ê½
         """
         if x < maxX:
             return (1-math.sqrt(1-(1-x/maxX)**2))*(1-minRate)+minRate
@@ -63,9 +65,9 @@ class Strategy4(object):
 
     def buyTaskPredict(self,workT,dist):
         """
-        # é¢„æµ‹æ­¤ä¹°ä»»åŠ¡æ˜¯å¦å¯è¡Œ æ¡ä»¶: æœºå™¨äººåˆ°è¾¾ç›®æ ‡å·¥ä½œå°å‰èƒ½ç”Ÿäº§äº§å“å‡ºæ¥
-        :param workT ç›®æ ‡ä¹°å·¥ä½œå°
-        :param dist æœºå™¨äººåˆ°ç›®æ ‡ä¹°å·¥ä½œå°çš„è·ç¦»
+        # Ô¤²â´ËÂòÈÎÎñÊÇ·ñ¿ÉĞĞ Ìõ¼ş: »úÆ÷ÈËµ½´ïÄ¿±ê¹¤×÷Ì¨Ç°ÄÜÉú²ú²úÆ·³öÀ´
+        :param workT Ä¿±êÂò¹¤×÷Ì¨
+        :param dist »úÆ÷ÈËµ½Ä¿±êÂò¹¤×÷Ì¨µÄ¾àÀë
         """
         if workT['remainTime']>0 and dist/6 > workT['remainTime']*0.02:
             return True
@@ -74,12 +76,12 @@ class Strategy4(object):
 
     def reservationPredict(self,idx,workT,dist):
         """
-        # é¢„æµ‹å·²è¢«é¢„å®šäº§å“çš„ä¹°å·¥ä½œå°,æ˜¯å¦å…è®¸é‡å¤é¢„å®šï¼ˆæ¡ä»¶: èƒ½ä¸ºæ¯ä¸ªé¢„å®šçš„æœºå™¨äººæä¾›äº§å“ï¼‰
-        :param idx ç›®æ ‡ä¹°å·¥ä½œå°id
-        :param workT ç›®æ ‡ä¹°å·¥ä½œå°
-        :param dist æœºå™¨äººåˆ°ç›®æ ‡ä¹°å·¥ä½œå°çš„è·ç¦»
+        # Ô¤²âÒÑ±»Ô¤¶¨²úÆ·µÄÂò¹¤×÷Ì¨,ÊÇ·ñÔÊĞíÖØ¸´Ô¤¶¨£¨Ìõ¼ş: ÄÜÎªÃ¿¸öÔ¤¶¨µÄ»úÆ÷ÈËÌá¹©²úÆ·£©
+        :param idx Ä¿±êÂò¹¤×÷Ì¨id
+        :param workT Ä¿±êÂò¹¤×÷Ì¨
+        :param dist »úÆ÷ÈËµ½Ä¿±êÂò¹¤×÷Ì¨µÄ¾àÀë
         """
-        # æŸ¥æ‰¾è°å…ˆé¢„å®šäº†workT
+        # ²éÕÒË­ÏÈÔ¤¶¨ÁËworkT
         for i in range(4):
             if self.robotTargetId[i][0]==idx:
                 robot_id = i
@@ -95,21 +97,21 @@ class Strategy4(object):
  
     def isNearest(self,i,workT):
         """
-        # åˆ¤æ–­iç›¸æ¯”äºå…¶ä»–æœºå™¨äººæ˜¯å¦ç¦»workTæœ€è¿‘ã€‚å¦‚æœå…¶ä»–æœºå™¨äººå¯¹äºå·¥ä½œå°workT é¡ºè·¯(æˆ–æ›´è¿‘), è‹¥æœ‰ return False , å¦åˆ™ True
-        :param i æœºå™¨äººç¼–å·
-        :param workT å·¥ä½œå°
+        # ÅĞ¶ÏiÏà±ÈÓÚÆäËû»úÆ÷ÈËÊÇ·ñÀëworkT×î½ü¡£Èç¹ûÆäËû»úÆ÷ÈË¶ÔÓÚ¹¤×÷Ì¨workT Ë³Â·(»ò¸ü½ü), ÈôÓĞ return False , ·ñÔò True
+        :param i »úÆ÷ÈË±àºÅ
+        :param workT ¹¤×÷Ì¨
         """
-        # i ä¸ workT è·ç¦»
+        # i Óë workT ¾àÀë
         i_dist = np.linalg.norm([self.robot[i]['x']-workT['x'],self.robot[i]['y']-workT['y']])
         for j in range(4):
             j_finish_dist = 1e5
-            if i!=j and self.isRobotOccupy[j]==1 and self.robotTaskType[j]==1: # jæœ‰ä»»åŠ¡åœ¨èº«ä¸”å·²ç»åœ¨å–çš„è·¯ä¸Š
-                # j å–ç›®æ ‡å·¥ä½œå°ä¸ workT è·ç¦»
+            if i!=j and self.isRobotOccupy[j]==1 and self.robotTaskType[j]==1: # jÓĞÈÎÎñÔÚÉíÇÒÒÑ¾­ÔÚÂôµÄÂ·ÉÏ
+                # j ÂôÄ¿±ê¹¤×÷Ì¨Óë workT ¾àÀë
                 j_finish_dist = np.linalg.norm([self.robotTargetOrid[j][1][0]-workT['x'],self.robotTargetOrid[j][1][1]-workT['y']])
-            elif i!=j and self.isRobotOccupy[j]==0: # jæ²¡ä»»åŠ¡åœ¨èº«
-                # j ä¸ workT è·ç¦»
+            elif i!=j and self.isRobotOccupy[j]==0: # jÃ»ÈÎÎñÔÚÉí
+                # j Óë workT ¾àÀë
                 j_finish_dist = np.linalg.norm([self.robot[j]['x']-workT['x'],self.robot[j]['y']-workT['y']])
-            # å­˜åœ¨ j æ›´è¿‘
+            # ´æÔÚ j ¸ü½ü
             if i_dist > j_finish_dist:
                 return False
         return True
@@ -118,7 +120,7 @@ class Strategy4(object):
    
     def isMaterialComplete(self,workT):
         """
-        # åˆ¤æ–­ workT å·¥ä½œå°æ˜¯å¦ææ–™é½å…¨äº†
+        # ÅĞ¶Ï workT ¹¤×÷Ì¨ÊÇ·ñ²ÄÁÏÆëÈ«ÁË
         """ 
         matrial_type = self.demandTable[workT['type']]
         for i in matrial_type:
@@ -128,21 +130,21 @@ class Strategy4(object):
   
     def sellTaskPredict(self,idx,workT,buy_dist,sell_dist):
         """
-        # é¢„æµ‹æ­¤å–ä»»åŠ¡æ˜¯å¦å¯è¡Œ æ¡ä»¶: æœºå™¨äººåˆ°è¾¾ç›®æ ‡å·¥ä½œå°å‰èƒ½è…¾å‡ºå¯¹åº”ç‰©å“æ ¼å‡ºæ¥
-        :param idx ç›®æ ‡å–å·¥ä½œå°id
-        :param workT ç›®æ ‡å–å·¥ä½œå°
-        :param buy_dist æœºå™¨äººåˆ°ç›®æ ‡ä¹°å·¥ä½œå°çš„è·ç¦»
-        :param sell_dist æœºå™¨äººåˆ°ç›®æ ‡å–å·¥ä½œå°çš„è·ç¦»
+        # Ô¤²â´ËÂôÈÎÎñÊÇ·ñ¿ÉĞĞ Ìõ¼ş: »úÆ÷ÈËµ½´ïÄ¿±ê¹¤×÷Ì¨Ç°ÄÜÌÚ³ö¶ÔÓ¦ÎïÆ·¸ñ³öÀ´
+        :param idx Ä¿±êÂô¹¤×÷Ì¨id
+        :param workT Ä¿±êÂô¹¤×÷Ì¨
+        :param buy_dist »úÆ÷ÈËµ½Ä¿±êÂò¹¤×÷Ì¨µÄ¾àÀë
+        :param sell_dist »úÆ÷ÈËµ½Ä¿±êÂô¹¤×÷Ì¨µÄ¾àÀë
         """
-        # è§„å®šæ—¶é—´ T å³: æŸä¸€ä¸ªæœºå™¨äººä»åˆ†é…ä»»åŠ¡å¼€å§‹ã€ä¹°åˆ°ç‰©å“ã€å¹¶åˆ°è¾¾å–å·¥ä½œå°çš„ è¿™æ®µæ—¶é—´
-        # è…¾å‡ºå¯¹åº”ç‰©å“æ ¼çš„æ¡ä»¶: 1,æ— äº§å“ ä¸” å‰©ä½™ç”Ÿäº§æ—¶é—´å¸§å°äºè§„å®šæ—¶é—´T ä¸” ææ–™é½å¤‡æˆ–åœ¨å°äºè§„å®šæ—¶é—´å†…é½å¤‡
-        #                     2,æœ‰äº§å“ ä¸” å‰©ä½™ç”Ÿäº§æ—¶é—´å¸§å°äºè§„å®šæ—¶é—´T ä¸” å–äº§å“æ—¶é—´<è§„å®šæ—¶é—´T ä¸” ææ–™é½å¤‡æˆ–åœ¨å°äº [è§„å®šæ—¶é—´-å–äº§å“æ—¶é—´] å†…é½å¤‡
-        #  (ææ–™åœ¨å°äºè§„å®šæ—¶é—´å†…é½å¤‡) çš„é¢„æµ‹å¥½å¤æ‚ T_T ,å…ˆæ”¾å¼ƒ 
+        # ¹æ¶¨Ê±¼ä T ¼´: Ä³Ò»¸ö»úÆ÷ÈË´Ó·ÖÅäÈÎÎñ¿ªÊ¼¡¢Âòµ½ÎïÆ·¡¢²¢µ½´ïÂô¹¤×÷Ì¨µÄ Õâ¶ÎÊ±¼ä
+        # ÌÚ³ö¶ÔÓ¦ÎïÆ·¸ñµÄÌõ¼ş: 1,ÎŞ²úÆ· ÇÒ Ê£ÓàÉú²úÊ±¼äÖ¡Ğ¡ÓÚ¹æ¶¨Ê±¼äT ÇÒ ²ÄÁÏÆë±¸»òÔÚĞ¡ÓÚ¹æ¶¨Ê±¼äÄÚÆë±¸
+        #                     2,ÓĞ²úÆ· ÇÒ Ê£ÓàÉú²úÊ±¼äÖ¡Ğ¡ÓÚ¹æ¶¨Ê±¼äT ÇÒ È¡²úÆ·Ê±¼ä<¹æ¶¨Ê±¼äT ÇÒ ²ÄÁÏÆë±¸»òÔÚĞ¡ÓÚ [¹æ¶¨Ê±¼ä-È¡²úÆ·Ê±¼ä] ÄÚÆë±¸
+        #  (²ÄÁÏÔÚĞ¡ÓÚ¹æ¶¨Ê±¼äÄÚÆë±¸) µÄÔ¤²âºÃ¸´ÔÓ T_T ,ÏÈ·ÅÆú 
         
         T = (buy_dist+sell_dist)/6
         getProductTime = 1e5
         for i in range(4):
-            if self.robotTaskType[i]==0 and self.robotTargetId[i][0] == idx: # æœ‰æœºå™¨äººæ­£åœ¨æ¥ä¹°çš„è·¯ä¸Š
+            if self.robotTaskType[i]==0 and self.robotTargetId[i][0] == idx: # ÓĞ»úÆ÷ÈËÕıÔÚÀ´ÂòµÄÂ·ÉÏ
                 getProductTime = np.linalg.norm([self.robot[i]['x']-workT['x'],self.robot[i]['y']-workT['y']]) /6
 
         if workT['productState']==0 and workT['remainTime'] > 0 \
@@ -156,29 +158,29 @@ class Strategy4(object):
 
     def getBestTask(self,i):
         """
-        # æ ¹æ®åœºé¢ä¿¡æ¯,è¿”å›ä¸€ä¸ªè¾ƒä¼˜çš„ä»»åŠ¡
-        :param i æœºå™¨äººç¼–å·
+        # ¸ù¾İ³¡ÃæĞÅÏ¢,·µ»ØÒ»¸ö½ÏÓÅµÄÈÎÎñ
+        :param i »úÆ÷ÈË±àºÅ
         """   
-        epl = 1e-8 # å¾ˆå°çš„æ•°ï¼Œé˜²æ­¢é™¤æ•°ä¸º0  
-        # åœºä¸Šçš„æ‰€æœ‰éœ€æ±‚  #å­—å…¸é¡¹ä¸º ç‰©å“ç±»å‹:(æ ¼å­æ€»æ•°,ç©ºç¼ºæ ¼å­æ•°)
+        epl = 1e-8 # ºÜĞ¡µÄÊı£¬·ÀÖ¹³ıÊıÎª0  
+        # ³¡ÉÏµÄËùÓĞĞèÇó  #×ÖµäÏîÎª ÎïÆ·ÀàĞÍ:(¸ñ×Ó×ÜÊı,¿ÕÈ±¸ñ×ÓÊı)
         needType = {1:[epl,0],2:[epl,0],3:[epl,0],4:[epl,0],5:[epl,0],6:[epl,0],7:[epl,0]}  
-        # # åŒä¸€ç±»å‹å·¥ä½œå°æ€»ä½“å¯¹å…¶ä¸‹åŸææ–™çš„éœ€æ±‚  #å­—å…¸é¡¹ä¸º å·¥ä½œå°ç±»å‹:{ç‰©å“ç±»å‹:(æ ¼å­æ€»æ•°,ç©ºç¼ºæ ¼å­æ•°)}
+        # # Í¬Ò»ÀàĞÍ¹¤×÷Ì¨×ÜÌå¶ÔÆäÏÂÔ­²ÄÁÏµÄĞèÇó  #×ÖµäÏîÎª ¹¤×÷Ì¨ÀàĞÍ:{ÎïÆ·ÀàĞÍ:(¸ñ×Ó×ÜÊı,¿ÕÈ±¸ñ×ÓÊı)}
         sameWorkTableNeedType = {4:{1:[epl,0],2:[epl,0]},5:{1:[epl,0],3:[epl,0]},6:{2:[epl,0],3:[epl,0]},7:{4:[epl,0],5:[epl,0],6:[epl,0]}}
-        # æ­¤å·¥ä½œå°åŸæ–™å®Œå¤‡ç¨‹åº¦, å·¥ä½œå°id:ææ–™é½å¤‡ç¨‹åº¦
+        # ´Ë¹¤×÷Ì¨Ô­ÁÏÍê±¸³Ì¶È, ¹¤×÷Ì¨id:²ÄÁÏÆë±¸³Ì¶È
         readyRate = {} 
-        ## ä¿¡æ¯ç»Ÿè®¡
+        ## ĞÅÏ¢Í³¼Æ
         for idx,workT in enumerate(self.workTable):   
             readyCount = 0
             for objType in self.demandTable[workT['type']]:
                 needType[objType][0] += 1
-                if (workT['rawState']>>objType)&1==0 and self.wtReservation[idx][objType]==0: # ç©ºç¼ºä¸”ä¸è¢«é¢„å®š
+                if (workT['rawState']>>objType)&1==0 and self.wtReservation[idx][objType]==0: # ¿ÕÈ±ÇÒ²»±»Ô¤¶¨
                     needType[objType][1] += 1 
 
                 if workT['type']>=4 and workT['type']<=7:
                     sameWorkTableNeedType[workT['type']][objType][0] += 1
-                    if (workT['rawState']>>objType)&1==0 and self.wtReservation[idx][objType]==0: # ç©ºç¼ºä¸”ä¸è¢«é¢„å®š
+                    if (workT['rawState']>>objType)&1==0 and self.wtReservation[idx][objType]==0: # ¿ÕÈ±ÇÒ²»±»Ô¤¶¨
                         sameWorkTableNeedType[workT['type']][objType][1] += 1 
-                    else: # é½å¤‡æˆ–è¢«é¢„å®š
+                    else: # Æë±¸»ò±»Ô¤¶¨
                         readyCount += 1
 
             if workT['type']>=4 and workT['type']<=7:
@@ -187,62 +189,62 @@ class Strategy4(object):
                 
         # self.info.write(str(self.frameId)+"\n")
 
-        # task æ”¶é›†
+        # task ÊÕ¼¯
         task = []
         profit = []
-        buy_dist = {} # å·¥ä½œå°id:ä¸æœºå™¨äººè·ç¦»
-        sell_dist = {} # å·¥ä½œå°id:ä¸æœ€è¿‘éœ€æ±‚è€…è·ç¦»
+        buy_dist = {} # ¹¤×÷Ì¨id:Óë»úÆ÷ÈË¾àÀë
+        sell_dist = {} # ¹¤×÷Ì¨id:Óë×î½üĞèÇóÕß¾àÀë
         for idx,workT in enumerate(self.workTable): 
             if workT['type'] >= 1 and workT['type'] <= 7:
-                ### ç»Ÿè®¡ä¹°çš„è·ç¦»              
+                ### Í³¼ÆÂòµÄ¾àÀë              
                 buy_dist[idx] = np.linalg.norm([self.robot[i]['x']-workT['x'],self.robot[i]['y']-workT['y']])
-#------å¯è°ƒèŠ‚----##### å¯è¡Œçš„ä¹°ä»»åŠ¡
+#------¿Éµ÷½Ú----##### ¿ÉĞĞµÄÂòÈÎÎñ
                 if  (self.sw_nearest or self.isNearest(i,workT)) \
                 and (workT['productState']==1 or (self.sw_buy_pred and self.buyTaskPredict(workT,buy_dist[idx]))) \
                 and (self.wtReservation[idx]['product']==0 ):
-                    ### ç»Ÿè®¡ä¸éœ€æ±‚è€…è·ç¦»
+                    ### Í³¼ÆÓëĞèÇóÕß¾àÀë
                     objT = workT['type']
                     for idx2,workT2 in enumerate(self.workTable): 
-                        # å¦‚æœæ˜¯ä¸€ä¸ªæœ‰æ•ˆéœ€æ±‚è€…
+                        # Èç¹ûÊÇÒ»¸öÓĞĞ§ĞèÇóÕß
                         if objT in self.demandTable[workT2['type']]:
-                            # ç»Ÿè®¡å–çš„è·ç¦»
+                            # Í³¼ÆÂôµÄ¾àÀë
                             sell_dist[idx2] = np.linalg.norm([workT['x']-workT2['x'],workT['y']-workT2['y']])
-#-------å¯è°ƒèŠ‚--------------##### å¯è¡Œçš„å–ä»»åŠ¡
+#-------¿Éµ÷½Ú--------------##### ¿ÉĞĞµÄÂôÈÎÎñ
                             if ((workT2['rawState']>>objT)&1==0 or (self.sw_sell_pred and self.sellTaskPredict(idx2,workT2,buy_dist[idx],sell_dist[idx2]))) \
                             and (buy_dist[idx]+sell_dist[idx2])/6+1.5 < (9000-self.frameId)*0.02 \
                             and (self.wtReservation[idx2][objT]==0) :
                                 task.append([idx,idx2])
                                 sell_time = sell_dist[idx2]/6
                                 total_time = (buy_dist[idx]+sell_dist[idx2])/6
-                                # å•ä½æ—¶é—´æ”¶ç›Š
+                                # µ¥Î»Ê±¼äÊÕÒæ
                                 mps = self.income[objT] * self.f(sell_time*50,9000,0.8) / total_time
                                 
-                                if workT2['type'] == 9: # å–ç»™9
+                                if workT2['type'] == 9: # Âô¸ø9
                                     productNeed = 1
                                     rawNeed = 1
                                     rawReadyRate = 1
-                                elif workT2['type'] == 8: # å–ç»™8
+                                elif workT2['type'] == 8: # Âô¸ø8
                                     if (9000-self.frameId<500):
                                         mps *=2
                                     productNeed = 1
                                     rawNeed = 1
                                     rawReadyRate = 1
-                                elif workT2['type'] == 7: # å–ç»™7
-                                    # å…¶ä»–å·¥ä½œå°å¯¹æ­¤å·¥ä½œå°äº§å“çš„éœ€æ±‚åº¦
+                                elif workT2['type'] == 7: # Âô¸ø7
+                                    # ÆäËû¹¤×÷Ì¨¶Ô´Ë¹¤×÷Ì¨²úÆ·µÄĞèÇó¶È
                                     productNeed = 1         
-                                    # æ­¤ç±»å‹å·¥ä½œå°æ€»ä½“å¯¹è¯¥ç§åŸææ–™çš„éœ€æ±‚åº¦
+                                    # ´ËÀàĞÍ¹¤×÷Ì¨×ÜÌå¶Ô¸ÃÖÖÔ­²ÄÁÏµÄĞèÇó¶È
                                     rawNeed =  sameWorkTableNeedType[7][workT['type']][1] / sameWorkTableNeedType[7][workT['type']][0]
-                                    # æ­¤å·¥ä½œå°åŸæ–™å®Œå¤‡ç¨‹åº¦    
+                                    # ´Ë¹¤×÷Ì¨Ô­ÁÏÍê±¸³Ì¶È    
                                     rawReadyRate = 0 if readyRate[idx2]==1 else readyRate[idx2]
-                                elif workT2['type'] == 6: # å–ç»™6
+                                elif workT2['type'] == 6: # Âô¸ø6
                                     productNeed = needType[6][1] / needType[6][0]
                                     rawNeed = sameWorkTableNeedType[6][workT['type']][1] / sameWorkTableNeedType[6][workT['type']][0]
                                     rawReadyRate = 0 if readyRate[idx2]==1 else readyRate[idx2]
-                                elif workT2['type'] == 5: # å–ç»™5
+                                elif workT2['type'] == 5: # Âô¸ø5
                                     productNeed = needType[5][1] / needType[5][0]
                                     rawNeed = sameWorkTableNeedType[5][workT['type']][1] / sameWorkTableNeedType[5][workT['type']][0]
                                     rawReadyRate = 0 if readyRate[idx2]==1 else readyRate[idx2]
-                                elif workT2['type'] == 4: # å–ç»™4
+                                elif workT2['type'] == 4: # Âô¸ø4
                                     if workT2['remainTime'] == -1 and self.frameId<8300:
                                         mps *=5
                                     productNeed = needType[4][1] / needType[4][0]
@@ -253,7 +255,7 @@ class Strategy4(object):
                                 # self.info.write("id1:%d,type:%d  id2:%d,type:%d  score = %.3f,%.3f,%.3f,%.3f = %.3f \n" %(idx,workT['type'],idx2,workT2['type'],mps,productNeed,rawNeed,rawReadyRate,score))
 
                                 profit.append(score)
-        # task é€‰æ‹©
+        # task Ñ¡Ôñ
         if len(task)!=0:
             max_i = np.argmax(np.array(profit))
             return task[max_i]
@@ -262,103 +264,103 @@ class Strategy4(object):
 
     def judgeAbandon(self,i):
         """
-        # åˆ¤æ–­æ˜¯å¦éœ€è¦æ”¾å¼ƒ ç¼–å·ä¸º i çš„æœºå™¨äººç›®å‰çš„ä»»åŠ¡, è‹¥æ˜¯,return True, å¦åˆ™ False
-        :param i æœºå™¨äººç¼–å·
+        # ÅĞ¶ÏÊÇ·ñĞèÒª·ÅÆú ±àºÅÎª i µÄ»úÆ÷ÈËÄ¿Ç°µÄÈÎÎñ, ÈôÊÇ,return True, ·ñÔò False
+        :param i »úÆ÷ÈË±àºÅ
         :return bool
-        ç­–ç•¥: è‹¥æœ‰å¦å¤–çš„å–ä»»åŠ¡é€”ä¸­çš„æœºå™¨äºº j çš„ç›®æ ‡ç‚¹æ˜¯æœºå™¨äºº i å°†è¦å‰å¾€çš„ä¹°å·¥ä½œå° ,
-        ä¸”  T(i)/T(j) > self.abandonThreshold åˆ™æ”¾å¼ƒ i çš„ä»»åŠ¡. 
-        T(x) è¡¨ç¤ºç¼–å·ä¸ºxçš„æœºå™¨äººåˆ°è¾¾ä¸‹ä¸ªç›®æ ‡ç‚¹ä»éœ€çš„æ—¶é—´.
-        self.abandonThreshold ä¸ºå¯è°ƒå‚æ•°
-        æ—¶é—´ä¹‹æ¯”ä¹Ÿå³è·ç¦»ä¹‹æ¯”.
+        ²ßÂÔ: ÈôÓĞÁíÍâµÄÂôÈÎÎñÍ¾ÖĞµÄ»úÆ÷ÈË j µÄÄ¿±êµãÊÇ»úÆ÷ÈË i ½«ÒªÇ°ÍùµÄÂò¹¤×÷Ì¨ ,
+        ÇÒ  T(i)/T(j) > self.abandonThreshold Ôò·ÅÆú i µÄÈÎÎñ. 
+        T(x) ±íÊ¾±àºÅÎªxµÄ»úÆ÷ÈËµ½´ïÏÂ¸öÄ¿±êµãÈÔĞèµÄÊ±¼ä.
+        self.abandonThreshold Îª¿Éµ÷²ÎÊı
+        Ê±¼äÖ®±ÈÒ²¼´¾àÀëÖ®±È.
         """
-        # i ç›®æ ‡å·¥ä½œå°åæ ‡(ä¹°é€”ä¸­)
+        # i Ä¿±ê¹¤×÷Ì¨×ø±ê(ÂòÍ¾ÖĞ)
         i_target = self.robotTargetOrid[i][0]
-        # i ä¸ å…¶ target è·ç¦»
+        # i Óë Æä target ¾àÀë
         i_dist = np.linalg.norm([self.robot[i]['x']-i_target[0],self.robot[i]['y']-i_target[1]])
 
         for j in range(4):
-            # jæœ‰ä»»åŠ¡åœ¨èº«ä¸”å·²ç»åœ¨å–çš„è·¯ä¸Šä¸” j çš„å–å·¥ä½œå°ä¸ i ç›®æ ‡å·¥ä½œå°ç›¸åŒ
+            # jÓĞÈÎÎñÔÚÉíÇÒÒÑ¾­ÔÚÂôµÄÂ·ÉÏÇÒ j µÄÂô¹¤×÷Ì¨Óë i Ä¿±ê¹¤×÷Ì¨ÏàÍ¬
             if i!=j and self.isRobotOccupy[j]==1 and self.robotTaskType[j]==1 \
             and self.robotTargetId[j][1] == self.robotTargetId[i][0]: 
-                # j ç›®æ ‡å·¥ä½œå°åæ ‡
+                # j Ä¿±ê¹¤×÷Ì¨×ø±ê
                 j_target = self.robotTargetOrid[i][1]
-                # j ä¸ ç›®æ ‡å·¥ä½œå°è·ç¦»
+                # j Óë Ä¿±ê¹¤×÷Ì¨¾àÀë
                 j_dist = np.linalg.norm([self.robot[j]['x']-j_target[0],self.robot[j]['y']-j_target[1]])
             else:
                 j_dist = 1e5
 
-            # å­˜åœ¨ j é¡ºè·¯, åˆ™ i å¯ä»¥æ”¾å¼ƒ
+            # ´æÔÚ j Ë³Â·, Ôò i ¿ÉÒÔ·ÅÆú
             if i_dist / j_dist > self.abandonThreshold:
                 return True
         return False
 
     def scheduleRobot(self):
         """
-        # ç»™ç©ºé—²æœºå™¨äººåˆ†é…ä»»åŠ¡,è°ƒåº¦
+        # ¸ø¿ÕÏĞ»úÆ÷ÈË·ÖÅäÈÎÎñ,µ÷¶È
         """       
-        # ä»»åŠ¡ = ä¸¤ä¸ªå·¥ä½œå°id åˆ†åˆ«ä¸º buy å’Œ sell, è¡¨ç¤ºæœºå™¨äººè¦å‰å¾€å¯¹åº”å·¥ä½œå° , æ‰§è¡Œ buy å’Œ sell  
+        # ÈÎÎñ = Á½¸ö¹¤×÷Ì¨id ·Ö±ğÎª buy ºÍ sell, ±íÊ¾»úÆ÷ÈËÒªÇ°Íù¶ÔÓ¦¹¤×÷Ì¨ , Ö´ĞĞ buy ºÍ sell  
         self.instr = ''
         for i in range(4):
-            # if ç©ºé—²
+            # if ¿ÕÏĞ
             if self.isRobotOccupy[i] == 0: 
-                # åˆ†é…ä»»åŠ¡
+                # ·ÖÅäÈÎÎñ
                 task = self.getBestTask(i)  
                 if task!=None: 
-                    # æ›´æ–°æœºå™¨äººè°ƒåº¦çŠ¶æ€
+                    # ¸üĞÂ»úÆ÷ÈËµ÷¶È×´Ì¬
                     self.robotTargetId[i] = task  # [buy sell]
                     self.isRobotOccupy[i] = 1
                     self.robotTaskType[i] = 0
-                    # ä¹°ä»»åŠ¡åæ ‡
+                    # ÂòÈÎÎñ×ø±ê
                     self.robotTargetOrid[i][0] = (self.workTable[task[0]]['x'],self.workTable[task[0]]['y'])
-                    # å–ä»»åŠ¡åæ ‡
+                    # ÂôÈÎÎñ×ø±ê
                     self.robotTargetOrid[i][1] = (self.workTable[task[1]]['x'],self.workTable[task[1]]['y'])
-                    # æ›´æ–°å·¥ä½œå°é¢„å®šè¡¨
+                    # ¸üĞÂ¹¤×÷Ì¨Ô¤¶¨±í
                     self.wtReservation[task[0]]['product'] = 1
-                    if self.workTable[task[1]]['type']==8 or self.workTable[task[1]]['type']==9: # ä¸éœ€é¢„å®šï¼Œä¸€ç›´å¯å–
+                    if self.workTable[task[1]]['type']==8 or self.workTable[task[1]]['type']==9: # ²»ĞèÔ¤¶¨£¬Ò»Ö±¿ÉÂô
                         self.wtReservation[task[1]][self.workTable[task[0]]['type']] = 0
                     else:
                         self.wtReservation[task[1]][self.workTable[task[0]]['type']] = 1
-                else: # æ²¡ä»»åŠ¡å¯åˆ†é…
-#----å¯è°ƒèŠ‚---------##### # å¾€åœ°å›¾ä¸­å¿ƒèµ° (å¾€æŸä¸ªå·¥ä½œå°èµ°ï¼Ÿ)
+                else: # Ã»ÈÎÎñ¿É·ÖÅä
+#----¿Éµ÷½Ú---------##### # ÍùµØÍ¼ÖĞĞÄ×ß (ÍùÄ³¸ö¹¤×÷Ì¨×ß£¿)
                     self.instr += self.control(i,(25,25))
                     
-            # ä¹°å ç”¨çŠ¶æ€
+            # ÂòÕ¼ÓÃ×´Ì¬
             elif self.isRobotOccupy[i] == 1 and self.robotTaskType[i] == 0 : 
-                # æœªåˆ°è¾¾ä¹°ç›®æ ‡ç‚¹
+                # Î´µ½´ïÂòÄ¿±êµã
                 if self.robot[i]['workTableID'] != self.robotTargetId[i][0]:
-                    # è‹¥æœ‰å¦å¤–çš„å–ä»»åŠ¡é€”ä¸­çš„æœºå™¨äºº j çš„ç›®æ ‡ç‚¹æ˜¯æœºå™¨äºº i å°†è¦å‰å¾€çš„ä¹°å·¥ä½œå° ,
- #---å¯è°ƒèŠ‚----------##### # ä¸”  T(i)/T(j) > é˜ˆå€¼ åˆ™æ”¾å¼ƒ i çš„ä»»åŠ¡ã€‚ T(x) è¡¨ç¤ºç¼–å·ä¸ºxçš„æœºå™¨äººåˆ°è¾¾ä¸‹ä¸ªç›®æ ‡ç‚¹ä»éœ€çš„æ—¶é—´
+                    # ÈôÓĞÁíÍâµÄÂôÈÎÎñÍ¾ÖĞµÄ»úÆ÷ÈË j µÄÄ¿±êµãÊÇ»úÆ÷ÈË i ½«ÒªÇ°ÍùµÄÂò¹¤×÷Ì¨ ,
+ #---¿Éµ÷½Ú----------##### # ÇÒ  T(i)/T(j) > ãĞÖµ Ôò·ÅÆú i µÄÈÎÎñ¡£ T(x) ±íÊ¾±àºÅÎªxµÄ»úÆ÷ÈËµ½´ïÏÂ¸öÄ¿±êµãÈÔĞèµÄÊ±¼ä
                     if self.sw_abandon and self.judgeAbandon(i):
-                        # æ”¾å¼ƒæ­¤ä»»åŠ¡
-                        # æœºå™¨äººè½¬ä¸ºç©ºé—²
+                        # ·ÅÆú´ËÈÎÎñ
+                        # »úÆ÷ÈË×ªÎª¿ÕÏĞ
                         self.isRobotOccupy[i] = 0
-                        # æ›´æ–°å·¥ä½œå°é¢„å®šè¡¨
-                        self.wtReservation[self.robotTargetId[i][0]]['product'] = 0 # å–æ¶ˆä¹°é¢„å®š
+                        # ¸üĞÂ¹¤×÷Ì¨Ô¤¶¨±í
+                        self.wtReservation[self.robotTargetId[i][0]]['product'] = 0 # È¡ÏûÂòÔ¤¶¨
                         objT = self.workTable[self.robotTargetId[i][0]]['type']
-                        self.wtReservation[self.robotTargetId[i][1]][objT] = 0 # å–æ¶ˆå–é¢„å®š
+                        self.wtReservation[self.robotTargetId[i][1]][objT] = 0 # È¡ÏûÂôÔ¤¶¨
                     else:
                         self.instr += self.control(i,self.robotTargetOrid[i][0])
-                # åˆ°è¾¾ç›®æ ‡ç‚¹
+                # µ½´ïÄ¿±êµã
                 else:
-                    # ä¹°
+                    # Âò
                     self.instr += 'buy %d\n' % (i)
-                    # æœºå™¨äººä»»åŠ¡ç±»å‹ä» ä¹° è½¬ä¸º å–
+                    # »úÆ÷ÈËÈÎÎñÀàĞÍ´Ó Âò ×ªÎª Âô
                     self.robotTaskType[i] = 1
-                    # æ›´æ–°å·¥ä½œå°é¢„å®šè¡¨
+                    # ¸üĞÂ¹¤×÷Ì¨Ô¤¶¨±í
                     self.wtReservation[self.robotTargetId[i][0]]['product'] = 0
 
-            # å–å ç”¨çŠ¶æ€
+            # ÂôÕ¼ÓÃ×´Ì¬
             elif self.isRobotOccupy[i] == 1 and self.robotTaskType[i] == 1:
-                # æœªåˆ°è¾¾å–ç›®æ ‡ç‚¹
+                # Î´µ½´ïÂôÄ¿±êµã
                 if self.robot[i]['workTableID'] != self.robotTargetId[i][1]:
                     self.instr += self.control(i,self.robotTargetOrid[i][1])
-                # åˆ°è¾¾ç›®æ ‡ç‚¹
+                # µ½´ïÄ¿±êµã
                 else: 
-                    # å–
+                    # Âô
                     self.instr += 'sell %d\n' % (i)
-                    # æœºå™¨äººè½¬ä¸ºç©ºé—²
+                    # »úÆ÷ÈË×ªÎª¿ÕÏĞ
                     self.isRobotOccupy[i] = 0
-                    # æ›´æ–°å·¥ä½œå°é¢„å®šè¡¨
+                    # ¸üĞÂ¹¤×÷Ì¨Ô¤¶¨±í
                     self.wtReservation[self.robotTargetId[i][1]][self.robot[i]['type']] = 0
         if self.sw_avoidCrash == 1:
             self.avoidCrash()
@@ -367,12 +369,12 @@ class Strategy4(object):
     def avoidCrowd(self):
         for i in range(4):
             robot = self.robot[i]
-            dist1 = np.linalg.norm([robot['x'],robot['y']-50])  # å·¦ä¸Š
-            dist2 = np.linalg.norm([robot['x']-50,robot['y']-50]) # å³ä¸Š
-            dist3 = np.linalg.norm([robot['x']-50,robot['y']]) # å³ä¸‹
-            dist4 = np.linalg.norm([robot['x'],robot['y']]) # å·¦ä¸‹
+            dist1 = np.linalg.norm([robot['x'],robot['y']-50])  # ×óÉÏ
+            dist2 = np.linalg.norm([robot['x']-50,robot['y']-50]) # ÓÒÉÏ
+            dist3 = np.linalg.norm([robot['x']-50,robot['y']]) # ÓÒÏÂ
+            dist4 = np.linalg.norm([robot['x'],robot['y']]) # ×óÏÂ
 
-            # å‡ºé˜Ÿ
+            # ³ö¶Ó
             if len(self.accessList[0])!=0 and self.accessList[0][0] == i and dist1 >8:
                 self.accessList[0] = self.accessList[0][1:]
             elif len(self.accessList[1])!=0 and self.accessList[1][0] == i and dist2 > 8:
@@ -382,7 +384,7 @@ class Strategy4(object):
             elif len(self.accessList[3])!=0 and self.accessList[3][0] == i and dist4 > 8:
                 self.accessList[3] = self.accessList[3][1:]    
 
-            # å…¥é˜Ÿ
+            # Èë¶Ó
             if dist1 <= 8:
                 if i not in self.accessList[0]:
                     self.accessList[0].append(i)
@@ -405,7 +407,7 @@ class Strategy4(object):
                     self.instr += 'forward %d %f\n' % (i,0)
 
     def avoidCrash(self):
-        """ç¢°æ’é¿å…"""
+        """Åö×²±ÜÃâ"""
         turn=[0 for i in range(4)]
         for i in range(3):
             for j in range(i + 1, 4):
@@ -420,14 +422,14 @@ class Strategy4(object):
 
                     b1=self.robot[i]['y']-k1*self.robot[i]['x']
                     b2=self.robot[j]['y']-k2*self.robot[j]['x']
-                    #äº¤ç‚¹
+                    #½»µã
                     t1=0
                     t2=0
                     if k1!=k2 and self.robot[i]['orientation']!=-math.pi/2 and self.robot[i]['orientation']!=math.pi/2 and self.robot[j]['orientation']!=-math.pi/2and self.robot[j]['orientation']!=math.pi/2:
                         x_0=(b2-b1)/(k1-k2)
                         y_0=x_0*k1+b1
                         if(x_0-self.robot[i]['x'])*math.cos(self.robot[i]['orientation'])>0 and(y_0-self.robot[i]['y'])*math.sin(self.robot[i]['orientation'])>0:
-                            t1=np.linalg.norm(np.array([self.robot[i]['x']-x_0, self.robot[i]['y']-y_0]))/0.12 #å½“å‰ä½ç½®åˆ°ç›¸æ’çš„ç‚¹çš„è·ç¦»å¤„äºæ¯ä¸€å¸§æœ€é«˜é€Ÿåº¦è¿è¡Œçš„è·ç¦»
+                            t1=np.linalg.norm(np.array([self.robot[i]['x']-x_0, self.robot[i]['y']-y_0]))/0.12 #µ±Ç°Î»ÖÃµ½Ïà×²µÄµãµÄ¾àÀë´¦ÓÚÃ¿Ò»Ö¡×î¸ßËÙ¶ÈÔËĞĞµÄ¾àÀë
                         if ( x_0-self.robot[j]['x'] ) * math.cos(self.robot[j]['orientation'])>0 and ( y_0-self.robot[j]['y']) * math.sin(
                                 self.robot[j]['orientation']) > 0:
                             t2 = np.linalg.norm(np.array([self.robot[j]['x'] - x_0, self.robot[j]['y'] - y_0]))/0.12
@@ -440,7 +442,7 @@ class Strategy4(object):
                             if (self.turning[j] == 0):
                                 self.turning[j] = 30
                             if abs(self.robot[j]['orientation']+self.robot[i]['orientation'])<math.pi/36 and  abs(self.robot[j]['x']-self.robot[i]['x'])>1.6:
-                                continue #é¿å…ä¸¤ä¸ªå°çƒè¿åŠ¨æ–¹å‘ç›¸åä½†æ˜¯ç»å¯¹ä¸å¯èƒ½ä¸å¯èƒ½ç›¸æ’å¯¼è‡´è¯¯åˆ¤ä¸ºç¢°æ’é¿å…è€Œè€½è¯¯æ—¶é—´
+                                continue #±ÜÃâÁ½¸öĞ¡ÇòÔË¶¯·½ÏòÏà·´µ«ÊÇ¾ø¶Ô²»¿ÉÄÜ²»¿ÉÄÜÏà×²µ¼ÖÂÎóÅĞÎªÅö×²±ÜÃâ¶øµ¢ÎóÊ±¼ä
                             if self.robot[j]['orientation']<0 and self.robot[j]['y']>self.robot[i]['y'] and self.robot[j]['x']>self.robot[i]['x']:
                                 turn[j] = math.pi
                             if self.robot[j]['orientation']<=0 and self.robot[j]['y']>self.robot[i]['y'] and self.robot[j]['x']<=self.robot[i]['x']:
@@ -450,7 +452,7 @@ class Strategy4(object):
                             if self.robot[j]['orientation']>=0 and self.robot[j]['y']<self.robot[i]['y'] and self.robot[j]['x']<=self.robot[i]['x']:
                                 turn[j] = math.pi
                             self.turning[j]-=1
-        # è§’é€Ÿåº¦
+        # ½ÇËÙ¶È
         for i in range(4):
             if turn[i]!=0:
                 instr_i = 'rotate %d %f\n' % (i,turn[i])
@@ -458,65 +460,65 @@ class Strategy4(object):
 
     def control(self,i,target):
         """
-        # ç§»åŠ¨æ§åˆ¶
-        :param i æœºå™¨äººç¼–å·
-        :param target ç›®æ ‡ç‚¹åæ ‡
+        # ÒÆ¶¯¿ØÖÆ
+        :param i »úÆ÷ÈË±àºÅ
+        :param target Ä¿±êµã×ø±ê
         """
         instr_i = ''
 
-        a = self.robot[i]['orientation'] # æœå‘è§’
-        vector_a = np.array([math.cos(a),math.sin(a)]) # æœºå™¨äººæœå‘ 
+        a = self.robot[i]['orientation'] # ³¯Ïò½Ç
+        vector_a = np.array([math.cos(a),math.sin(a)]) # »úÆ÷ÈË³¯Ïò 
         x_bar = target[0] - self.robot[i]['x']
         y_bar = target[1] - self.robot[i]['y']
-        vector_b = np.array([x_bar,y_bar]) # æœºå™¨äººå½“å‰ä½ç½®æŒ‡å‘ç›®æ ‡ç‚¹çš„ 
+        vector_b = np.array([x_bar,y_bar]) # »úÆ÷ÈËµ±Ç°Î»ÖÃÖ¸ÏòÄ¿±êµãµÄ 
         dist_a = np.linalg.norm(vector_a)
-        dist_b = np.linalg.norm(vector_b) # æœºå™¨äººä¸ç›®æ ‡ç‚¹çš„è·ç¦»
+        dist_b = np.linalg.norm(vector_b) # »úÆ÷ÈËÓëÄ¿±êµãµÄ¾àÀë
 
-        dot = np.dot(vector_a,vector_b)     # ç‚¹ç§¯
-        cross = np.cross(vector_a,vector_b) # å‰ç§¯
+        dot = np.dot(vector_a,vector_b)     # µã»ı
+        cross = np.cross(vector_a,vector_b) # ²æ»ı
 
-        cos_theta = dot/(dist_a*dist_b) # å‘é‡aè½¬åˆ°bçš„è½¬å‘è§’ä½™å¼¦å€¼ 
-        theta = math.acos(round(cos_theta,10)) # a -> b è½¬  
-        if cross < 0: # åº”è¯¥é¡ºæ—¶é’ˆè½¬
+        cos_theta = dot/(dist_a*dist_b) # ÏòÁ¿a×ªµ½bµÄ×ªÏò½ÇÓàÏÒÖµ 
+        theta = math.acos(round(cos_theta,10)) # a -> b ×ª  
+        if cross < 0: # Ó¦¸ÃË³Ê±Õë×ª
             theta = -theta
-        else: # é€†æ—¶é’ˆè½¬
+        else: # ÄæÊ±Õë×ª
             theta = theta
 
         '''
-        æŒæœ‰ç‰©å“ï¼šè´¨é‡ä¸º0.88247 kg
-        æœ€å¤§åŠ é€Ÿåº¦ï¼š283.295 m/s*s (5.6659 m/s*frame)
-        æœ€å¤§è§’åŠ é€Ÿåº¦ï¼š403.4115 pi/s*s (8.06823 pi/s*fram    
-        ä¸æŒæœ‰ç‰©å“ï¼šè´¨é‡ä¸º0.63617 kg
-        æœ€å¤§åŠ é€Ÿåº¦ï¼š392.976 m/s*s (7.85952 m/s*frame)
-        æœ€å¤§è§’åŠ é€Ÿåº¦ï¼š776.2503 pi/s*s (15.525 pi/s*frame)
+        ³ÖÓĞÎïÆ·£ºÖÊÁ¿Îª0.88247 kg
+        ×î´ó¼ÓËÙ¶È£º283.295 m/s*s (5.6659 m/s*frame)
+        ×î´ó½Ç¼ÓËÙ¶È£º403.4115 pi/s*s (8.06823 pi/s*fram    
+        ²»³ÖÓĞÎïÆ·£ºÖÊÁ¿Îª0.63617 kg
+        ×î´ó¼ÓËÙ¶È£º392.976 m/s*s (7.85952 m/s*frame)
+        ×î´ó½Ç¼ÓËÙ¶È£º776.2503 pi/s*s (15.525 pi/s*frame)
         '''
-        # è§’é€Ÿåº¦
+        # ½ÇËÙ¶È
         angle_v = min(theta/0.02, math.pi) if theta>0 else max(theta/0.02, -math.pi)
         instr_i += 'rotate %d %f\n' % (i,angle_v)
 
-        #é€Ÿåº¦
+        #ËÙ¶È
         x = self.robot[i]['x']
         y = self.robot[i]['y']
         
-        # å·¦
+        # ×ó
         if x<2 and y<48 and y>2 and ((a>=-math.pi and a<-math.pi/2) or (a>math.pi/2 and a<=math.pi)):
             v = 6/(abs(abs(a)-math.pi/2)*10/math.pi+1)
-        # å³
+        # ÓÒ
         elif x>48 and y<48 and y>2 and a>-math.pi/2 and a<math.pi/2:
             v = 6/(abs(abs(a)-math.pi/2)*10/math.pi+1)
-        # ä¸Š
+        # ÉÏ
         elif x>2 and x<48 and y>48 and a>0 and a<math.pi:
             if a<=math.pi/2:
                 v = 6/(a*10/math.pi+1)
             else:
                 v = 6/((math.pi-a)*10/math.pi+1)
-        # ä¸‹
+        # ÏÂ
         elif x>2 and x<48 and y<2 and a>-math.pi and a<0:
             if a>=-math.pi/2:
                 v = 6/(-a*10/math.pi+1)
             else:
                 v = 6/((math.pi+a)*10/math.pi+1)
-        # å·¦ä¸Š
+        # ×óÉÏ
         elif x<=2 and y>=48 and ((a>=-math.pi and a<-math.pi/2) or (a>0 and a<=math.pi)):
             if a>0 and a<=math.pi/2:
                 v = 6/(a*10/math.pi+1)
@@ -526,7 +528,7 @@ class Strategy4(object):
                 v = 6/((a-math.pi/2)*24/math.pi+6)
             else:
                 v = 6/((math.pi-a)*24/math.pi+6)
-        # å·¦ä¸‹
+        # ×óÏÂ
         elif x<=2 and y<=2 and ((a>=-math.pi and a<0) or (a>math.pi/2 and a<=math.pi)):
             if a>=-math.pi/2 and a<0:
                 v = 6/(-a*10/math.pi+1)
@@ -536,7 +538,7 @@ class Strategy4(object):
                 v = 6/(abs(a+math.pi/2)*24/math.pi+6)
             else:
                 v = 6/(abs(a+math.pi)*24/math.pi+6)
-        # å³ä¸Š
+        # ÓÒÉÏ
         elif x>=48 and y>=48 and a>-math.pi/2 and a<math.pi:
             if a>=math.pi/2:
                 v = 6/((math.pi-a)*10/math.pi+1)
@@ -546,7 +548,7 @@ class Strategy4(object):
                 v = 6/(a*24/math.pi+6)
             else:
                 v = 6/(abs(a-math.pi/2)*24/math.pi+6)
-        # å³ä¸‹
+        # ÓÒÏÂ
         elif x>=48 and y<=2 and a>-math.pi and a<math.pi/2:
             if a<=-math.pi/2:
                 v = 6/((math.pi+a)*10/math.pi+1)

@@ -1,0 +1,15 @@
+µÚ1ÕÅµØÍ¼
+#@@@
+ self.nine= 2400.000000
+   self.eight= 3000.000000
+ self.seven= 800.000000
+ self.seven23= 1000.000000
+ self.seven13= 800.000000
+ #@@@maxMoney=650876
+#@@@
+ self.nine= 200.000000
+   self.eight= 0.000000
+ self.seven= 2400.000000
+ self.seven23= 1800.000000
+ self.seven13= 200.000000
+ #@@@maxMoney=655760
