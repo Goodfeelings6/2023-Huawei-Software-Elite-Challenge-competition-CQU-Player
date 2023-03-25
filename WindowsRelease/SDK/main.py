@@ -41,6 +41,7 @@ class Solution(object):
 
         # 工作台预定表(读入地图时顺序初始化,可预定成品格、物品格, 0未被预定、1被预定)
         self.wtReservation = []
+        self.turning = [0 for i in range(4)]
         # self.param_need = 0.01
         # self.param_buy_dist = 1
         # self.param_need_dist = 0
@@ -50,13 +51,13 @@ class Solution(object):
         # self.param_sell_dist = 0.5
         # 参数
         #@@@
-        self.param_need = 0.933333
-        self.param_buy_dist = 0.800000
-        self.param_need_dist = 0.333333
-        self.param_haveProduct = 0.866667
-        self.param_produce = 0.133333
-        self.param_lackRate = 0.066667
-        self.param_sell_dist = 0.666667
+        self.param_need = 0.258065
+        self.param_buy_dist = 0.935484
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
         #@@@
         # ---日志---
         # self.info = open('info.txt', 'w')
@@ -90,38 +91,38 @@ class Solution(object):
             inputLine = sys.stdin.readline()
         # 识别地图,设定参数
         wtNum = sum(self.wtTypeNum)
-        # if wtNum == 31:
-        #     self.param_need = 0.01
-        #     self.param_buy_dist = 1
-        #     self.param_need_dist = 0
-        #     self.param_haveProduct = 0
-        #     self.param_produce = 0
-        #     self.param_lackRate = 1
-        #     self.param_sell_dist = 0.5
-        # elif wtNum == 17:
-        #     self.param_need = 0.0225806
-        #     self.param_buy_dist = 0.451613
-        #     self.param_need_dist = 0.612903
-        #     self.param_haveProduct = 0.451613
-        #     self.param_produce = 0.838710
-        #     self.param_lackRate = 0.322581
-        #     self.param_sell_dist = 0.193548
-        # elif wtNum == 18:
-        #     self.param_need = 0.266667
-        #     self.param_buy_dist = 0.800000
-        #     self.param_need_dist = 0.133333
-        #     self.param_haveProduct = 0.333333
-        #     self.param_produce = 0.933333
-        #     self.param_lackRate = 0.400000
-        #     self.param_sell_dist = 0.533333
-        # elif wtNum == 50:
-        #     self.param_need = 0.01
-        #     self.param_buy_dist = 1
-        #     self.param_need_dist = 0
-        #     self.param_haveProduct = 0
-        #     self.param_produce = 0
-        #     self.param_lackRate = 1
-        #     self.param_sell_dist = 0.5
+        if wtNum == 43:
+            self.param_need = 0.01
+            self.param_buy_dist = 1
+            self.param_need_dist = 0
+            self.param_haveProduct = 0
+            self.param_produce = 0
+            self.param_lackRate = 1
+            self.param_sell_dist = 0.5
+        elif wtNum == 25:
+            self.param_need = 0.838710
+            self.param_buy_dist = 0.774194
+            self.param_need_dist = 0.193548
+            self.param_haveProduct = 0.064516
+            self.param_produce = 0.580645
+            self.param_lackRate = 0.451613
+            self.param_sell_dist = 1.000000
+        elif wtNum == 50:
+            self.param_need = 0.266667
+            self.param_buy_dist = 0.800000
+            self.param_need_dist = 0.133333
+            self.param_haveProduct = 0.333333
+            self.param_produce = 0.933333
+            self.param_lackRate = 0.400000
+            self.param_sell_dist = 0.533333
+        elif wtNum == 18:
+            self.param_need = 0.01
+            self.param_buy_dist = 1
+            self.param_need_dist = 0
+            self.param_haveProduct = 0
+            self.param_produce = 0
+            self.param_lackRate = 1
+            self.param_sell_dist = 0.5
         # 读完后,输出 'OK', 告诉判题器已就绪
         self.finish()
 
@@ -385,6 +386,53 @@ class Solution(object):
         # 2、产生控制指令并返回
         """
         self.instr = ''
+
+        """碰撞避免"""
+        turn=[0 for i in range(4)]
+        for i in range(3):
+            for j in range(i + 1, 4):
+                if pow(self.robot[i]['x']-self.robot[j]['x'],2)+pow(self.robot[i]['y']-self.robot[j]['y'],2)<2.9**2.9 and\
+                        self.robot[i]['orientation']*self.robot[j]['orientation']<=0:
+                    k1=0
+                    k2=0
+                    if(self.robot[i]['orientation']!=-math.pi/2 and self.robot[i]['orientation']!=math.pi/2 ):
+                        k1 = math.tan(self.robot[i]['orientation'])
+                    if (self.robot[j]['orientation'] != -math.pi / 2 and self.robot[j]['orientation'] != math.pi / 2):
+                        k2 = math.tan(self.robot[j]['orientation'])
+
+                    b1=self.robot[i]['y']-k1*self.robot[i]['x']
+                    b2=self.robot[j]['y']-k2*self.robot[j]['x']
+                    #交点
+                    t1=0
+                    t2=0
+                    if k1!=k2 and self.robot[i]['orientation']!=-math.pi/2 and self.robot[i]['orientation']!=math.pi/2 and self.robot[j]['orientation']!=-math.pi/2and self.robot[j]['orientation']!=math.pi/2:
+                        x_0=(b2-b1)/(k1-k2)
+                        y_0=x_0*k1+b1
+                        if(x_0-self.robot[i]['x'])*math.cos(self.robot[i]['orientation'])>0 and(y_0-self.robot[i]['y'])*math.sin(self.robot[i]['orientation'])>0:
+                            t1=np.linalg.norm(np.array([self.robot[i]['x']-x_0, self.robot[i]['y']-y_0]))/0.12 #当前位置到相撞的点的距离处于每一帧最高速度运行的距离
+                        if ( x_0-self.robot[j]['x'] ) * math.cos(self.robot[j]['orientation'])>0 and ( y_0-self.robot[j]['y']) * math.sin(
+                                self.robot[j]['orientation']) > 0:
+                            t2 = np.linalg.norm(np.array([self.robot[j]['x'] - x_0, self.robot[j]['y'] - y_0]))/0.12
+                    #self.info.write("t1-t2: " + str(t1-t2)+'\n'+str(self.turning[j])+'\n')
+                    if(abs(t1-t2)>30 and self.turning[j]==0):
+                        continue
+                    if  self.turning[j]>=1 or abs(t1-t2)<=30 or self.robot[i]['orientation']==-math.pi/2 or self.robot[i]['orientation']==math.pi/2 or self.robot[j]['orientation']==-math.pi/2 or self.robot[j]['orientation']==math.pi/2:
+                        #if turn[j]==0 and  (pow(self.robot[j]['linV_x'],2)+pow(self.robot[j]['linV_y'],2)) >=16 or (pow(self.robot[i]['linV_x'],2)+pow(self.robot[i]['linV_y'],2)) >=9:
+                        if turn[j] == 0:
+                            if (self.turning[j] == 0):
+                                self.turning[j] = 30
+                            if abs(self.robot[j]['orientation']+self.robot[i]['orientation'])<math.pi/36 and  abs(self.robot[j]['x']-self.robot[i]['x'])>1.6:
+                                continue #避免两个小球运动方向相反但是绝对不可能不可能相撞导致误判为碰撞避免而耽误时间
+                            if self.robot[j]['orientation']<0 and self.robot[j]['y']>self.robot[i]['y'] and self.robot[j]['x']>self.robot[i]['x']:
+                                turn[j] = math.pi
+                            if self.robot[j]['orientation']<=0 and self.robot[j]['y']>self.robot[i]['y'] and self.robot[j]['x']<=self.robot[i]['x']:
+                                turn[j] = -math.pi
+                            if self.robot[j]['orientation']>0 and self.robot[j]['y']<self.robot[i]['y'] and self.robot[j]['x']>self.robot[i]['x']:
+                                turn[j] = -math.pi
+                            if self.robot[j]['orientation']>=0 and self.robot[j]['y']<self.robot[i]['y'] and self.robot[j]['x']<=self.robot[i]['x']:
+                                turn[j] = math.pi
+                            self.turning[j]-=1
+
         for i in range(4):
             # 物品持有时间计时
             if self.robot[i]['type'] != 0:
@@ -484,6 +532,8 @@ class Solution(object):
                         v = 6/(-a*24/math.pi+6)
                     else:
                         v = 6/(abs(math.pi/2+a)*24/math.pi+6)
+                elif dist_b<1:
+                    v = 1
                 else:
                     v = 6/(abs(theta)+1)
                 v = min(v, 6) if v>0 else max(v, -2)
@@ -512,6 +562,10 @@ class Solution(object):
                     self.wtReservation[self.robotTargetId[i]][self.robot[i]['type']] = 0
             else: # 空闲状态
                 pass
+            
+            if turn[i]!=0:
+                instr_i = 'rotate %d %f\n' % (i,turn[i])
+                self.instr += instr_i
 
         return self.instr
 

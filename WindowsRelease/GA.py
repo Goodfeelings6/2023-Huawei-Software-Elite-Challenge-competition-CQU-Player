@@ -3,11 +3,11 @@ import numpy as np
 import subprocess
 
 # 参数
-DNA_SIZE = 4 # 每个参数用5位2进制编码
-POP_SIZE = 10 # 种群数
+DNA_SIZE = 5 # 每个参数用5位2进制编码
+POP_SIZE = 20 # 种群数
 CROSSOVER_RATE = 0.8 # 交叉概率
-MUTATION_RATE = 0.07 # 变异概率
-N_GENERATIONS = 10 # 迭代代数
+MUTATION_RATE = 0.1 # 变异概率
+N_GENERATIONS = 100 # 迭代代数
 # 所有优化自变量的范围
 BOUND = [0,1]
 
@@ -117,11 +117,9 @@ def crossover_and_mutation(pop, CROSSOVER_RATE):
         child = father		#孩子先得到父亲的全部基因（这里我把一串二进制串的那些0，1称为基因）
         if np.random.rand() < CROSSOVER_RATE:			#产生子代时不是必然发生交叉，而是以一定的概率发生交叉
             mother = pop[np.random.randint(POP_SIZE)]	#再种群中选择另一个个体，并将该个体作为母亲
-            for i in range(np.random.randint(6,9)): # 随机7-14个多点交叉
+            for i in range(np.random.randint(7,13)): # 随机7-14个多点交叉
                 cross_points = np.random.randint(low=0, high=DNA_SIZE*7) #随机产生交叉的点
                 child[cross_points] = mother[cross_points] #孩子得到位于交叉点之间的母亲的基因
-        mutation(child,MUTATION_RATE)	#每个后代有一定的机率发生变异
-        mutation(child,MUTATION_RATE)	#每个后代有一定的机率发生变异
         mutation(child,MUTATION_RATE)	#每个后代有一定的机率发生变异
         new_pop.append(child)
 
@@ -167,7 +165,7 @@ def generation(cmd:str):
 
 
 if __name__ == "__main__":
-    for i in [3]:
+    for i in range(4):
         cmd = 'robot -m maps/%d.txt -c ./SDK -f "python main.py"'%(i+1)
         f = open('ttt.txt', "a")
         f.write("第"+str(i+1)+"张地图\n")

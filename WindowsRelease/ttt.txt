@@ -1,82 +1,2742 @@
+第1张地图
+#@@@
+        self.param_need = 0.129032
+        self.param_buy_dist = 0.903226
+        self.param_need_dist = 0.322581
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.096774
+        self.param_lackRate = 0.967742
+        self.param_sell_dist = 0.451613
+#@@@
+maxMoney=517534
+#@@@
+        self.param_need = 0.387097
+        self.param_buy_dist = 0.354839
+        self.param_need_dist = 0.354839
+        self.param_haveProduct = 0.322581
+        self.param_produce = 0.000000
+        self.param_lackRate = 0.935484
+        self.param_sell_dist = 0.322581
+#@@@
+maxMoney=569531
+#@@@
+        self.param_need = 0.967742
+        self.param_buy_dist = 0.290323
+        self.param_need_dist = 0.161290
+        self.param_haveProduct = 0.741935
+        self.param_produce = 0.193548
+        self.param_lackRate = 0.935484
+        self.param_sell_dist = 0.870968
+#@@@
+maxMoney=486161
+fitness=[474460 486161 486161 486161 474460 474460 486161 474460 486161 467958
+ 484284 474460 467958 474460 474460 486161 467958 467958 467958 486161]
+第2张地图
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.935484
+        self.param_need_dist = 0.935484
+        self.param_haveProduct = 0.838710
+        self.param_produce = 0.806452
+        self.param_lackRate = 0.387097
+        self.param_sell_dist = 0.967742
+#@@@
+maxMoney=667237
+#@@@
+        self.param_need = 0.548387
+        self.param_buy_dist = 0.677419
+        self.param_need_dist = 0.387097
+        self.param_haveProduct = 0.516129
+        self.param_produce = 0.516129
+        self.param_lackRate = 0.258065
+        self.param_sell_dist = 0.677419
+#@@@
+maxMoney=662046
+#@@@
+        self.param_need = 0.806452
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.483871
+        self.param_produce = 0.580645
+        self.param_lackRate = 0.516129
+        self.param_sell_dist = 0.451613
+#@@@
+maxMoney=633591
+#@@@
+        self.param_need = 0.709677
+        self.param_buy_dist = 0.967742
+        self.param_need_dist = 1.000000
+        self.param_haveProduct = 0.290323
+        self.param_produce = 0.032258
+        self.param_lackRate = 0.806452
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=668852
+#@@@
+        self.param_need = 0.677419
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 1.000000
+        self.param_haveProduct = 0.806452
+        self.param_produce = 0.032258
+        self.param_lackRate = 0.806452
+        self.param_sell_dist = 0.032258
+#@@@
+maxMoney=654508
+#@@@
+        self.param_need = 0.225806
+        self.param_buy_dist = 0.548387
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.387097
+        self.param_produce = 0.096774
+        self.param_lackRate = 0.967742
+        self.param_sell_dist = 0.387097
+#@@@
+maxMoney=640496
+#@@@
+        self.param_need = 0.225806
+        self.param_buy_dist = 0.612903
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.387097
+        self.param_produce = 0.548387
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.774194
+#@@@
+maxMoney=632413
+#@@@
+        self.param_need = 0.548387
+        self.param_buy_dist = 0.612903
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.387097
+        self.param_produce = 0.612903
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.645161
+#@@@
+maxMoney=658756
+#@@@
+        self.param_need = 0.548387
+        self.param_buy_dist = 0.612903
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.387097
+        self.param_produce = 0.612903
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.645161
+#@@@
+maxMoney=658756
+#@@@
+        self.param_need = 0.580645
+        self.param_buy_dist = 0.612903
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.387097
+        self.param_produce = 0.612903
+        self.param_lackRate = 0.064516
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=664388
+#@@@
+        self.param_need = 0.096774
+        self.param_buy_dist = 0.935484
+        self.param_need_dist = 0.419355
+        self.param_haveProduct = 0.161290
+        self.param_produce = 0.516129
+        self.param_lackRate = 0.064516
+        self.param_sell_dist = 0.645161
+#@@@
+maxMoney=663981
+#@@@
+        self.param_need = 0.096774
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.290323
+        self.param_haveProduct = 0.419355
+        self.param_produce = 0.516129
+        self.param_lackRate = 0.064516
+        self.param_sell_dist = 0.645161
+#@@@
+maxMoney=671244
+#@@@
+        self.param_need = 0.774194
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.419355
+        self.param_produce = 0.548387
+        self.param_lackRate = 0.193548
+        self.param_sell_dist = 0.387097
+#@@@
+maxMoney=658756
+#@@@
+        self.param_need = 0.096774
+        self.param_buy_dist = 0.483871
+        self.param_need_dist = 0.483871
+        self.param_haveProduct = 0.129032
+        self.param_produce = 0.000000
+        self.param_lackRate = 0.709677
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=653213
+#@@@
+        self.param_need = 0.064516
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.161290
+        self.param_produce = 0.032258
+        self.param_lackRate = 0.580645
+        self.param_sell_dist = 0.258065
+#@@@
+maxMoney=688360
+#@@@
+        self.param_need = 0.483871
+        self.param_buy_dist = 0.483871
+        self.param_need_dist = 0.354839
+        self.param_haveProduct = 0.161290
+        self.param_produce = 0.000000
+        self.param_lackRate = 0.967742
+        self.param_sell_dist = 0.774194
+#@@@
+maxMoney=671050
+#@@@
+        self.param_need = 0.225806
+        self.param_buy_dist = 0.483871
+        self.param_need_dist = 0.354839
+        self.param_haveProduct = 0.161290
+        self.param_produce = 0.000000
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.774194
+#@@@
+maxMoney=693065
+#@@@
+        self.param_need = 0.354839
+        self.param_buy_dist = 0.483871
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.161290
+        self.param_produce = 0.000000
+        self.param_lackRate = 0.967742
+        self.param_sell_dist = 0.774194
+#@@@
+maxMoney=690506
+#@@@
+        self.param_need = 0.032258
+        self.param_buy_dist = 0.483871
+        self.param_need_dist = 0.483871
+        self.param_haveProduct = 0.161290
+        self.param_produce = 0.516129
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.645161
+#@@@
+maxMoney=691174
+#@@@
+        self.param_need = 0.225806
+        self.param_buy_dist = 0.741935
+        self.param_need_dist = 0.483871
+        self.param_haveProduct = 0.161290
+        self.param_produce = 0.000000
+        self.param_lackRate = 0.967742
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=672351
+#@@@
+        self.param_need = 0.225806
+        self.param_buy_dist = 0.741935
+        self.param_need_dist = 0.483871
+        self.param_haveProduct = 0.161290
+        self.param_produce = 0.000000
+        self.param_lackRate = 0.967742
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=672351
+#@@@
+        self.param_need = 0.225806
+        self.param_buy_dist = 0.741935
+        self.param_need_dist = 0.483871
+        self.param_haveProduct = 0.161290
+        self.param_produce = 0.000000
+        self.param_lackRate = 0.967742
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=672351
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.161290
+        self.param_produce = 0.290323
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=645839
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.161290
+        self.param_produce = 0.290323
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=645839
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.161290
+        self.param_produce = 0.290323
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=645839
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.161290
+        self.param_produce = 0.290323
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=645839
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.161290
+        self.param_produce = 0.290323
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=624245
+#@@@
+        self.param_need = 0.709677
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.161290
+        self.param_produce = 0.290323
+        self.param_lackRate = 0.580645
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=645839
+#@@@
+        self.param_need = 0.709677
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.161290
+        self.param_produce = 0.290323
+        self.param_lackRate = 0.580645
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=645839
+#@@@
+        self.param_need = 0.709677
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.161290
+        self.param_produce = 0.290323
+        self.param_lackRate = 0.580645
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=645839
+#@@@
+        self.param_need = 0.709677
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.161290
+        self.param_produce = 0.290323
+        self.param_lackRate = 0.580645
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=645839
+#@@@
+        self.param_need = 0.741935
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.161290
+        self.param_haveProduct = 0.161290
+        self.param_produce = 0.290323
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=645839
+#@@@
+        self.param_need = 0.580645
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.129032
+        self.param_produce = 0.290323
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=633203
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.161290
+        self.param_haveProduct = 0.161290
+        self.param_produce = 0.290323
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=624245
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.741935
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.129032
+        self.param_produce = 0.290323
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=635021
+#@@@
+        self.param_need = 0.741935
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.161290
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.806452
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=645839
+#@@@
+        self.param_need = 0.741935
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.161290
+        self.param_haveProduct = 0.645161
+        self.param_produce = 0.806452
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=645839
+#@@@
+        self.param_need = 0.741935
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.161290
+        self.param_haveProduct = 0.645161
+        self.param_produce = 0.806452
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=645839
+#@@@
+        self.param_need = 0.580645
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.645161
+        self.param_produce = 0.290323
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=625218
+#@@@
+        self.param_need = 0.580645
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.645161
+        self.param_produce = 0.290323
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=625218
+#@@@
+        self.param_need = 0.580645
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.129032
+        self.param_produce = 0.290323
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=636583
+#@@@
+        self.param_need = 0.580645
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.645161
+        self.param_produce = 0.290323
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=625218
+#@@@
+        self.param_need = 0.580645
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.645161
+        self.param_produce = 0.290323
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=625218
+#@@@
+        self.param_need = 0.741935
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.161290
+        self.param_haveProduct = 0.645161
+        self.param_produce = 0.354839
+        self.param_lackRate = 0.580645
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=646751
+#@@@
+        self.param_need = 0.870968
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.354839
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=627993
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.161290
+        self.param_produce = 0.354839
+        self.param_lackRate = 0.580645
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=638943
+#@@@
+        self.param_need = 0.741935
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=632073
+#@@@
+        self.param_need = 0.741935
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=632073
+#@@@
+        self.param_need = 0.741935
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=632073
+#@@@
+        self.param_need = 0.741935
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=632073
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 0.741935
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=636478
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.548387
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.354839
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=640539
+#@@@
+        self.param_need = 0.741935
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=632073
+#@@@
+        self.param_need = 0.741935
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=635861
+#@@@
+        self.param_need = 0.741935
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.354839
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=627993
+#@@@
+        self.param_need = 0.741935
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.354839
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=627993
+#@@@
+        self.param_need = 0.741935
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=635861
+#@@@
+        self.param_need = 0.741935
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=635861
+#@@@
+        self.param_need = 0.741935
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.322581
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=624869
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 0.741935
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.322581
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=636478
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 0.741935
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.322581
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=636478
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 0.741935
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.322581
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=636478
+#@@@
+        self.param_need = 0.548387
+        self.param_buy_dist = 0.741935
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.612903
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=652662
+#@@@
+        self.param_need = 0.741935
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.741935
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.322581
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=645839
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 0.741935
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.967742
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=636478
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 0.741935
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.741935
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.322581
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=636478
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 0.741935
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.741935
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=636478
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 0.741935
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.322581
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=636478
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.935484
+        self.param_produce = 0.806452
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=643569
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.935484
+        self.param_produce = 0.806452
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=643569
+#@@@
+        self.param_need = 0.741935
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.806452
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=635861
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.935484
+        self.param_produce = 0.806452
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.387097
+#@@@
+maxMoney=627439
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 0.741935
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.806452
+        self.param_lackRate = 0.354839
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=636478
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 0.741935
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.806452
+        self.param_lackRate = 0.322581
+        self.param_sell_dist = 0.387097
+#@@@
+maxMoney=636478
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 0.741935
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.806452
+        self.param_lackRate = 0.322581
+        self.param_sell_dist = 0.387097
+#@@@
+maxMoney=636478
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 0.741935
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.774194
+        self.param_lackRate = 0.322581
+        self.param_sell_dist = 0.387097
+#@@@
+maxMoney=636478
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 0.741935
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.806452
+        self.param_lackRate = 0.322581
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=636478
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 0.741935
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.806452
+        self.param_lackRate = 0.322581
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=636478
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 0.741935
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.806452
+        self.param_lackRate = 0.322581
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=636478
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 0.741935
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.806452
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.387097
+#@@@
+maxMoney=636478
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 0.741935
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.806452
+        self.param_lackRate = 0.322581
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=636478
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 0.741935
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.806452
+        self.param_lackRate = 0.322581
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=636478
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 0.741935
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.806452
+        self.param_lackRate = 0.322581
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=636478
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 0.903226
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.935484
+        self.param_produce = 0.806452
+        self.param_lackRate = 0.322581
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=628560
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.935484
+        self.param_produce = 0.806452
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=643569
+#@@@
+        self.param_need = 0.612903
+        self.param_buy_dist = 0.935484
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.935484
+        self.param_produce = 0.806452
+        self.param_lackRate = 0.322581
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=628560
+#@@@
+        self.param_need = 0.741935
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.806452
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=635861
+#@@@
+        self.param_need = 0.741935
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.806452
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=635861
+#@@@
+        self.param_need = 0.741935
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.806452
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=635861
+#@@@
+        self.param_need = 0.741935
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.806452
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=635861
+#@@@
+        self.param_need = 0.741935
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.806452
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=635861
+#@@@
+        self.param_need = 0.741935
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.806452
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=635861
+#@@@
+        self.param_need = 0.741935
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.806452
+        self.param_lackRate = 0.838710
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=635861
+#@@@
+        self.param_need = 0.741935
+        self.param_buy_dist = 0.935484
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.870968
+        self.param_produce = 0.935484
+        self.param_lackRate = 0.322581
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=625567
+#@@@
+        self.param_need = 0.741935
+        self.param_buy_dist = 0.935484
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.870968
+        self.param_produce = 0.935484
+        self.param_lackRate = 0.322581
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=625567
+#@@@
+        self.param_need = 0.741935
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.548387
+        self.param_produce = 0.935484
+        self.param_lackRate = 0.322581
+        self.param_sell_dist = 0.258065
+#@@@
+maxMoney=624869
+#@@@
+        self.param_need = 0.741935
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.870968
+        self.param_produce = 0.935484
+        self.param_lackRate = 0.322581
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=625567
+#@@@
+        self.param_need = 0.741935
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.870968
+        self.param_produce = 0.935484
+        self.param_lackRate = 0.322581
+        self.param_sell_dist = 0.129032
+#@@@
+maxMoney=625567
+fitness=[597735 624869 613237 624869 560206 624869 624869 610725 603065 624869
+ 613237 624869 560206 624869 586044 625567 611993 624869 611993 575689]
 第3张地图
 #@@@
-        self.param_need = 0.066667
-        self.param_buy_dist = 0.533333
-        self.param_need_dist = 0.266667
-        self.param_haveProduct = 0.066667
-        self.param_produce = 0.133333
-        self.param_lackRate = 0.733333
-        self.param_sell_dist = 0.800000
-#@@@
-maxMoney=743937
-#@@@
-        self.param_need = 0.666667
-        self.param_buy_dist = 0.400000
-        self.param_need_dist = 0.533333
-        self.param_haveProduct = 0.400000
-        self.param_produce = 0.066667
-        self.param_lackRate = 0.066667
-        self.param_sell_dist = 0.600000
-#@@@
-maxMoney=758983
-#@@@
-        self.param_need = 0.066667
-        self.param_buy_dist = 0.533333
-        self.param_need_dist = 0.600000
+        self.param_need = 0.032258
+        self.param_buy_dist = 0.967742
+        self.param_need_dist = 0.967742
         self.param_haveProduct = 0.000000
-        self.param_produce = 0.133333
-        self.param_lackRate = 1.000000
-        self.param_sell_dist = 0.466667
+        self.param_produce = 0.548387
+        self.param_lackRate = 0.645161
+        self.param_sell_dist = 0.451613
 #@@@
-maxMoney=740415
+maxMoney=746181
 #@@@
-        self.param_need = 0.866667
-        self.param_buy_dist = 0.533333
-        self.param_need_dist = 0.066667
-        self.param_haveProduct = 0.133333
-        self.param_produce = 0.133333
-        self.param_lackRate = 0.866667
-        self.param_sell_dist = 0.866667
+        self.param_need = 0.258065
+        self.param_buy_dist = 0.838710
+        self.param_need_dist = 0.193548
+        self.param_haveProduct = 0.064516
+        self.param_produce = 0.258065
+        self.param_lackRate = 0.258065
+        self.param_sell_dist = 0.935484
 #@@@
-maxMoney=737860
+maxMoney=776990
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 0.838710
+        self.param_need_dist = 0.193548
+        self.param_haveProduct = 0.064516
+        self.param_produce = 0.258065
+        self.param_lackRate = 0.258065
+        self.param_sell_dist = 0.935484
+#@@@
+maxMoney=776990
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.193548
+        self.param_haveProduct = 0.064516
+        self.param_produce = 0.032258
+        self.param_lackRate = 0.387097
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=781116
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.193548
+        self.param_haveProduct = 0.064516
+        self.param_produce = 0.032258
+        self.param_lackRate = 0.387097
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=781116
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.193548
+        self.param_haveProduct = 0.064516
+        self.param_produce = 0.032258
+        self.param_lackRate = 0.258065
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=824435
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.129032
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.548387
+        self.param_lackRate = 0.387097
+        self.param_sell_dist = 0.774194
+#@@@
+maxMoney=797249
+#@@@
+        self.param_need = 0.000000
+        self.param_buy_dist = 0.903226
+        self.param_need_dist = 0.612903
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.419355
+        self.param_sell_dist = 0.645161
+#@@@
+maxMoney=807442
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 0.838710
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.774194
+        self.param_lackRate = 0.290323
+        self.param_sell_dist = 0.967742
+#@@@
+maxMoney=800298
+#@@@
+        self.param_need = 0.516129
+        self.param_buy_dist = 0.967742
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.322581
+        self.param_lackRate = 0.354839
+        self.param_sell_dist = 0.064516
+#@@@
+maxMoney=778588
+#@@@
+        self.param_need = 0.000000
+        self.param_buy_dist = 0.774194
+        self.param_need_dist = 0.161290
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.258065
+        self.param_sell_dist = 0.774194
+#@@@
+maxMoney=830906
+#@@@
+        self.param_need = 0.387097
+        self.param_buy_dist = 0.774194
+        self.param_need_dist = 0.129032
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.677419
+        self.param_lackRate = 0.290323
+        self.param_sell_dist = 0.967742
+#@@@
+maxMoney=808293
+#@@@
+        self.param_need = 0.387097
+        self.param_buy_dist = 0.838710
+        self.param_need_dist = 0.645161
+        self.param_haveProduct = 0.064516
+        self.param_produce = 0.129032
+        self.param_lackRate = 0.290323
+        self.param_sell_dist = 0.774194
+#@@@
+maxMoney=798793
+#@@@
+        self.param_need = 0.903226
+        self.param_buy_dist = 0.967742
+        self.param_need_dist = 0.129032
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.387097
+        self.param_lackRate = 0.290323
+        self.param_sell_dist = 0.838710
+#@@@
+maxMoney=774446
+#@@@
+        self.param_need = 0.903226
+        self.param_buy_dist = 0.774194
+        self.param_need_dist = 0.129032
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.387097
+        self.param_lackRate = 0.290323
+        self.param_sell_dist = 0.612903
+#@@@
+maxMoney=792108
+#@@@
+        self.param_need = 0.903226
+        self.param_buy_dist = 0.838710
+        self.param_need_dist = 0.193548
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.129032
+        self.param_lackRate = 0.258065
+        self.param_sell_dist = 0.838710
+#@@@
+maxMoney=800254
+#@@@
+        self.param_need = 0.903226
+        self.param_buy_dist = 0.838710
+        self.param_need_dist = 0.193548
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.129032
+        self.param_lackRate = 0.322581
+        self.param_sell_dist = 0.838710
+#@@@
+maxMoney=801310
+#@@@
+        self.param_need = 0.903226
+        self.param_buy_dist = 0.838710
+        self.param_need_dist = 0.193548
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.129032
+        self.param_lackRate = 0.322581
+        self.param_sell_dist = 0.838710
+#@@@
+maxMoney=801310
+#@@@
+        self.param_need = 0.903226
+        self.param_buy_dist = 0.838710
+        self.param_need_dist = 0.193548
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.129032
+        self.param_lackRate = 0.322581
+        self.param_sell_dist = 0.838710
+#@@@
+maxMoney=801310
+#@@@
+        self.param_need = 0.903226
+        self.param_buy_dist = 0.838710
+        self.param_need_dist = 0.193548
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.129032
+        self.param_lackRate = 0.354839
+        self.param_sell_dist = 0.838710
+#@@@
+maxMoney=787224
+#@@@
+        self.param_need = 0.387097
+        self.param_buy_dist = 0.838710
+        self.param_need_dist = 0.645161
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.903226
+        self.param_lackRate = 0.290323
+        self.param_sell_dist = 0.838710
+#@@@
+maxMoney=814719
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.580645
+        self.param_need_dist = 0.193548
+        self.param_haveProduct = 0.064516
+        self.param_produce = 0.000000
+        self.param_lackRate = 0.419355
+        self.param_sell_dist = 0.580645
+#@@@
+maxMoney=793443
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.838710
+        self.param_need_dist = 0.193548
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.258065
+        self.param_lackRate = 0.258065
+        self.param_sell_dist = 0.838710
+#@@@
+maxMoney=817692
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.806452
+        self.param_need_dist = 0.193548
+        self.param_haveProduct = 0.064516
+        self.param_produce = 0.000000
+        self.param_lackRate = 0.290323
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=801687
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.806452
+        self.param_need_dist = 0.193548
+        self.param_haveProduct = 0.064516
+        self.param_produce = 0.000000
+        self.param_lackRate = 0.290323
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=801687
+#@@@
+        self.param_need = 0.903226
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.193548
+        self.param_haveProduct = 0.064516
+        self.param_produce = 0.129032
+        self.param_lackRate = 0.290323
+        self.param_sell_dist = 0.774194
+#@@@
+maxMoney=779464
+#@@@
+        self.param_need = 0.903226
+        self.param_buy_dist = 0.806452
+        self.param_need_dist = 0.064516
+        self.param_haveProduct = 0.064516
+        self.param_produce = 0.387097
+        self.param_lackRate = 0.290323
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=749621
+#@@@
+        self.param_need = 0.903226
+        self.param_buy_dist = 0.806452
+        self.param_need_dist = 0.064516
+        self.param_haveProduct = 0.064516
+        self.param_produce = 0.387097
+        self.param_lackRate = 0.290323
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=749621
+#@@@
+        self.param_need = 0.903226
+        self.param_buy_dist = 0.806452
+        self.param_need_dist = 0.064516
+        self.param_haveProduct = 0.064516
+        self.param_produce = 0.387097
+        self.param_lackRate = 0.290323
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=749621
+#@@@
+        self.param_need = 0.903226
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.387097
+        self.param_lackRate = 0.419355
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=771848
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.387097
+        self.param_lackRate = 0.387097
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=803777
+#@@@
+        self.param_need = 0.903226
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.193548
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.903226
+        self.param_lackRate = 0.419355
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=782948
+#@@@
+        self.param_need = 0.677419
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.419355
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=785461
+#@@@
+        self.param_need = 0.677419
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.419355
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=785461
+#@@@
+        self.param_need = 0.677419
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.903226
+        self.param_lackRate = 0.419355
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=785461
+#@@@
+        self.param_need = 0.677419
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.903226
+        self.param_lackRate = 0.419355
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=785461
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.193548
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.903226
+        self.param_lackRate = 0.419355
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=760745
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.193548
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.903226
+        self.param_lackRate = 0.419355
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=760745
+#@@@
+        self.param_need = 0.677419
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.903226
+        self.param_lackRate = 0.419355
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=785461
+#@@@
+        self.param_need = 0.677419
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.903226
+        self.param_lackRate = 0.419355
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=785461
+#@@@
+        self.param_need = 0.677419
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.903226
+        self.param_lackRate = 0.290323
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=786803
+#@@@
+        self.param_need = 0.677419
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.903226
+        self.param_lackRate = 0.419355
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=785461
+#@@@
+        self.param_need = 0.677419
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.903226
+        self.param_lackRate = 0.290323
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=786803
+#@@@
+        self.param_need = 0.677419
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.903226
+        self.param_lackRate = 0.419355
+        self.param_sell_dist = 0.548387
+#@@@
+maxMoney=785461
+#@@@
+        self.param_need = 0.677419
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.903226
+        self.param_lackRate = 0.290323
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=775766
+#@@@
+        self.param_need = 0.677419
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.903226
+        self.param_lackRate = 0.290323
+        self.param_sell_dist = 0.548387
+#@@@
+maxMoney=776577
+#@@@
+        self.param_need = 0.677419
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.516129
+        self.param_lackRate = 0.290323
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=775766
+#@@@
+        self.param_need = 0.677419
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.516129
+        self.param_lackRate = 0.290323
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=775766
+#@@@
+        self.param_need = 0.677419
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.677419
+        self.param_lackRate = 0.290323
+        self.param_sell_dist = 0.548387
+#@@@
+maxMoney=775698
+#@@@
+        self.param_need = 0.677419
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.677419
+        self.param_lackRate = 0.419355
+        self.param_sell_dist = 0.548387
+#@@@
+maxMoney=785461
+#@@@
+        self.param_need = 0.677419
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.935484
+        self.param_lackRate = 0.419355
+        self.param_sell_dist = 0.548387
+#@@@
+maxMoney=785461
+#@@@
+        self.param_need = 0.677419
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.935484
+        self.param_lackRate = 0.419355
+        self.param_sell_dist = 0.548387
+#@@@
+maxMoney=785461
+#@@@
+        self.param_need = 0.677419
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.419355
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=785461
+#@@@
+        self.param_need = 0.677419
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.419355
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=785461
+#@@@
+        self.param_need = 0.677419
+        self.param_buy_dist = 0.838710
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.290323
+        self.param_sell_dist = 0.774194
+#@@@
+maxMoney=803957
+#@@@
+        self.param_need = 0.677419
+        self.param_buy_dist = 0.838710
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.483871
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=785461
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.483871
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=785461
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.838710
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.483871
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=785461
+#@@@
+        self.param_need = 0.903226
+        self.param_buy_dist = 0.838710
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.064516
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.290323
+        self.param_sell_dist = 0.774194
+#@@@
+maxMoney=762211
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.838710
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.806452
+        self.param_sell_dist = 0.548387
+#@@@
+maxMoney=785461
+#@@@
+        self.param_need = 0.677419
+        self.param_buy_dist = 0.838710
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.483871
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=785461
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.838710
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.064516
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.483871
+        self.param_sell_dist = 0.774194
+#@@@
+maxMoney=779950
+#@@@
+        self.param_need = 0.903226
+        self.param_buy_dist = 0.838710
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.064516
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.290323
+        self.param_sell_dist = 0.774194
+#@@@
+maxMoney=762211
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.322581
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.483871
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=761288
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.322581
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.483871
+        self.param_sell_dist = 0.774194
+#@@@
+maxMoney=776317
+#@@@
+        self.param_need = 0.129032
+        self.param_buy_dist = 0.322581
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.483871
+        self.param_sell_dist = 0.838710
+#@@@
+maxMoney=779111
+#@@@
+        self.param_need = 0.129032
+        self.param_buy_dist = 0.322581
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.483871
+        self.param_sell_dist = 0.838710
+#@@@
+maxMoney=779111
+#@@@
+        self.param_need = 0.129032
+        self.param_buy_dist = 0.322581
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.483871
+        self.param_sell_dist = 0.838710
+#@@@
+maxMoney=779111
+#@@@
+        self.param_need = 0.129032
+        self.param_buy_dist = 0.322581
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.483871
+        self.param_sell_dist = 0.838710
+#@@@
+maxMoney=779111
+#@@@
+        self.param_need = 0.129032
+        self.param_buy_dist = 0.322581
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.483871
+        self.param_sell_dist = 0.580645
+#@@@
+maxMoney=775351
+#@@@
+        self.param_need = 0.129032
+        self.param_buy_dist = 0.451613
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.483871
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=766374
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.322581
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.483871
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=761288
+#@@@
+        self.param_need = 0.129032
+        self.param_buy_dist = 0.322581
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=775351
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.451613
+        self.param_need_dist = 0.064516
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.483871
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=761358
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.451613
+        self.param_need_dist = 0.064516
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.483871
+        self.param_sell_dist = 0.580645
+#@@@
+maxMoney=761358
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.451613
+        self.param_need_dist = 0.064516
+        self.param_haveProduct = 0.064516
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.483871
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=766325
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.451613
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.483871
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=761211
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.451613
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.193548
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=761850
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.451613
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.193548
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=761850
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.451613
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.193548
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=761850
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.322581
+        self.param_need_dist = 0.161290
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.483871
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=759143
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.322581
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.064516
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.483871
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=734684
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.322581
+        self.param_need_dist = 0.129032
+        self.param_haveProduct = 0.064516
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.645161
+#@@@
+maxMoney=741259
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.322581
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.064516
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.483871
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=734684
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.322581
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.064516
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.483871
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=734684
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.322581
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.064516
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.483871
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=734684
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.322581
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.064516
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.483871
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=734684
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.322581
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.064516
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.483871
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=734684
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.322581
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.064516
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.483871
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=734684
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.322581
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.064516
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.483871
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=734684
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.451613
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.483871
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=781036
+#@@@
+        self.param_need = 0.129032
+        self.param_buy_dist = 0.322581
+        self.param_need_dist = 0.032258
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.483871
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=771854
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.322581
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.483871
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=761288
+#@@@
+        self.param_need = 0.645161
+        self.param_buy_dist = 0.322581
+        self.param_need_dist = 0.096774
+        self.param_haveProduct = 0.000000
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.483871
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=761288
+fitness=[705343 706811 685351 702371 705343 761288 705725 737481 684945 705343
+ 663221 736299 746820 761288 685351 730815 730815 736299 707928 743595]
 第4张地图
 #@@@
-        self.param_need = 0.733333
-        self.param_buy_dist = 0.200000
-        self.param_need_dist = 0.400000
-        self.param_haveProduct = 0.533333
-        self.param_produce = 0.400000
-        self.param_lackRate = 0.600000
-        self.param_sell_dist = 0.733333
+        self.param_need = 0.225806
+        self.param_buy_dist = 0.709677
+        self.param_need_dist = 0.516129
+        self.param_haveProduct = 0.516129
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.806452
+        self.param_sell_dist = 0.225806
 #@@@
-maxMoney=531816
+maxMoney=568555
 #@@@
-        self.param_need = 0.733333
-        self.param_buy_dist = 0.200000
-        self.param_need_dist = 0.400000
-        self.param_haveProduct = 0.533333
-        self.param_produce = 0.400000
-        self.param_lackRate = 0.600000
-        self.param_sell_dist = 1.000000
+        self.param_need = 0.225806
+        self.param_buy_dist = 0.967742
+        self.param_need_dist = 0.774194
+        self.param_haveProduct = 0.516129
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.806452
+        self.param_sell_dist = 0.225806
 #@@@
-maxMoney=510951
+maxMoney=567067
 #@@@
-        self.param_need = 0.666667
-        self.param_buy_dist = 0.266667
-        self.param_need_dist = 0.466667
-        self.param_haveProduct = 0.866667
-        self.param_produce = 0.533333
-        self.param_lackRate = 0.600000
-        self.param_sell_dist = 0.266667
+        self.param_need = 0.516129
+        self.param_buy_dist = 0.903226
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.451613
+        self.param_produce = 0.548387
+        self.param_lackRate = 0.516129
+        self.param_sell_dist = 0.903226
 #@@@
-maxMoney=533815
+maxMoney=545185
 #@@@
-        self.param_need = 0.733333
-        self.param_buy_dist = 0.200000
-        self.param_need_dist = 0.200000
-        self.param_haveProduct = 0.066667
-        self.param_produce = 0.800000
-        self.param_lackRate = 0.600000
-        self.param_sell_dist = 0.666667
+        self.param_need = 0.516129
+        self.param_buy_dist = 0.903226
+        self.param_need_dist = 0.225806
+        self.param_haveProduct = 0.451613
+        self.param_produce = 0.548387
+        self.param_lackRate = 0.516129
+        self.param_sell_dist = 0.903226
 #@@@
-maxMoney=529826
+maxMoney=545185
+#@@@
+        self.param_need = 0.967742
+        self.param_buy_dist = 0.451613
+        self.param_need_dist = 0.935484
+        self.param_haveProduct = 0.709677
+        self.param_produce = 0.709677
+        self.param_lackRate = 0.967742
+        self.param_sell_dist = 0.258065
+#@@@
+maxMoney=554370
+#@@@
+        self.param_need = 0.516129
+        self.param_buy_dist = 0.903226
+        self.param_need_dist = 0.741935
+        self.param_haveProduct = 0.709677
+        self.param_produce = 0.645161
+        self.param_lackRate = 0.645161
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=570807
+#@@@
+        self.param_need = 0.516129
+        self.param_buy_dist = 0.935484
+        self.param_need_dist = 0.741935
+        self.param_haveProduct = 0.258065
+        self.param_produce = 0.612903
+        self.param_lackRate = 0.129032
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=569496
+#@@@
+        self.param_need = 0.516129
+        self.param_buy_dist = 0.935484
+        self.param_need_dist = 0.741935
+        self.param_haveProduct = 0.387097
+        self.param_produce = 0.612903
+        self.param_lackRate = 0.129032
+        self.param_sell_dist = 0.967742
+#@@@
+maxMoney=569496
+#@@@
+        self.param_need = 0.516129
+        self.param_buy_dist = 0.935484
+        self.param_need_dist = 0.741935
+        self.param_haveProduct = 0.387097
+        self.param_produce = 0.580645
+        self.param_lackRate = 0.129032
+        self.param_sell_dist = 0.967742
+#@@@
+maxMoney=569496
+#@@@
+        self.param_need = 0.516129
+        self.param_buy_dist = 0.935484
+        self.param_need_dist = 0.741935
+        self.param_haveProduct = 0.387097
+        self.param_produce = 0.612903
+        self.param_lackRate = 0.129032
+        self.param_sell_dist = 0.967742
+#@@@
+maxMoney=569496
+#@@@
+        self.param_need = 0.516129
+        self.param_buy_dist = 0.935484
+        self.param_need_dist = 0.741935
+        self.param_haveProduct = 0.387097
+        self.param_produce = 0.580645
+        self.param_lackRate = 0.193548
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=569496
+#@@@
+        self.param_need = 0.516129
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.612903
+        self.param_haveProduct = 0.516129
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.967742
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=559532
+#@@@
+        self.param_need = 0.516129
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.612903
+        self.param_haveProduct = 0.516129
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.967742
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=559532
+#@@@
+        self.param_need = 0.516129
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.612903
+        self.param_haveProduct = 0.516129
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.967742
+        self.param_sell_dist = 0.645161
+#@@@
+maxMoney=559532
+#@@@
+        self.param_need = 0.516129
+        self.param_buy_dist = 0.806452
+        self.param_need_dist = 0.741935
+        self.param_haveProduct = 0.709677
+        self.param_produce = 0.741935
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.645161
+#@@@
+maxMoney=571112
+#@@@
+        self.param_need = 0.516129
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.741935
+        self.param_haveProduct = 0.709677
+        self.param_produce = 0.677419
+        self.param_lackRate = 0.967742
+        self.param_sell_dist = 0.709677
+#@@@
+maxMoney=558697
+#@@@
+        self.param_need = 0.903226
+        self.param_buy_dist = 0.870968
+        self.param_need_dist = 0.709677
+        self.param_haveProduct = 0.516129
+        self.param_produce = 0.806452
+        self.param_lackRate = 0.967742
+        self.param_sell_dist = 0.774194
+#@@@
+maxMoney=546869
+#@@@
+        self.param_need = 0.774194
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.709677
+        self.param_haveProduct = 0.516129
+        self.param_produce = 0.806452
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.774194
+#@@@
+maxMoney=533298
+#@@@
+        self.param_need = 0.774194
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.709677
+        self.param_haveProduct = 0.516129
+        self.param_produce = 0.806452
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.774194
+#@@@
+maxMoney=533298
+#@@@
+        self.param_need = 0.774194
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.709677
+        self.param_haveProduct = 0.516129
+        self.param_produce = 0.806452
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.774194
+#@@@
+maxMoney=533298
+#@@@
+        self.param_need = 0.774194
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.741935
+        self.param_haveProduct = 0.064516
+        self.param_produce = 0.677419
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.967742
+#@@@
+maxMoney=538224
+#@@@
+        self.param_need = 0.806452
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.645161
+        self.param_produce = 0.354839
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.967742
+#@@@
+maxMoney=543251
+#@@@
+        self.param_need = 0.806452
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.741935
+        self.param_haveProduct = 0.709677
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.516129
+#@@@
+maxMoney=533298
+#@@@
+        self.param_need = 0.290323
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=585017
+#@@@
+        self.param_need = 0.290323
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=585017
+#@@@
+        self.param_need = 0.290323
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=585017
+#@@@
+        self.param_need = 0.290323
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=585017
+#@@@
+        self.param_need = 0.290323
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.709677
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=585017
+#@@@
+        self.param_need = 0.290323
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.645161
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.838710
+#@@@
+maxMoney=585017
+#@@@
+        self.param_need = 0.290323
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.709677
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=585017
+#@@@
+        self.param_need = 0.290323
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=585017
+#@@@
+        self.param_need = 0.290323
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.709677
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=585017
+#@@@
+        self.param_need = 0.290323
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.483871
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=585017
+#@@@
+        self.param_need = 0.290323
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=585017
+#@@@
+        self.param_need = 0.290323
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.709677
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=585017
+#@@@
+        self.param_need = 0.290323
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.612903
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.774194
+#@@@
+maxMoney=585017
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 0.935484
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.677419
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.774194
+#@@@
+maxMoney=555979
+#@@@
+        self.param_need = 0.290323
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.612903
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.774194
+#@@@
+maxMoney=585017
+#@@@
+        self.param_need = 0.290323
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.548387
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.838710
+#@@@
+maxMoney=585017
+#@@@
+        self.param_need = 0.290323
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.612903
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.838710
+#@@@
+maxMoney=585017
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 0.935484
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.709677
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.774194
+#@@@
+maxMoney=555979
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 0.935484
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.645161
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.774194
+#@@@
+maxMoney=555979
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 0.935484
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.709677
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=555979
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.516129
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.612903
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=592837
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.612903
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=592837
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.612903
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=592837
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.612903
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=592837
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.612903
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=592837
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.612903
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=592837
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.612903
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=592837
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.612903
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=592837
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.612903
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=592837
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.612903
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=592837
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.612903
+        self.param_haveProduct = 0.838710
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.774194
+#@@@
+maxMoney=592837
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.612903
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=592837
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.612903
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=592837
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 0.967742
+        self.param_need_dist = 0.612903
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.612903
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=563439
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 0.967742
+        self.param_need_dist = 0.612903
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.612903
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=563439
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 0.967742
+        self.param_need_dist = 0.612903
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.612903
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=563439
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.612903
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.967742
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=542306
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=527330
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.612903
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.967742
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=542306
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.612903
+        self.param_lackRate = 0.967742
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=592837
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.612903
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=592837
+#@@@
+        self.param_need = 0.290323
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=585017
+#@@@
+        self.param_need = 0.290323
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=585017
+#@@@
+        self.param_need = 0.290323
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=585017
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.612903
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=592837
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.612903
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=592837
+#@@@
+        self.param_need = 0.290323
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.322581
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=585017
+#@@@
+        self.param_need = 0.290323
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 1.000000
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=585017
+#@@@
+        self.param_need = 0.290323
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=585017
+#@@@
+        self.param_need = 0.290323
+        self.param_buy_dist = 1.000000
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=585017
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 0.935484
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.322581
+        self.param_sell_dist = 0.935484
+#@@@
+maxMoney=555979
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 0.935484
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.935484
+#@@@
+maxMoney=555979
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 0.935484
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.322581
+        self.param_sell_dist = 0.935484
+#@@@
+maxMoney=555979
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 0.806452
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.322581
+        self.param_sell_dist = 0.935484
+#@@@
+maxMoney=589748
+#@@@
+        self.param_need = 0.258065
+        self.param_buy_dist = 0.935484
+        self.param_need_dist = 0.580645
+        self.param_haveProduct = 0.580645
+        self.param_produce = 0.870968
+        self.param_lackRate = 0.451613
+        self.param_sell_dist = 0.903226
+#@@@
+maxMoney=555979
+fitness=[555979 533298 555979 533298 533298 555979 533298 533298 555979 533298
+ 533298 533298 533298 496107 533298 533298 537195 555979 469641 555979]
