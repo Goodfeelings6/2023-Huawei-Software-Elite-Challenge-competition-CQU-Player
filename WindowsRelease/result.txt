@@ -1,0 +1,2489 @@
+第1张地图
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 2301
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 2401
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 2501
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 2601
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 2701
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 2801
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 2901
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 3001
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 3101
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 3201
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 3301
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 3401
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 3501
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 3601
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 3701
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 3801
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 3901
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 4001
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 4101
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 4201
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 4301
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 4401
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 4501
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 4601
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 4701
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 4801
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 4901
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 2301
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 2401
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 2501
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 2601
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 2701
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 2801
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 2901
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 3001
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 3101
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 3201
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 3301
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 3401
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 3501
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 3601
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 3701
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 3801
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 3901
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 4001
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 4101
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 4201
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 4301
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 4401
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 4501
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 4601
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 4701
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 4801
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 4901
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 2301
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 2401
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 2501
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 2601
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 2701
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 2801
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 2901
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 3001
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 3101
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 3201
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 3301
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 3401
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 3501
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 3601
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 3701
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 3801
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 3901
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 4001
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 670134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 4101
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 4201
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 4301
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 4401
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 4501
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 4601
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 4701
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 4801
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 4901
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 2301
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 2401
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 2501
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 2601
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 2701
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 2801
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 2901
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 3001
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 3101
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 3201
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 3301
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 3401
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 3501
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 3601
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 3701
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 3801
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 3901
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 4001
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 669925
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 4101
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 4201
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 4301
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 4401
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 4501
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 4601
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 4701
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 4801
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 4901
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 664214
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 2601
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 651250
+#@@@
+test1
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 2701
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 690364
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 2801
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 690364
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 2901
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 690364
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 3001
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 690364
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 3101
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 692761
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 3201
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 692761
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 3301
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 692761
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 3401
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 692761
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 3501
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 692761
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 3601
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 692761
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 3701
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 692761
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 3801
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 692761
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 3901
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 692761
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 4001
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 692761
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 4101
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 692761
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 4201
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 692761
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 4301
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 692761
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 4401
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 692761
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 4501
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 692761
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 4601
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 692761
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 1301
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 655117
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 1401
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 655117
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 1501
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 655117
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 1601
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 655117
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 1701
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 655117
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 1801
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 655117
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 1901
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 655117
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 2601
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 651250
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 2701
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 690364
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 2801
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 690364
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 2901
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 690364
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 3001
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 690364
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 3101
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 692761
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 3201
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 692761
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 3301
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 692761
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 3401
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 692761
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 3501
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 692761
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 3601
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 692761
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 3701
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 692761
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 3801
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 692761
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 3901
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 692761
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 4001
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 692761
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 4101
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 692761
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 4201
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 692761
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 4301
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 692761
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 4401
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 692761
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 4501
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 692761
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 4601
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 692761
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 1301
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 655117
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 1401
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 655117
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 1501
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 655117
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 1601
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 655117
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 1701
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 655117
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 1801
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 655117
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 1901
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 655117
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 1901
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 656561
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 2001
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 656561
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 2101
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 656561
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 2201
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 656561
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 2301
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 656561
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 1901
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 656561
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 2001
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 656561
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 2101
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 656561
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 2201
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 656561
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 2301
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 656561
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 2301
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 656695
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 2401
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 656695
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 2501
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 656695
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 2601
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 656695
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 2701
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 656695
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 2801
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 656695
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 2901
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 656695
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 3001
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 656695
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 2301
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 656695
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 2401
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 656695
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 2501
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 656695
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 2601
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 656695
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 2701
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 656695
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 2801
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 656695
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 2901
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 656695
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 3001
+self.sw_abandon = 1
+self.sw_avoidCrash = 0
+#@@@
+money = 656695
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 3101
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+maxMoney = 692761
+第2张地图
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 301
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 757417
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 501
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 761401
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 601
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 751766
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 701
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 784891
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 801
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 753868
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 901
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 777634
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 501
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 761401
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 601
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 751766
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 701
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 786057
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 801
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 766913
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 901
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 777634
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 301
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 757417
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 501
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 761401
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 601
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 751766
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 701
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 784891
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 801
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 753868
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 901
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 777634
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 501
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 761401
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 601
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 751766
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 701
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 786057
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 801
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 766913
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 901
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 777634
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 1701
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 750511
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 1801
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 764733
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 2901
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 755282
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 3001
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 755282
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 401
+self.sw_abandon = 0
+self.sw_avoidCrash = 1
+#@@@
+money = 755435
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 501
+self.sw_abandon = 0
+self.sw_avoidCrash = 1
+#@@@
+money = 751125
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 401
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 768496
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 2901
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 752721
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 3001
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 752721
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 3101
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 752721
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 3201
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 752721
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 3301
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 752721
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 3401
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 752721
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 3501
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 752721
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 901
+self.sw_abandon = 0
+self.sw_avoidCrash = 1
+#@@@
+money = 777295
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 1701
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 750511
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 1801
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 764733
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 2901
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 755282
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 3001
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 755282
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 401
+self.sw_abandon = 0
+self.sw_avoidCrash = 1
+#@@@
+money = 755435
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 501
+self.sw_abandon = 0
+self.sw_avoidCrash = 1
+#@@@
+money = 751125
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 401
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 768496
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 2901
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 752721
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 3001
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 752721
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 3101
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 752721
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 3201
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 752721
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 3301
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 752721
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 3401
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 752721
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 3501
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 752721
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 901
+self.sw_abandon = 0
+self.sw_avoidCrash = 1
+#@@@
+money = 777295
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 701
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+maxMoney = 786057
+第3张地图
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 1
+self.sw_abandon = 0
+self.sw_avoidCrash = 1
+#@@@
+money = 913141
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 1
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 925469
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 1
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 913246
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 1
+self.sw_abandon = 0
+self.sw_avoidCrash = 1
+#@@@
+money = 904859
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 1
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+money = 921685
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 1
+self.sw_sell_pred = 1
+self.param_mps = 1
+self.sw_abandon = 0
+self.sw_avoidCrash = 1
+#@@@
+money = 912378
+#@@@
+self.sw_nearest = 1
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 1
+self.sw_abandon = 0
+self.sw_avoidCrash = 0
+#@@@
+maxMoney = 925469
+第4张地图
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 101
+self.sw_abandon = 0
+self.sw_avoidCrash = 1
+#@@@
+money = 635086
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 301
+self.sw_abandon = 0
+self.sw_avoidCrash = 1
+#@@@
+money = 637741
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 801
+self.sw_abandon = 0
+self.sw_avoidCrash = 1
+#@@@
+money = 632471
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 1001
+self.sw_abandon = 0
+self.sw_avoidCrash = 1
+#@@@
+money = 632167
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 1
+self.sw_abandon = 1
+self.sw_avoidCrash = 1
+#@@@
+money = 635717
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 201
+self.sw_abandon = 1
+self.sw_avoidCrash = 1
+#@@@
+money = 630134
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 301
+self.sw_abandon = 1
+self.sw_avoidCrash = 1
+#@@@
+money = 637741
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 701
+self.sw_abandon = 1
+self.sw_avoidCrash = 1
+#@@@
+money = 646331
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 0
+self.param_mps = 801
+self.sw_abandon = 1
+self.sw_avoidCrash = 1
+#@@@
+money = 632471
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 301
+self.sw_abandon = 0
+self.sw_avoidCrash = 1
+#@@@
+money = 634809
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 401
+self.sw_abandon = 0
+self.sw_avoidCrash = 1
+#@@@
+money = 633907
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 601
+self.sw_abandon = 0
+self.sw_avoidCrash = 1
+#@@@
+money = 636983
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 1
+self.sw_abandon = 1
+self.sw_avoidCrash = 1
+#@@@
+money = 635694
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 201
+self.sw_abandon = 1
+self.sw_avoidCrash = 1
+#@@@
+money = 630642
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 301
+self.sw_abandon = 1
+self.sw_avoidCrash = 1
+#@@@
+money = 634809
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 401
+self.sw_abandon = 1
+self.sw_avoidCrash = 1
+#@@@
+money = 633907
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 501
+self.sw_abandon = 1
+self.sw_avoidCrash = 1
+#@@@
+money = 633547
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 601
+self.sw_abandon = 1
+self.sw_avoidCrash = 1
+#@@@
+money = 632568
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 701
+self.sw_abandon = 1
+self.sw_avoidCrash = 1
+#@@@
+money = 632398
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 801
+self.sw_abandon = 1
+self.sw_avoidCrash = 1
+#@@@
+money = 642031
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 0
+self.sw_sell_pred = 1
+self.param_mps = 1001
+self.sw_abandon = 1
+self.sw_avoidCrash = 1
+#@@@
+money = 640019
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 101
+self.sw_abandon = 0
+self.sw_avoidCrash = 1
+#@@@
+money = 635086
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 301
+self.sw_abandon = 0
+self.sw_avoidCrash = 1
+#@@@
+money = 637741
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 801
+self.sw_abandon = 0
+self.sw_avoidCrash = 1
+#@@@
+money = 632471
+#@@@
+self.sw_nearest = 0
+self.sw_buy_pred = 1
+self.sw_sell_pred = 0
+self.param_mps = 1001
+self.sw_abandon = 0
+self.sw_avoidCrash = 1
+#@@@
+money = 632167

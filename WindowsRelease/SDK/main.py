@@ -1,3 +1,4 @@
+#coding=gb2312
 #!/bin/bash
 import sys
 import numpy as np
@@ -7,59 +8,59 @@ from Strategy2 import Strategy2
 from Strategy3 import Strategy3
 from Strategy4 import Strategy4
 
-# æµ‹è¯•,å‘½ä»¤è¡Œè¾“å…¥ï¼š
-# é»˜è®¤è°ƒè¯•æ¨¡å¼(ä½¿ç”¨ç°å®æ—¶é—´)  ./robot -m maps/1.txt -c ./SDK "python main.py"
-# å¿«é€Ÿæ¨¡å¼(ä½¿ç”¨ç¨‹åºæ—¶é—´)     ./robot -m maps/1.txt -c ./SDK -f "python main.py"
-# é»˜è®¤è°ƒè¯•æ¨¡å¼ä½¿ç”¨gui        ./robot_gui -m maps/1.txt -c ./SDK "python main.py"
-# è¿è¡Œå…¨éƒ¨åœ°å›¾å¹¶ç»Ÿè®¡ç»“æœ      ./run_all
+# ²âÊÔ,ÃüÁîĞĞÊäÈë£º
+# Ä¬ÈÏµ÷ÊÔÄ£Ê½(Ê¹ÓÃÏÖÊµÊ±¼ä)  ./robot -m maps/1.txt -c ./SDK "python main.py"
+# ¿ìËÙÄ£Ê½(Ê¹ÓÃ³ÌĞòÊ±¼ä)     ./robot -m maps/1.txt -c ./SDK -f "python main.py"
+# Ä¬ÈÏµ÷ÊÔÄ£Ê½Ê¹ÓÃgui        ./robot_gui -m maps/1.txt -c ./SDK "python main.py"
+# ÔËĞĞÈ«²¿µØÍ¼²¢Í³¼Æ½á¹û      ./run_all
 
 class Solution(object):
     def __init__(self) -> None:       
-        # åœ°å›¾æ•°æ®
+        # µØÍ¼Êı¾İ
         self.map = []
-        # åœ°å›¾å·¥ä½œå°ç±»å‹æ•°é‡ç»Ÿè®¡
+        # µØÍ¼¹¤×÷Ì¨ÀàĞÍÊıÁ¿Í³¼Æ
         self.wtTypeNum = [0 for i in range(0,10)]
-        # å·¥ä½œå°æ•°æ®
+        # ¹¤×÷Ì¨Êı¾İ
         self.workTable = []
-        # æœºå™¨äººæ•°æ®
+        # »úÆ÷ÈËÊı¾İ
         self.robot = []
-        # å½“å‰æ—¶é—´å¸§
+        # µ±Ç°Ê±¼äÖ¡
         self.frameId = 0
-        # å½“å‰é‡‘é’±æ•°
+        # µ±Ç°½ğÇ®Êı
         self.money = 0
-        # å½“å‰æ§åˆ¶æŒ‡ä»¤
+        # µ±Ç°¿ØÖÆÖ¸Áî
         self.instr = ''
-        # é”€æ¯æ—¶é—´ s (æŒç»­å ç”¨æ—¶é—´è¾¾åˆ°é”€æ¯æ—¶é—´æ—¶å°±é”€æ¯)
+        # Ïú»ÙÊ±¼ä s (³ÖĞøÕ¼ÓÃÊ±¼ä´ïµ½Ïú»ÙÊ±¼äÊ±¾ÍÏú»Ù)
         self.destoryTime = 20
 
-        # å›ºå®šä¿¡æ¯ ï¼šéœ€æ±‚è¡¨,å³æ¯ç§å·¥ä½œå°éœ€è¦çš„ç‰©å“(åŸææ–™æˆ–æˆå“)ç±»å‹
+        # ¹Ì¶¨ĞÅÏ¢ £ºĞèÇó±í,¼´Ã¿ÖÖ¹¤×÷Ì¨ĞèÒªµÄÎïÆ·(Ô­²ÄÁÏ»ò³ÉÆ·)ÀàĞÍ
         self.demandTable = {1:[],2:[],3:[],4:[1,2],5:[1,3],6:[2,3],7:[4,5,6],8:[7],9:[1,2,3,4,5,6,7]} 
 
-        # å·¥ä½œå°é¢„å®šè¡¨(è¯»å…¥åœ°å›¾æ—¶é¡ºåºåˆå§‹åŒ–,å¯é¢„å®šæˆå“æ ¼ã€ç‰©å“æ ¼, 0æœªè¢«é¢„å®šã€1è¢«é¢„å®š)
+        # ¹¤×÷Ì¨Ô¤¶¨±í(¶ÁÈëµØÍ¼Ê±Ë³Ğò³õÊ¼»¯,¿ÉÔ¤¶¨³ÉÆ·¸ñ¡¢ÎïÆ·¸ñ, 0Î´±»Ô¤¶¨¡¢1±»Ô¤¶¨)
         self.wtReservation = []
 
-        # è°ƒåº¦ã€æ§åˆ¶ç­–ç•¥
+        # µ÷¶È¡¢¿ØÖÆ²ßÂÔ
         self.strategy = None
 
 
     def finish(self):
         """
-        # è¾“å‡º 'OK', è¡¨ç¤ºå½“å‰å¸§è¾“å‡ºå®Œæ¯•
+        # Êä³ö 'OK', ±íÊ¾µ±Ç°Ö¡Êä³öÍê±Ï
         """
         sys.stdout.write('OK\n')
         sys.stdout.flush()
 
     def initMap(self):
         """
-        # åˆå§‹åŒ–åœ°å›¾
+        # ³õÊ¼»¯µØÍ¼
         """ 
         inputLine = sys.stdin.readline()
         while inputLine.strip() != 'OK':
-            # å†™å…¥åœ°å›¾
+            # Ğ´ÈëµØÍ¼
             self.map.append(inputLine)
-            # åˆå§‹åŒ–ä¸€äº›æ•°æ®
+            # ³õÊ¼»¯Ò»Ğ©Êı¾İ
             for char in inputLine:
-                if char.isdigit(): # æ˜¯ä¸€ä¸ªå·¥ä½œå°
+                if char.isdigit(): # ÊÇÒ»¸ö¹¤×÷Ì¨
                     self.wtTypeNum[int(char)] += 1
                     dic = {}
                     dic['product'] = 0
@@ -67,10 +68,10 @@ class Solution(object):
                         dic[i] = 0
                     self.wtReservation.append(dic)
                     
-            # ç»§ç»­è¯»å–
+            # ¼ÌĞø¶ÁÈ¡
             inputLine = sys.stdin.readline()
 
-        # è¯†åˆ«åœ°å›¾,è®¾å®šç­–ç•¥
+        # Ê¶±ğµØÍ¼,Éè¶¨²ßÂÔ
         wtNum = sum(self.wtTypeNum)
         if wtNum == 43:
             self.strategy = Strategy1(self.destoryTime,self.demandTable,self.wtReservation)
@@ -81,129 +82,130 @@ class Solution(object):
         elif wtNum == 18:
             self.strategy = Strategy4(self.destoryTime,self.demandTable,self.wtReservation)
 
-        # è¯»å®Œå,è¾“å‡º 'OK', å‘Šè¯‰åˆ¤é¢˜å™¨å·²å°±ç»ª
+        # ¶ÁÍêºó,Êä³ö 'OK', ¸æËßÅĞÌâÆ÷ÒÑ¾ÍĞ÷
         self.finish()
 
     def inputData(self):
         """
-        # è¯»å–æ¥è‡ªåˆ¤é¢˜å™¨çš„åœºé¢æ•°æ®
+        # ¶ÁÈ¡À´×ÔÅĞÌâÆ÷µÄ³¡ÃæÊı¾İ
         """
         end = False
-        # è¯»ç¬¬ä¸€è¡Œ
+        # ¶ÁµÚÒ»ĞĞ
         inputLine = sys.stdin.readline()
-        if not inputLine: # è¯»åˆ°äº†EOF
+        if not inputLine: # ¶Áµ½ÁËEOF
             end = True
             return end
         parts = inputLine.split(' ')
         self.frameId = int(parts[0])
         self.money = int(parts[1])
         
-        # è¯»ç¬¬äºŒè¡Œ
+        # ¶ÁµÚ¶şĞĞ
         inputLine = sys.stdin.readline()
         workTableNum = int(inputLine)
         
-        # è¯»å·¥ä½œå°æ•°æ®,æ¯ä¸€è¡Œæ˜¯ä¸€ä¸ªå·¥ä½œå°æ•°æ®
+        # ¶Á¹¤×÷Ì¨Êı¾İ,Ã¿Ò»ĞĞÊÇÒ»¸ö¹¤×÷Ì¨Êı¾İ
         self.workTable = []
         for i in range(workTableNum):
             singleWorkTable = dict()
             inputLine = sys.stdin.readline()
             parts = inputLine.split(' ')
 
-            singleWorkTable['type'] = int(parts[0]) # å·¥ä½œå°ç±»å‹ 
-            singleWorkTable['x'] = float(parts[1])  # å·¥ä½œå°åæ ‡x
-            singleWorkTable['y'] = float(parts[2])  # å·¥ä½œå°åæ ‡y
-            singleWorkTable['remainTime'] = int(parts[3])   # å‰©ä½™ç”Ÿäº§æ—¶é—´(å¸§æ•°)
-            singleWorkTable['rawState'] = int(parts[4])     # åŸææ–™æ ¼çŠ¶æ€
-            singleWorkTable['productState'] = int(parts[5]) # äº§å“æ ¼çŠ¶æ€
+            singleWorkTable['type'] = int(parts[0]) # ¹¤×÷Ì¨ÀàĞÍ 
+            singleWorkTable['x'] = float(parts[1])  # ¹¤×÷Ì¨×ø±êx
+            singleWorkTable['y'] = float(parts[2])  # ¹¤×÷Ì¨×ø±êy
+            singleWorkTable['remainTime'] = int(parts[3])   # Ê£ÓàÉú²úÊ±¼ä(Ö¡Êı)
+            singleWorkTable['rawState'] = int(parts[4])     # Ô­²ÄÁÏ¸ñ×´Ì¬
+            singleWorkTable['productState'] = int(parts[5]) # ²úÆ·¸ñ×´Ì¬
 
             self.workTable.append(singleWorkTable)
 
-        # è¯»æœºå™¨äººæ•°æ®,å…±4ä¸ª,æ¯ä¸€è¡Œæ˜¯ä¸€ä¸ªæœºå™¨äººæ•°æ®
+        # ¶Á»úÆ÷ÈËÊı¾İ,¹²4¸ö,Ã¿Ò»ĞĞÊÇÒ»¸ö»úÆ÷ÈËÊı¾İ
         self.robot = []
         for i in range(4):
             singleRobot = dict()
             inputLine = sys.stdin.readline()
             parts = inputLine.split(' ')
 
-            singleRobot['workTableID'] = int(parts[0])     # æ‰€å¤„å·¥ä½œå° ID
-            singleRobot['type'] = int(parts[1])            # æºå¸¦ç‰©å“ç±»å‹
-            singleRobot['timeRate'] = float(parts[2])      # æ—¶é—´ä»·å€¼ç³»æ•°
-            singleRobot['collisionRate'] = float(parts[3]) # ç¢°æ’ä»·å€¼ç³»æ•°
-            singleRobot['angV'] = float(parts[4])          # è§’é€Ÿåº¦
-            singleRobot['linV_x'] = float(parts[5])        # çº¿é€Ÿåº¦x
-            singleRobot['linV_y'] = float(parts[6])        # çº¿é€Ÿåº¦y
-            singleRobot['orientation'] = float(parts[7])   # æœå‘
-            singleRobot['x'] = float(parts[8])             # æœºå™¨äººåæ ‡x
-            singleRobot['y'] = float(parts[9])             # æœºå™¨äººåæ ‡y
+            singleRobot['workTableID'] = int(parts[0])     # Ëù´¦¹¤×÷Ì¨ ID
+            singleRobot['type'] = int(parts[1])            # Ğ¯´øÎïÆ·ÀàĞÍ
+            singleRobot['timeRate'] = float(parts[2])      # Ê±¼ä¼ÛÖµÏµÊı
+            singleRobot['collisionRate'] = float(parts[3]) # Åö×²¼ÛÖµÏµÊı
+            singleRobot['angV'] = float(parts[4])          # ½ÇËÙ¶È
+            singleRobot['linV_x'] = float(parts[5])        # ÏßËÙ¶Èx
+            singleRobot['linV_y'] = float(parts[6])        # ÏßËÙ¶Èy
+            singleRobot['orientation'] = float(parts[7])   # ³¯Ïò
+            singleRobot['x'] = float(parts[8])             # »úÆ÷ÈË×ø±êx
+            singleRobot['y'] = float(parts[9])             # »úÆ÷ÈË×ø±êy
 
             self.robot.append(singleRobot)
         
-        # è¯»å–åˆ¤é¢˜å™¨çš„ 'OK'
+        # ¶ÁÈ¡ÅĞÌâÆ÷µÄ 'OK'
         sys.stdin.readline()
         
         return end
 
     def outputData(self):
         """
-        # è¾“å‡ºæœºå™¨äººçš„æ§åˆ¶æ•°æ®
+        # Êä³ö»úÆ÷ÈËµÄ¿ØÖÆÊı¾İ
         """
-        # ç¬¬ä¸€è¡Œè¾“å‡ºå¸§ID
+        # µÚÒ»ĞĞÊä³öÖ¡ID
         sys.stdout.write('%d\n' % self.frameId)
-        # ç»™ç­–ç•¥å¯¹è±¡å‘é€æ•°æ®
+        # ¸ø²ßÂÔ¶ÔÏó·¢ËÍÊı¾İ
         self.strategy.getMessage(self.workTable,self.robot,self.frameId)
-        # è¿è¡Œç­–ç•¥å¯¹è±¡
+        # ÔËĞĞ²ßÂÔ¶ÔÏó
         self.strategy.run()
-        # ç­–ç•¥å¯¹è±¡è¿”å› æŒ‡ä»¤
+        # ²ßÂÔ¶ÔÏó·µ»Ø Ö¸Áî
+
         self.instr = self.strategy.sentMessage()
-        # è¾“å‡ºæœºå™¨äººæ§åˆ¶æŒ‡ä»¤
+        # time.sleep(0.013)
+        # Êä³ö»úÆ÷ÈË¿ØÖÆÖ¸Áî
         sys.stdout.write(self.instr)
-        # è¾“å‡ºç»“æŸå,è¾“å‡º 'OK'
+        # Êä³ö½áÊøºó,Êä³ö 'OK'
         self.finish()
 
     def run(self):
         """
-        # åˆå§‹åŒ–,å¹¶ä¸åˆ¤é¢˜å™¨è¿›è¡Œäº¤äº’
+        # ³õÊ¼»¯,²¢ÓëÅĞÌâÆ÷½øĞĞ½»»¥
         """
-        # åˆå§‹åŒ–
+        # ³õÊ¼»¯
         self.initMap()
 
-        # äº¤äº’
+        # ½»»¥
         while True:
-            # æ¯ä¸€å¸§è¾“å…¥(æ¥è‡ªåˆ¤é¢˜å™¨)
+            # Ã¿Ò»Ö¡ÊäÈë(À´×ÔÅĞÌâÆ÷)
             end = self.inputData()
             if end:
                 break
-            # æ¯ä¸€å¸§è¾“å‡º(æœºå™¨äººæ§åˆ¶æŒ‡ä»¤) 
+            # Ã¿Ò»Ö¡Êä³ö(»úÆ÷ÈË¿ØÖÆÖ¸Áî) 
             self.outputData()
 
-            # æ—¥å¿—
+            # ÈÕÖ¾
             # if self.frameId % 50 == 1:
             # if 1:
-                # self.log()
+            #     self.log()
             
     def log(self):
         """
-        # å†™æ—¥å¿—
+        # Ğ´ÈÕÖ¾
         """      
-        #---æ—¥å¿—---
-        self.info = open('info.txt', 'w') 
+        #---ÈÕÖ¾---
+        self.info = open('info.txt', 'a') 
 
         robot_ordin = []
-        self.info.write("æ—¶é—´å¸§ï¼š"+str(self.frameId)+"\n")
-        self.info.write("å·¥ä½œå°ï¼š"+str(self.workTable)+"\n")
+        self.info.write("Ê±¼äÖ¡£º"+str(self.frameId)+"\n")
+        self.info.write("¹¤×÷Ì¨£º"+str(self.workTable)+"\n")
         for i in range(4):
-            self.info.write("æœºå™¨äººï¼š"+str(self.robot[i])+"\n")
+            self.info.write("»úÆ÷ÈË£º"+str(self.robot[i])+"\n")
             robot_ordin.append((self.robot[i]['x'],self.robot[i]['y']))
-        self.info.write("æŒ‡ä»¤ï¼š\n"+str(self.instr))
-        self.info.write("æ˜¯å¦å ç”¨      :"+str(self.strategy.isRobotOccupy)+"\n")
-        self.info.write("ç›®æ ‡å·¥ä½œå°ID  :"+str(self.strategy.robotTargetId)+"\n")
-        self.info.write("ç›®æ ‡å·¥ä½œå°åæ ‡ :"+str(self.strategy.robotTargetOrid)+"\n")
-        self.info.write("æœºå™¨äººåæ ‡    :"+str(robot_ordin)+"\n")
-        self.info.write("æœºå™¨äººä»»åŠ¡ç±»å‹ :"+str(self.strategy.robotTaskType)+"\n")
-        self.info.write("æœºå™¨äººå ç”¨æ—¶é—´ :"+str(self.strategy.robotObjOccupyTime)+"\n")
+        self.info.write("Ö¸Áî£º\n"+str(self.instr))
+        self.info.write("ÊÇ·ñÕ¼ÓÃ      :"+str(self.strategy.isRobotOccupy)+"\n")
+        self.info.write("Ä¿±ê¹¤×÷Ì¨ID  :"+str(self.strategy.robotTargetId)+"\n")
+        self.info.write("Ä¿±ê¹¤×÷Ì¨×ø±ê :"+str(self.strategy.robotTargetOrid)+"\n")
+        self.info.write("»úÆ÷ÈË×ø±ê    :"+str(robot_ordin)+"\n")
+        self.info.write("»úÆ÷ÈËÈÎÎñÀàĞÍ :"+str(self.strategy.robotTaskType)+"\n")
         self.info.write("\n")
                 
-        # å…³é—­æ—¥å¿—æ–‡ä»¶
+        # ¹Ø±ÕÈÕÖ¾ÎÄ¼ş
         self.info.close()
 
 if __name__ == '__main__':

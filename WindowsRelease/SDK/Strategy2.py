@@ -1,7 +1,7 @@
 #coding=gb2312
 import numpy as np
 import math
-import time
+
 # 策略类 地图2
 class Strategy2(object):
     def __init__(self,_destoryTime,_demandTable,_wtReservation) -> None:  
@@ -199,7 +199,8 @@ class Strategy2(object):
 #------可调节----##### 可行的买任务
                 if  (self.sw_nearest or self.isNearest(i,workT)) \
                 and (workT['productState']==1 or (self.sw_buy_pred and self.buyTaskPredict(workT,buy_dist[idx]))) \
-                and (self.wtReservation[idx]['product']==0 or self.wtReservation[idx]['product']==1 and self.reservationPredict(idx,workT,buy_dist[idx])):
+                and (self.wtReservation[idx]['product']==0 or self.wtReservation[idx]['product']==1 and self.reservationPredict(idx,workT,buy_dist[idx]))\
+                and ((i in [0,1] and idx<=12) or (i in [2,3] and idx>=12)):
                     ### 统计与需求者距离
                     objT = workT['type']
                     for idx2,workT2 in enumerate(self.workTable): 
@@ -209,8 +210,9 @@ class Strategy2(object):
                             sell_dist[idx2] = np.linalg.norm([workT['x']-workT2['x'],workT['y']-workT2['y']])
 #-------可调节--------------##### 可行的卖任务
                             if ((workT2['rawState']>>objT)&1==0 or (self.sw_sell_pred and self.sellTaskPredict(idx2,workT2,buy_dist[idx],sell_dist[idx2]))) \
-                            and (buy_dist[idx]+sell_dist[idx2])/6+1.5 < (9000-self.frameId)*0.02 \
-                            and (self.wtReservation[idx2][objT]==0) :
+                            and (buy_dist[idx]+sell_dist[idx2])/6+1.2 < (9000-self.frameId)*0.02 \
+                            and (self.wtReservation[idx2][objT]==0) \
+                            and ((i in [0,1] and idx2<=12) or (i in [2,3] and idx2>=12)):
                                 task.append([idx,idx2])
                                 sell_time = sell_dist[idx2]/6
                                 total_time = (buy_dist[idx]+sell_dist[idx2])/6
@@ -292,6 +294,10 @@ class Strategy2(object):
         """
         # 给空闲机器人分配任务,调度
         """       
+        if self.frameId <20:
+            self.sw_buy_pred = 1
+        else:
+            self.sw_buy_pred = 0
         # 任务 = 两个工作台id 分别为 buy 和 sell, 表示机器人要前往对应工作台 , 执行 buy 和 sell  
         self.instr = ''
         for i in range(4):
@@ -405,47 +411,46 @@ class Strategy2(object):
         turn=[0 for i in range(4)]
         for i in range(3):
             for j in range(i + 1, 4):
-                if pow(self.robot[i]['x']-self.robot[j]['x'],2)+pow(self.robot[i]['y']-self.robot[j]['y'],2)<2.9**2.9 and\
-                        self.robot[i]['orientation']*self.robot[j]['orientation']<=0:
-                    k1=0
-                    k2=0
-                    if(self.robot[i]['orientation']!=-math.pi/2 and self.robot[i]['orientation']!=math.pi/2 ):
-                        k1 = math.tan(self.robot[i]['orientation'])
-                    if (self.robot[j]['orientation'] != -math.pi / 2 and self.robot[j]['orientation'] != math.pi / 2):
-                        k2 = math.tan(self.robot[j]['orientation'])
-
-                    b1=self.robot[i]['y']-k1*self.robot[i]['x']
-                    b2=self.robot[j]['y']-k2*self.robot[j]['x']
-                    #交点
-                    t1=0
-                    t2=0
-                    if k1!=k2 and self.robot[i]['orientation']!=-math.pi/2 and self.robot[i]['orientation']!=math.pi/2 and self.robot[j]['orientation']!=-math.pi/2and self.robot[j]['orientation']!=math.pi/2:
-                        x_0=(b2-b1)/(k1-k2)
-                        y_0=x_0*k1+b1
-                        if(x_0-self.robot[i]['x'])*math.cos(self.robot[i]['orientation'])>0 and(y_0-self.robot[i]['y'])*math.sin(self.robot[i]['orientation'])>0:
-                            t1=np.linalg.norm(np.array([self.robot[i]['x']-x_0, self.robot[i]['y']-y_0]))/0.12 #当前位置到相撞的点的距离处于每一帧最高速度运行的距离
-                        if ( x_0-self.robot[j]['x'] ) * math.cos(self.robot[j]['orientation'])>0 and ( y_0-self.robot[j]['y']) * math.sin(
-                                self.robot[j]['orientation']) > 0:
-                            t2 = np.linalg.norm(np.array([self.robot[j]['x'] - x_0, self.robot[j]['y'] - y_0]))/0.12
-                    #self.info.write("t1-t2: " + str(t1-t2)+'\n'+str(self.turning[j])+'\n')
-                    if(abs(t1-t2)>30 and self.turning[j]==0):
-                        continue
-                    if  self.turning[j]>=1 or abs(t1-t2)<=30 or self.robot[i]['orientation']==-math.pi/2 or self.robot[i]['orientation']==math.pi/2 or self.robot[j]['orientation']==-math.pi/2 or self.robot[j]['orientation']==math.pi/2:
-                        #if turn[j]==0 and  (pow(self.robot[j]['linV_x'],2)+pow(self.robot[j]['linV_y'],2)) >=16 or (pow(self.robot[i]['linV_x'],2)+pow(self.robot[i]['linV_y'],2)) >=9:
-                        if turn[j] == 0:
-                            if (self.turning[j] == 0):
-                                self.turning[j] = 30
-                            if abs(self.robot[j]['orientation']+self.robot[i]['orientation'])<math.pi/36 and  abs(self.robot[j]['x']-self.robot[i]['x'])>1.6:
-                                continue #避免两个小球运动方向相反但是绝对不可能不可能相撞导致误判为碰撞避免而耽误时间
-                            if self.robot[j]['orientation']<0 and self.robot[j]['y']>self.robot[i]['y'] and self.robot[j]['x']>self.robot[i]['x']:
-                                turn[j] = math.pi
-                            if self.robot[j]['orientation']<=0 and self.robot[j]['y']>self.robot[i]['y'] and self.robot[j]['x']<=self.robot[i]['x']:
-                                turn[j] = -math.pi
-                            if self.robot[j]['orientation']>0 and self.robot[j]['y']<self.robot[i]['y'] and self.robot[j]['x']>self.robot[i]['x']:
-                                turn[j] = -math.pi
-                            if self.robot[j]['orientation']>=0 and self.robot[j]['y']<self.robot[i]['y'] and self.robot[j]['x']<=self.robot[i]['x']:
-                                turn[j] = math.pi
-                            self.turning[j]-=1
+                if pow(self.robot[i]['x']-self.robot[j]['x'],2)+pow(self.robot[i]['y']-self.robot[j]['y'],2)<2.9**2.9 and \
+                        (self.robot[i]['orientation']*self.robot[j]['orientation']<=0 or abs(self.robot[i]['orientation'])<math.pi/36 \
+                                or abs(self.robot[j]['orientation']<math.pi/36) or abs(abs(self.robot[i]['orientation'])-math.pi)<math.pi/36 or abs(abs(self.robot[j]['orientation'])-math.pi) <math.pi/36) :
+                    # k1=0
+                    # k2=0
+                    # if(self.robot[i]['orientation']!=-math.pi/2 and self.robot[i]['orientation']!=math.pi/2 ):
+                    #     k1 = math.tan(self.robot[i]['orientation'])
+                    # if (self.robot[j]['orientation'] != -math.pi / 2 and self.robot[j]['orientation'] != math.pi / 2):
+                    #     k2 = math.tan(self.robot[j]['orientation'])
+                    #
+                    # b1=self.robot[i]['y']-k1*self.robot[i]['x']
+                    # b2=self.robot[j]['y']-k2*self.robot[j]['x']
+                    # #交点
+                    # t1=0
+                    # t2=0
+                    # if k1!=k2 and self.robot[i]['orientation']!=-math.pi/2 and self.robot[i]['orientation']!=math.pi/2 and self.robot[j]['orientation']!=-math.pi/2and self.robot[j]['orientation']!=math.pi/2:
+                    #     x_0=(b2-b1)/(k1-k2)
+                    #     y_0=x_0*k1+b1
+                    #     if(x_0-self.robot[i]['x'])*math.cos(self.robot[i]['orientation'])>0 and(y_0-self.robot[i]['y'])*math.sin(self.robot[i]['orientation'])>0:
+                    #         t1=np.linalg.norm(np.array([self.robot[i]['x']-x_0, self.robot[i]['y']-y_0]))/0.12 #当前位置到相撞的点的距离处于每一帧最高速度运行的距离
+                    #     if ( x_0-self.robot[j]['x'] ) * math.cos(self.robot[j]['orientation'])>0 and ( y_0-self.robot[j]['y']) * math.sin(
+                    #             self.robot[j]['orientation']) > 0:
+                    #         t2 = np.linalg.norm(np.array([self.robot[j]['x'] - x_0, self.robot[j]['y'] - y_0]))/0.12
+                    # #self.info.write("t1-t2: " + str(t1-t2)+'\n'+str(self.turning[j])+'\n')
+                    # if(abs(t1-t2)>30 and self.turning[j]==0):
+                    #     continue
+                    # if  self.turning[j]>=1 or abs(t1-t2)<=30 or self.robot[i]['orientation']==-math.pi/2 or self.robot[i]['orientation']==math.pi/2 or self.robot[j]['orientation']==-math.pi/2 or self.robot[j]['orientation']==math.pi/2:
+                    #     #if turn[j]==0 and  (pow(self.robot[j]['linV_x'],2)+pow(self.robot[j]['linV_y'],2)) >=16 or (pow(self.robot[i]['linV_x'],2)+pow(self.robot[i]['linV_y'],2)) >=9:
+                    if turn[j] == 0:
+                        if (self.turning[j] == 0):
+                            self.turning[j] = 15
+                        if self.robot[j]['orientation']<0 and self.robot[j]['y']>self.robot[i]['y'] and self.robot[j]['x']>self.robot[i]['x']:
+                            turn[j] = math.pi
+                        if self.robot[j]['orientation']<=0 and self.robot[j]['y']>self.robot[i]['y'] and self.robot[j]['x']<=self.robot[i]['x']:
+                            turn[j] = -math.pi
+                        if self.robot[j]['orientation']>0 and self.robot[j]['y']<self.robot[i]['y'] and self.robot[j]['x']>self.robot[i]['x']:
+                            turn[j] = -math.pi
+                        if self.robot[j]['orientation']>=0 and self.robot[j]['y']<self.robot[i]['y'] and self.robot[j]['x']<=self.robot[i]['x']:
+                            turn[j] = math.pi
+                        self.turning[j]-=1
         # 角速度
         for i in range(4):
             if turn[i]!=0:
@@ -518,8 +523,8 @@ class Strategy2(object):
         elif x<=edge and y>=50-edge and ((a>=-math.pi and a<-math.pi/2) or (a>0 and a<=math.pi)):
             if a>0 and a<=math.pi/2:
                 v = 6/(a*10/math.pi+1)
-            elif a>=math.pi and a<-math.pi/2:
-                v = 6/(abs(abs(a)-math.pi/2)*10/math.pi+1)
+            elif a>=-math.pi and a<-math.pi/2:
+                v = 6/(abs(abs(a)-math.pi/2)*15/math.pi+1)
             elif a>math.pi/2 and a<=3*math.pi/4:
                 v = 6/((a-math.pi/2)*24/math.pi+6)
             else:
@@ -527,9 +532,9 @@ class Strategy2(object):
         # 左下
         elif x<=edge and y<=edge and ((a>=-math.pi and a<0) or (a>math.pi/2 and a<=math.pi)):
             if a>=-math.pi/2 and a<0:
-                v = 6/(-a*10/math.pi+1)
+                v = 6/(-a*20/math.pi+1)
             elif a>math.pi/2 and a<=math.pi:
-                v = v = 6/(abs(abs(a)-math.pi/2)*10/math.pi+1)
+                v = 6/(abs(abs(a)-math.pi/2)*10/math.pi+1)
             elif a>=-3*math.pi/4 and a<-math.pi/2:
                 v = 6/(abs(a+math.pi/2)*24/math.pi+6)
             else:
@@ -537,7 +542,7 @@ class Strategy2(object):
         # 右上
         elif x>=50-edge and y>=50-edge and a>-math.pi/2 and a<math.pi:
             if a>=math.pi/2:
-                v = 6/((math.pi-a)*10/math.pi+1)
+                v = 6/((math.pi-a)*15/math.pi+1)
             elif a<=0:
                 v = 6/(abs(abs(a)-math.pi/2)*10/math.pi+1)
             elif a>0 and a<=math.pi/4:
@@ -547,7 +552,7 @@ class Strategy2(object):
         # 右下
         elif x>=50-edge and y<=edge and a>-math.pi and a<math.pi/2:
             if a<=-math.pi/2:
-                v = 6/((math.pi+a)*10/math.pi+1)
+                v = 6/((math.pi+a)*15/math.pi+1)
             elif a>=0:
                 v = 6/(abs(a-math.pi/2)*10/math.pi+1)
             elif a>=-math.pi/4 and a<0:

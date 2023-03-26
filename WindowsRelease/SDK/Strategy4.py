@@ -1,7 +1,6 @@
 #coding=gb2312
 import numpy as np
 import math
-import time
 
 # 策略类 地图4
 class Strategy4(object):
@@ -298,7 +297,13 @@ class Strategy4(object):
         """
         # 给空闲机器人分配任务,调度
         """       
-        # 任务 = 两个工作台id 分别为 buy 和 sell, 表示机器人要前往对应工作台 , 执行 buy 和 sell  
+        # 任务 = 两个工作台id 分别为 buy 和 sell, 表示机器人要前往对应工作台 , 执行 buy 和 sell 
+        if self.frameId <20:
+            self.sw_buy_pred = 1
+        else:
+            self.sw_buy_pred = 0
+        if self.frameId >8100:
+            self.param_mps = 1 
         self.instr = ''
         for i in range(4):
             # if 空闲

@@ -63,6 +63,7 @@ class Strategy1(object):
         """
         # 发送数据(指令)给 Solution 类
         """
+        time.sleep(0.011)
         return self.instr
 
     def f(self, x, maxX, minRate):
